@@ -27,7 +27,7 @@
 2. **Umami:** webbplatsen vad-svarar-ai.kegren.com finns på umami.kemero.io och id:t står i
    `src/lib/umami.ts`.
 3. **Driftsatt** på https://vad-svarar-ai.kegren.com. En riktig körning för kemero gav åtta
-   svar, analysen och läsbarhetskontrollen med nio modellanrop, och budgeten räknade 1,92 kr.
+   svar, analysen och läsbarhetskontrollen med nio modellanrop. Budgeten räknade 1,92 kr.
    Delningssidan och delningsbilden fungerar. Dev-sidorna ger 404 i produktion.
 4. **GitHub:** https://github.com/kegren/vad-svarar-ai är publikt och pushat.
 5. **kegren.com:** projektet och inläggen ligger i produktionens databas och sajten är
