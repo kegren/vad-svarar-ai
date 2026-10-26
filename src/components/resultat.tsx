@@ -5,9 +5,13 @@ import {
   type Resultat as ResultatData,
   svarsnyckel,
 } from "#/lib/analys";
+import { gissaHemsida } from "#/lib/lasbarhet";
 import { TJANST_ORDNING, TJANSTER, type Tjanst } from "#/lib/modeller";
 import { namnMonster } from "#/lib/svarstext";
+import type { LasbarhetTillstand } from "#/lib/use-lasbarhet";
+import { useSyns } from "#/lib/use-syns";
 import { Favicon } from "./favicon";
+import { Lasbarhet } from "./lasbarhet";
 import type { Korning } from "./scen";
 
 type Svarsbedomning = ResultatData["svar"][number];
@@ -156,27 +160,7 @@ function Staplar({
   ].sort((a, b) => b.antal - a.antal || Number(b.eget) - Number(a.eget));
   const total = TJANST_ORDNING.length * 2;
   const listaRef = useRef<HTMLUListElement>(null);
-  const [syns, setSyns] = useState(false);
-
-  // Staplarna växer först när listan syns, inte när datan kommer.
-  useEffect(() => {
-    const lista = listaRef.current;
-    if (!(lista && "IntersectionObserver" in window)) {
-      setSyns(true);
-      return;
-    }
-    const observator = new IntersectionObserver(
-      ([post]) => {
-        if (post?.isIntersecting) {
-          setSyns(true);
-          observator.disconnect();
-        }
-      },
-      { threshold: 0 }
-    );
-    observator.observe(lista);
-    return () => observator.disconnect();
-  }, []);
+  const syns = useSyns(listaRef);
 
   return (
     <ul className="space-y-3" ref={listaRef}>
@@ -277,12 +261,14 @@ function AttGora({
 export function Resultat({
   korning,
   namns,
+  las,
 }: {
   korning: Korning;
   namns: number;
+  las: LasbarhetTillstand;
 }) {
   const [resultat, setResultat] = useState<ResultatData | null>(null);
-  const { sendMessage, partial, error, reload, isLoading } = useChat({
+  const { sendMessage, partial, error, reload, isLoading, messages } = useChat({
     connection: fetchServerSentEvents("/api/analys"),
     threadId: `${korning.id}-analys`,
     forwardedProps: { korningId: korning.id },
@@ -420,12 +406,46 @@ export function Resultat({
         </div>
       ) : null}
 
+      {resultat || las.data ? (
+        <div className="mt-16">
+          <Rubrik>Kan AI läsa din hemsida?</Rubrik>
+          <p className="text-dov mt-2 mb-6 max-w-[56ch]">
+            Fyra kontroller av det AI-tjänsternas robotar ser när de hämtar
+            hemsidan.
+          </p>
+          <Lasbarhet
+            forslag={
+              korning.hemsida ||
+              gissaHemsida(
+                korning.foretag,
+                resultat?.kallor.map((k) => k.doman) ?? []
+              )
+            }
+            tillstand={las}
+          />
+        </div>
+      ) : null}
+
       {attGora.some((a) => a.gor) ? (
         <div className="mt-16 sm:mt-20">
           <Rubrik>Tre saker att göra</Rubrik>
           <div className="mt-8">
             <AttGora saker={attGora} />
           </div>
+        </div>
+      ) : null}
+
+      {!(isLoading || resultat || error) &&
+      messages.some((m) => m.role === "assistant") ? (
+        <div className="text-fel mt-10 flex flex-wrap items-center gap-3">
+          <p>Sammanfattningen blev inte klar den här gången.</p>
+          <button
+            className="text-text hover:border-ljus rounded-full border border-[var(--linje-stark)] px-4 py-1.5 text-sm transition-colors"
+            onClick={() => reload()}
+            type="button"
+          >
+            Försök igen
+          </button>
         </div>
       ) : null}
 

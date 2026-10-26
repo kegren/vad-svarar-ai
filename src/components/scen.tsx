@@ -17,10 +17,15 @@ import SpotlightCard from "#/components/reactbits/SpotlightCard";
 import { type Foretag, fragor, type Kalla } from "#/lib/fragor";
 import { TJANST_ORDNING, TJANSTER, type Tjanst } from "#/lib/modeller";
 import { namnsI, Svarstext } from "#/lib/svarstext";
+import { useLasbarhet } from "#/lib/use-lasbarhet";
 import { Favicon } from "./favicon";
 import { Resultat } from "./resultat";
 
-export type Korning = Foretag & { id: string; startad: string };
+export type Korning = Foretag & {
+  id: string;
+  startad: string;
+  hemsida?: string;
+};
 
 type Lage = { klar: boolean; namns: boolean; fel: boolean };
 
@@ -317,6 +322,19 @@ export function Scen({ korning }: { korning: Korning }) {
   const rotRef = useRef<HTMLDivElement>(null);
   const [lagen, setLagen] = useState<Record<string, Lage>>({});
   const [meddelande, setMeddelande] = useState("");
+  const las = useLasbarhet(korning.id);
+
+  // Hemsidan kontrolleras direkt, så att analysen kan bygga på kontrollen.
+  const korLas = useRef(las.kor);
+  korLas.current = las.kor;
+  const { hemsida } = korning;
+  useEffect(() => {
+    if (!hemsida) {
+      return;
+    }
+    const id = setTimeout(() => korLas.current(hemsida), 0);
+    return () => clearTimeout(id);
+  }, [hemsida]);
 
   const gnista = useCallback((el: Element) => {
     const rot = rotRef.current?.getBoundingClientRect();
@@ -441,7 +459,9 @@ export function Scen({ korning }: { korning: Korning }) {
         </GnistaContext.Provider>
       </div>
 
-      {klara === total ? <Resultat korning={korning} namns={namns} /> : null}
+      {klara === total ? (
+        <Resultat korning={korning} las={las} namns={namns} />
+      ) : null}
 
       {klara === total && (
         <p className="text-svag mt-16 max-w-[62ch] text-sm leading-relaxed">

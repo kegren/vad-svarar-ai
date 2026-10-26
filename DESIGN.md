@@ -197,6 +197,12 @@ Kommer under svaren när alla åtta är klara och fylls i medan analysen strömm
 - **Staplar:** en per företag som nämns, 8px hög på djup sammet. Företagets egen stapel är rampljus, konkurrenternas glödlampsljus på 70 procent. Staplarna växer från vänster när listan syns (1.1s, 90ms mellan raderna) och står i full längd vid reducerad rörelse.
 - **Tre saker att göra:** numrerade 1 till 3 i vikt 600 och glödlampsljus, eftersom ordningen är den viktigaste först. Uppmaningen i Title-storlek (max 34 tecken bred) och skälet under i dov text.
 
+### Läsbarhetskontrollen (signatur)
+Sektionen "Kan AI läsa din hemsida?" i sammanfattningen.
+- **Rad per kontroll:** en ring på 28px med ett tecken som ritas när listan syns (0.6s, 160ms mellan raderna): bock i glödlampsljus för klarar, kryss i fel-färgen för klarar inte, streck i dov text för varning och okänt. Rubriken i 1.1rem och vikt 600, förklaringen i dov text, och detaljerna (tjänster eller fält) som små tecken på 16px. Rampljus används inte här.
+- **Utan hemsida:** ett fält i pillerform med förslag från källorna och knappen "Kontrollera" i glödlampsljus.
+- **Länken till besiktningen:** under listan, i svag text med en tunn pil som följer texten. Ingen knapp, ingen ram och ingen färg som sticker ut (PLAN.md avsnitt 0).
+
 ## Do's and Don'ts
 
 ### Do:

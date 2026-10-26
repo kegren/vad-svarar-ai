@@ -2,6 +2,7 @@ import { env } from "cloudflare:workers";
 import type { Resultat, SparatSvar } from "./analys";
 import type { Foretag } from "./fragor";
 import { nyttId } from "./id";
+import type { Lasbarhet } from "./lasbarhet";
 import { TJANSTER } from "./modeller";
 
 // Körningen i D1 (PLAN.md avsnitt 6). Svaren sparas i svar_json med en nyckel per
@@ -14,6 +15,7 @@ export type SparadKorning = Foretag & {
   hemsida: string | null;
   svar: Record<string, SparatSvar>;
   analys: Resultat | null;
+  las: Lasbarhet | null;
 };
 
 type Rad = {
@@ -25,6 +27,7 @@ type Rad = {
   hemsida: string | null;
   svar_json: string | null;
   analys_json: string | null;
+  las_json: string | null;
 };
 
 // SQLite ger "2026-10-26 16:02:11" i UTC utan tidszon. Safari tolkar inte det.
@@ -70,7 +73,7 @@ export async function skapaKorning(
 
 export async function hamtaKorning(id: string): Promise<SparadKorning | null> {
   const rad = await env.DB.prepare(
-    "SELECT id, skapad, foretag, bransch, ort, hemsida, svar_json, analys_json FROM korning WHERE id = ?"
+    "SELECT id, skapad, foretag, bransch, ort, hemsida, svar_json, analys_json, las_json FROM korning WHERE id = ?"
   )
     .bind(id)
     .first<Rad>();
@@ -86,6 +89,7 @@ export async function hamtaKorning(id: string): Promise<SparadKorning | null> {
     hemsida: rad.hemsida,
     svar: rad.svar_json ? JSON.parse(rad.svar_json) : {},
     analys: rad.analys_json ? JSON.parse(rad.analys_json) : null,
+    las: rad.las_json ? JSON.parse(rad.las_json) : null,
   };
 }
 
@@ -100,5 +104,13 @@ export async function sparaSvar(id: string, nyckel: string, svar: SparatSvar) {
 export async function sparaAnalys(id: string, analys: Resultat) {
   await env.DB.prepare("UPDATE korning SET analys_json = ? WHERE id = ?")
     .bind(JSON.stringify(analys), id)
+    .run();
+}
+
+export async function sparaLasbarhet(id: string, las: Lasbarhet) {
+  await env.DB.prepare(
+    "UPDATE korning SET hemsida = ?, las_json = ? WHERE id = ?"
+  )
+    .bind(las.url, JSON.stringify(las), id)
     .run();
 }

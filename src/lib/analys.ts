@@ -69,7 +69,7 @@ export const AnalysSchema = z.object({
         }),
         pekarPa: z.array(z.string()).meta({
           description:
-            "Svarsnycklar (chatgpt-1) eller domäner (eniro.se) som saken bygger på.",
+            "Svarsnycklar (chatgpt-1), domäner (eniro.se) eller kontroller (robots.txt, llms.txt, html, strukturerad data) som saken bygger på.",
         }),
       })
     )

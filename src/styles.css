@@ -163,9 +163,24 @@ mark.namn {
   transform: scaleX(1);
 }
 
+/* Bockarna i läsbarhetskontrollen ritas när listan syns. */
+.rita {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.6s var(--ease-ut);
+}
+
+.rita.syns {
+  stroke-dashoffset: 0;
+}
+
 @media print {
   .stapel {
     transform: none;
+  }
+
+  .rita {
+    stroke-dashoffset: 0;
   }
 }
 

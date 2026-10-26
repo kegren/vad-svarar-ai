@@ -76,6 +76,8 @@ export const Route = createFileRoute("/api/svar")({
           messages: [{ role: "user", content: fragor(korning)[fraga] }],
           threadId,
           abortController,
+          // Ett tak för svarets längd håller nere kostnaden och kreditbehovet.
+          modelOptions: { maxCompletionTokens: 4000 },
           tools: sok
             ? [
                 webSearchTool({

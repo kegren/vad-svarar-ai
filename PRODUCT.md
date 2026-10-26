@@ -57,6 +57,8 @@ svaren som de kommer, med källorna. Det är en körning som går att se, inte e
   kunderna frågar AI?" och är godkänd av Kenny.
 - Avsändarraden: "Byggt av Kenny Damgren (kegren.com) · kemero.se".
 - Designen är en egen värld som varken följer kegren.com eller kemero.
+- Typsnittet är detsamma som på kemero.se: Inter med optisk storlek (Kennys beslut 26
+  oktober 2026). Detektorns varning för överanvänt typsnitt gäller inte här.
 - Rösten är svensk, varm och rak. Inga tankstreck och inget komma före "och" eller
   "eller". Skriv "AI-tjänster" i allmänhet och tjänstens namn där den svarar.
 - Rubriker godkänns av Kenny.

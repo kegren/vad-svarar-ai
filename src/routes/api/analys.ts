@@ -34,9 +34,20 @@ function systemprompt(korning: SparadKorning) {
     "Du skriver till ägaren av företaget, inte till en kund. Svaren du läser är skrivna för kunder, men din läsare är den som driver företaget och vill att AI-tjänsterna ska beskriva det rätt.",
     "De tre sakerna att göra är åtgärder ägaren själv gör, till exempel rättar en katalog, skriver en uppgift tydligt på hemsidan eller samlar omdömen. Varje sak pekar på ett svar eller en källa. Inga råd till kunder och inga allmänna råd som passar alla företag.",
     "Ordna sakerna efter hur mycket de påverkar vad tjänsterna svarar om företaget, den viktigaste först.",
+    "Om underlaget har en kontroll av hemsidan och en kontroll har fallerat, kan en av sakerna bygga på den. Peka då på kontrollen med robots.txt, llms.txt, html eller strukturerad data i pekarPa.",
     "Skriv tjänsternas namn (ChatGPT, Gemini, Claude, Perplexity) i texten, aldrig svarsnycklarna. Nycklarna hör bara hemma i fälten nyckel, svar och pekarPa.",
     "Skriv på svenska, varmt och rakt. Använd inga tankstreck och sätt inget komma före och eller eller.",
   ].join("\n");
+}
+
+function kontrollunderlag(korning: SparadKorning) {
+  if (!korning.las) {
+    return "";
+  }
+  const rader = korning.las.kontroller.map(
+    (k) => `- ${k.rubrik} (${k.status}): ${k.text}`
+  );
+  return `\n\n## Kontroll av hemsidan ${korning.las.url}\n\n${rader.join("\n")}`;
 }
 
 function underlag(korning: SparadKorning, svar: SparatSvar[]) {
@@ -50,7 +61,8 @@ function underlag(korning: SparadKorning, svar: SparatSvar[]) {
         kallor ? `Källor:\n${kallor}` : "Inga källor.",
       ].join("\n\n");
     })
-    .join("\n\n");
+    .join("\n\n")
+    .concat(kontrollunderlag(korning));
 }
 
 function resultatHandelse(resultat: Resultat): StreamChunk {
@@ -150,6 +162,9 @@ export const Route = createFileRoute("/api/analys")({
           messages: [{ role: "user", content: underlag(korning, svar) }],
           outputSchema: AnalysSchema,
           stream: true,
+          // Utan tak ber adaptern om modellens högsta antal tokens, och OpenRouter
+          // vägrar när nyckelns kredit inte räcker till det värsta fallet.
+          modelOptions: { maxCompletionTokens: 8000 },
         });
 
         return toServerSentEventsResponse(
