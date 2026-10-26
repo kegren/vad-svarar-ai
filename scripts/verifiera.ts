@@ -9,6 +9,7 @@ import { webSearchTool } from "@tanstack/ai-openrouter/tools";
 import { z } from "zod";
 
 const UT = ".verifiera";
+const GENERATION_ID = /"id":"(?<id>gen-[^"]+)"/u;
 const TJANSTER = {
   chatgpt: "openai/gpt-6-luna",
   gemini: "google/gemini-3.1-flash-lite",
@@ -170,7 +171,7 @@ function spara() {
 // sökningar som gjordes och vad anropet kostade.
 async function hamtaGenerationer() {
   const ids = [...ravaror.values()].flatMap((post) => {
-    const id = post.sse.match(/"id":"(gen-[^"]+)"/u)?.[1];
+    const id = post.sse.match(GENERATION_ID)?.groups?.id;
     return id ? [id] : [];
   });
   await new Promise((resolve) => setTimeout(resolve, 5000));

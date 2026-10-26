@@ -43,9 +43,12 @@ redan i SDK:n, innan TanStack-adaptern ser delen. Ingen händelse i strömmen b�
 `body.tee()`: SDK:n får strömmen oförändrad och vi läser `annotations` ur den andra
 grenen. Sedan läggs källorna in som en `CUSTOM`-händelse (`name: "kallor"`) före
 `RUN_FINISHED` och klienten tar emot dem med `onCustomEvent` på `useChat`.
+Läsningen av den andra grenen måste vara klar innan händelsen skickas, så
+omslaget väntar in den vid `RUN_FINISHED`.
 `scripts/kallor-prov.ts` spelar upp de sparade svaren genom den vägen: alla åtta svar
-får sina källor och texten är oförändrad. Det kräver `@openrouter/sdk` som direkt
-beroende, låst till samma version som adaptern använder.
+får sina källor och texten är oförändrad. `@openrouter/sdk` är nu ett direkt
+beroende, låst till 0.13.20 som adaptern använder. Byter adaptern SDK-version måste
+låsningen följa med, och om SDK:n börjar släppa igenom `annotations` kan omvägen tas bort.
 
 **Källorna per tjänst i provkörningen:**
 

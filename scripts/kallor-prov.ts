@@ -12,47 +12,58 @@ type Kalla = { url: string; titel: string };
 
 type Ravara = { begaran: { model: string; tools?: unknown }; sse: string };
 
-// Läser `annotations` ur rå SSE medan strömmen går vidare oförändrad till SDK:n.
-function kallFetcher(sparat: string, kallor: Map<string, Kalla>) {
-  return new HTTPClient({
-    fetcher: async () => {
+type Annotation = { url_citation?: { url?: string; title?: string } };
+
+type Del = { choices?: { delta?: { annotations?: Annotation[] } }[] };
+
+function kallorIDel(del: Del) {
+  return (del.choices ?? []).flatMap((val) =>
+    (val.delta?.annotations ?? []).flatMap(({ url_citation: u }) =>
+      u?.url ? [{ url: u.url, titel: u.title ?? u.url }] : []
+    )
+  );
+}
+
+function kallorISse(text: string) {
+  const kallor = new Map<string, Kalla>();
+  for (const rad of text.split("\n")) {
+    if (rad.startsWith("data: {")) {
+      for (const kalla of kallorIDel(JSON.parse(rad.slice(6)))) {
+        kallor.set(kalla.url, kalla);
+      }
+    }
+  }
+  return [...kallor.values()];
+}
+
+// Delar svaret: SDK:n får strömmen oförändrad och vi läser källorna ur den
+// andra grenen. `kallor` blir klar när hela svaret är läst.
+function kallFetcher(sparat: string) {
+  let kallor: Promise<Kalla[]> = Promise.resolve([]);
+  const httpClient = new HTTPClient({
+    fetcher: () => {
       const svar = new Response(sparat, {
         headers: { "content-type": "text/event-stream" },
       });
       const [tillSdk, tillOss] = (svar.body as ReadableStream).tee();
-      (async () => {
-        const text = await new Response(tillOss).text();
-        for (const rad of text.split("\n")) {
-          if (!rad.startsWith("data: {")) {
-            continue;
-          }
-          const del = JSON.parse(rad.slice(6));
-          for (const val of del.choices ?? []) {
-            for (const a of val.delta?.annotations ?? []) {
-              const u = a.url_citation;
-              if (u?.url && !kallor.has(u.url)) {
-                kallor.set(u.url, { url: u.url, titel: u.title ?? u.url });
-              }
-            }
-          }
-        }
-      })();
-      return new Response(tillSdk, svar);
+      kallor = new Response(tillOss).text().then(kallorISse);
+      return Promise.resolve(new Response(tillSdk, svar));
     },
   });
+  return { httpClient, kallor: () => kallor };
 }
 
 // Lägger in källorna som en CUSTOM-händelse före RUN_FINISHED.
 async function* medKallor(
   strom: AsyncIterable<StreamChunk>,
-  kallor: Map<string, Kalla>
+  kallor: () => Promise<Kalla[]>
 ) {
   for await (const del of strom) {
     if (del.type === EventType.RUN_FINISHED) {
       yield {
         type: EventType.CUSTOM,
         name: "kallor",
-        value: [...kallor.values()],
+        value: await kallor(),
         timestamp: Date.now(),
       } satisfies StreamChunk;
     }
@@ -60,19 +71,12 @@ async function* medKallor(
   }
 }
 
-const ravaror: Record<string, Ravara> = JSON.parse(
-  readFileSync(process.argv[2] ?? "", "utf8")
-);
-
-for (const [nyckel, post] of Object.entries(ravaror)) {
-  if (!(post.begaran.tools || nyckel.startsWith("perplexity"))) {
-    continue;
-  }
-  const kallor = new Map<string, Kalla>();
+async function spelaUpp(nyckel: string, post: Ravara) {
+  const { httpClient, kallor } = kallFetcher(post.sse);
   const adapter = createOpenRouterText(
     post.begaran.model as "perplexity/sonar",
     "uppspelning",
-    { httpClient: kallFetcher(post.sse, kallor) }
+    { httpClient }
   );
   const strom = chat({
     adapter,
@@ -80,15 +84,27 @@ for (const [nyckel, post] of Object.entries(ravaror)) {
     threadId: nyckel,
   });
   let tecken = 0;
+  let lista: Kalla[] = [];
   for await (const del of medKallor(strom, kallor)) {
     if (del.type === EventType.TEXT_MESSAGE_CONTENT) {
       tecken += del.delta.length;
     }
     if (del.type === EventType.CUSTOM && del.name === "kallor") {
-      const lista = del.value as Kalla[];
-      console.log(
-        `${nyckel}: ${tecken} tecken text, ${lista.length} källor, först ${lista[0]?.titel}`
-      );
+      lista = del.value as Kalla[];
     }
   }
+  return `${nyckel}: ${tecken} tecken text, ${lista.length} källor, först ${lista[0]?.titel}`;
 }
+
+const ravaror: Record<string, Ravara> = JSON.parse(
+  readFileSync(process.argv[2] ?? "", "utf8")
+);
+
+const rader = await Promise.all(
+  Object.entries(ravaror)
+    .filter(
+      ([nyckel, post]) => post.begaran.tools || nyckel.startsWith("perplexity")
+    )
+    .map(([nyckel, post]) => spelaUpp(nyckel, post))
+);
+console.log(rader.join("\n"));

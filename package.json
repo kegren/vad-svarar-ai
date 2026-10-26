@@ -16,6 +16,7 @@
     "preview": "bun run build && vite preview"
   },
   "dependencies": {
+    "@openrouter/sdk": "0.13.20",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/ai": "^1.0.0",
     "@tanstack/ai-openrouter": "^1.0.0",
