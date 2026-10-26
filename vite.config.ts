@@ -6,6 +6,8 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
   resolve: { tsconfigPaths: true },
+  // Dev-servern nås från mobilen via `tailscale serve`.
+  server: { allowedHosts: [".ts.net"] },
   plugins: [
     cloudflare({ viteEnvironment: { name: "ssr" } }),
     tanstackStart(),
