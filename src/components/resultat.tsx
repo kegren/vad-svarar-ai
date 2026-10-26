@@ -5,13 +5,14 @@ import {
   type Resultat as ResultatData,
   svarsnyckel,
 } from "#/lib/analys";
+import { hallIhop } from "#/lib/hall-ihop";
 import { gissaHemsida } from "#/lib/lasbarhet";
 import { TJANST_ORDNING, TJANSTER, type Tjanst } from "#/lib/modeller";
 import { namnMonster } from "#/lib/svarstext";
 import type { LasbarhetTillstand } from "#/lib/use-lasbarhet";
 import { useSyns } from "#/lib/use-syns";
 import { Favicon } from "./favicon";
-import { Lasbarhet } from "./lasbarhet";
+import { Lasbarhet, LasbarhetIngress } from "./lasbarhet";
 import type { Korning } from "./scen";
 
 type Svarsbedomning = ResultatData["svar"][number];
@@ -56,20 +57,6 @@ function slutsats(korning: Korning, svar: Partial<Svarsbedomning>[]) {
   return { forsta: kannerText + kannerInteText, andra: rekText };
 }
 
-// Ord med bindestreck, som AI-tjänsterna, bryts inte vid strecket i stor stil.
-function utanAvstavning(text: string, nyckel: string): ReactNode[] {
-  return text.split(" ").map((ord, i, alla) => (
-    <span
-      className={ord.includes("-") ? "whitespace-nowrap" : ""}
-      // biome-ignore lint/suspicious/noArrayIndexKey: orden byter aldrig plats.
-      key={`${nyckel}-${i}`}
-    >
-      {ord}
-      {i < alla.length - 1 ? " " : ""}
-    </span>
-  ));
-}
-
 // Den stora meningen: företagets namn tänds i rampljus som i svaren.
 function stortText(text: string, namn: string) {
   return text.split(namnMonster(namn)).flatMap((del, i): ReactNode[] =>
@@ -80,7 +67,7 @@ function stortText(text: string, namn: string) {
             {del}
           </mark>,
         ]
-      : utanAvstavning(del, `del-${i}`)
+      : hallIhop(del, `del-${i}`)
   );
 }
 
@@ -409,10 +396,7 @@ export function Resultat({
       {resultat || las.data ? (
         <div className="mt-16">
           <Rubrik>Kan AI läsa din hemsida?</Rubrik>
-          <p className="text-dov mt-2 mb-6 max-w-[56ch]">
-            Fyra kontroller av det AI-tjänsternas robotar ser när de hämtar
-            hemsidan.
-          </p>
+          <LasbarhetIngress />
           <Lasbarhet
             forslag={
               korning.hemsida ||

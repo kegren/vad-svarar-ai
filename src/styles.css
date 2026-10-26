@@ -61,10 +61,10 @@ body {
   background: rgb(255 181 71 / 0.35);
 }
 
-:focus-visible {
+/* Fält visar fokus med sin egen kant och behåller pillerformen. */
+:focus-visible:not(input) {
   outline: 2px solid var(--color-ljus);
   outline-offset: 3px;
-  border-radius: 6px;
 }
 
 input {

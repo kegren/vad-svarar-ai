@@ -1,4 +1,5 @@
 import { type FormEvent, useEffect, useId, useRef, useState } from "react";
+import { hallIhop } from "#/lib/hall-ihop";
 import type { Kontroll, Status } from "#/lib/lasbarhet";
 import type { LasbarhetTillstand } from "#/lib/use-lasbarhet";
 import { useSyns } from "#/lib/use-syns";
@@ -33,7 +34,8 @@ function Tecken({
     ok: ["M6 14.5l5 5L22 8.5"],
     fel: ["M8 8l12 12", "M20 8L8 20"],
     varning: ["M7 14h14"],
-    okand: ["M7 14h14"],
+    // Okänt får bara ringen: kontrollen kunde inte göras.
+    okand: [],
   };
   return (
     <svg
@@ -84,10 +86,10 @@ function Rad({
       <div>
         <p className="text-text text-[1.1rem] leading-snug font-semibold">
           <span className="sr-only">{ETIKETT[kontroll.status]}: </span>
-          {kontroll.rubrik}
+          {hallIhop(kontroll.rubrik, "rubrik")}
         </p>
         <p className="text-dov mt-1 max-w-[60ch] leading-relaxed">
-          {kontroll.text}
+          {hallIhop(kontroll.text, "text")}
         </p>
         {kontroll.detaljer.length > 0 ? (
           <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
@@ -136,9 +138,11 @@ function Formular({
   return (
     <form className="max-w-xl" noValidate onSubmit={skicka}>
       <p className="text-dov max-w-[52ch] leading-relaxed">
-        {forslag
-          ? `Vi hittade ${forslag} bland källorna. Om det är företagets hemsida kan vi kontrollera om AI-tjänsterna kan läsa den.`
-          : "Fyll i hemsidan så kontrollerar vi om AI-tjänsterna kan läsa den."}
+        {hallIhop(
+          forslag
+            ? `Vi hittade ${forslag} bland källorna. Om det är företagets hemsida kan vi kontrollera om AI-tjänsterna kan läsa den.`
+            : "Fyll i hemsidan så kontrollerar vi om AI-tjänsterna kan läsa den."
+        )}
       </p>
       <div className="mt-4 flex flex-wrap gap-2.5">
         <label className="sr-only" htmlFor={id}>
@@ -148,8 +152,10 @@ function Formular({
           aria-describedby={tillstand.fel ? `${id}-fel` : undefined}
           aria-invalid={Boolean(tillstand.fel)}
           autoComplete="url"
-          className={`bg-sammet/80 text-text focus:border-ljus h-12 min-w-0 flex-1 basis-[14rem] rounded-full border px-5 transition-colors focus:outline-none ${
-            tillstand.fel ? "border-fel" : "border-[var(--linje-stark)]"
+          className={`bg-sammet/80 text-text h-12 min-w-0 flex-1 basis-[14rem] rounded-full border px-5 transition-colors focus:outline-none ${
+            tillstand.fel
+              ? "border-fel focus:border-fel"
+              : "focus:border-ljus border-[var(--linje-stark)]"
           }`}
           id={id}
           inputMode="url"
@@ -191,6 +197,16 @@ function klockslag(iso: string) {
     hour: "2-digit",
     minute: "2-digit",
   });
+}
+
+export function LasbarhetIngress() {
+  return (
+    <p className="text-dov mt-2 mb-6 max-w-[56ch]">
+      {hallIhop(
+        "Fyra kontroller av vad AI-tjänsternas robotar ser när de hämtar hemsidan."
+      )}
+    </p>
+  );
 }
 
 function Lista({ kontroller }: { kontroller: Kontroll[] }) {
@@ -264,7 +280,7 @@ export function Lasbarhet({
         </button>
       </div>
       <Lista kontroller={data.kontroller} />
-      <p className="mt-6 max-w-[52ch] text-[0.95rem] leading-relaxed">
+      <p className="mt-6 max-w-[64ch] text-[0.95rem] leading-relaxed">
         <a
           className="text-svag hover:text-dov group transition-colors"
           href="https://kemero.se/besiktigad-hemsida"

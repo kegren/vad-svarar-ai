@@ -184,8 +184,8 @@ Mjukt men inte runt. Kort har 16px hörn. Källchips har 12px. Fält, knappar, f
 
 ### Inputs / Fields
 - **Style:** sammet på 80 till 85 procent med lätt oskärpa bakom, piller, 1px kant på 24 procent. Namnfältet är 64 till 72px högt med text i 1.35 till 1.5rem.
-- **Focus:** kanten blir glödlampsljus. Markören är bärnsten.
-- **Error:** kanten blir fel-färgen och meddelandet står under fältet.
+- **Focus:** kanten blir glödlampsljus och pillerformen står kvar. Fält har ingen extra fokusring. Markören är bärnsten.
+- **Error:** kanten blir fel-färgen, även när fältet har fokus. Meddelandet står under fältet.
 
 ### Svarskortet (signatur)
 Ett kort per tjänst med tjänstens namn och modellnamn, två flikar ("Vem rekommenderas?" och "Om {företag}") och svaret som strömmar in. Fliken visar en pulserande prick medan svaret kommer och en bärnstensprick när namnet finns. Frågan står i kursiv ovanför svaret. Första gången namnet syns i en öppen flik tänds det med understreck i rampljus och en kort gnista (React Bits Click Spark, bara via kod). Under svaret står "{Tjänst} läste N källor" med källchipen.
@@ -199,7 +199,7 @@ Kommer under svaren när alla åtta är klara och fylls i medan analysen strömm
 
 ### Läsbarhetskontrollen (signatur)
 Sektionen "Kan AI läsa din hemsida?" i sammanfattningen.
-- **Rad per kontroll:** en ring på 28px med ett tecken som ritas när listan syns (0.6s, 160ms mellan raderna): bock i glödlampsljus för klarar, kryss i fel-färgen för klarar inte, streck i dov text för varning och okänt. Rubriken i 1.1rem och vikt 600, förklaringen i dov text, och detaljerna (tjänster eller fält) som små tecken på 16px. Rampljus används inte här.
+- **Rad per kontroll:** en ring på 28px med ett tecken som ritas när listan syns (0.6s, 160ms mellan raderna): bock i glödlampsljus för klarar, kryss i fel-färgen för klarar inte, streck i dov text för varning och bara ringen i svag text för okänt. Rubriken står i 1.1rem och vikt 600 och förklaringen i dov text. Detaljerna (tjänster eller fält) visas som små tecken på 16px. Rampljus används inte här.
 - **Utan hemsida:** ett fält i pillerform med förslag från källorna och knappen "Kontrollera" i glödlampsljus.
 - **Länken till besiktningen:** under listan, i svag text med en tunn pil som följer texten. Ingen knapp, ingen ram och ingen färg som sticker ut (PLAN.md avsnitt 0).
 

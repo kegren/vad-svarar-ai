@@ -41,8 +41,10 @@ function Chip({
         aria-describedby={fel ? `${id}-fel` : undefined}
         aria-invalid={Boolean(fel)}
         autoComplete={autoComplete}
-        className={`bg-sammet/80 text-text focus:border-ljus h-12 w-full rounded-full border px-5 text-[1rem] backdrop-blur-sm transition-colors focus:outline-none ${
-          fel ? "border-fel" : "border-[var(--linje-stark)]"
+        className={`bg-sammet/80 text-text h-12 w-full rounded-full border px-5 text-[1rem] backdrop-blur-sm transition-colors focus:outline-none ${
+          fel
+            ? "border-fel focus:border-fel"
+            : "focus:border-ljus border-[var(--linje-stark)]"
         }`}
         id={id}
         inputMode={typ === "url" ? "url" : "text"}
@@ -110,8 +112,10 @@ export function Formular({
         aria-describedby={fel.foretag ? `${namnId}-fel` : undefined}
         aria-invalid={Boolean(fel.foretag)}
         autoComplete="organization"
-        className={`bg-sammet/85 font-display text-text focus:border-ljus h-16 w-full rounded-full border px-7 text-[1.35rem] tracking-[-0.01em] backdrop-blur-sm transition-colors focus:outline-none sm:h-[4.5rem] sm:text-[1.5rem] ${
-          fel.foretag ? "border-fel" : "border-[var(--linje-stark)]"
+        className={`bg-sammet/85 font-display text-text h-16 w-full rounded-full border px-7 text-[1.35rem] tracking-[-0.01em] backdrop-blur-sm transition-colors focus:outline-none sm:h-[4.5rem] sm:text-[1.5rem] ${
+          fel.foretag
+            ? "border-fel focus:border-fel"
+            : "focus:border-ljus border-[var(--linje-stark)]"
         }`}
         id={namnId}
         onChange={(e) => satt("foretag")(e.target.value)}

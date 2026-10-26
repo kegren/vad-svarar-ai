@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiAnalysRouteImport } from './routes/api/analys'
 import { Route as ApiSvarRouteImport } from './routes/api/svar'
+import { Route as DevLasbarhetIdRouteImport } from './routes/dev/lasbarhet.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -28,35 +29,44 @@ const ApiSvarRoute = ApiSvarRouteImport.update({
   path: '/api/svar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DevLasbarhetIdRoute = DevLasbarhetIdRouteImport.update({
+  id: '/dev/lasbarhet/$id',
+  path: '/dev/lasbarhet/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/analys': typeof ApiAnalysRoute
   '/api/svar': typeof ApiSvarRoute
+  '/dev/lasbarhet/$id': typeof DevLasbarhetIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/analys': typeof ApiAnalysRoute
   '/api/svar': typeof ApiSvarRoute
+  '/dev/lasbarhet/$id': typeof DevLasbarhetIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/api/analys': typeof ApiAnalysRoute
   '/api/svar': typeof ApiSvarRoute
+  '/dev/lasbarhet/$id': typeof DevLasbarhetIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/analys' | '/api/svar'
+  fullPaths: '/' | '/api/analys' | '/api/svar' | '/dev/lasbarhet/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/analys' | '/api/svar'
-  id: '__root__' | '/' | '/api/analys' | '/api/svar'
+  to: '/' | '/api/analys' | '/api/svar' | '/dev/lasbarhet/$id'
+  id: '__root__' | '/' | '/api/analys' | '/api/svar' | '/dev/lasbarhet/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiAnalysRoute: typeof ApiAnalysRoute
   ApiSvarRoute: typeof ApiSvarRoute
+  DevLasbarhetIdRoute: typeof DevLasbarhetIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +92,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSvarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dev/lasbarhet/$id': {
+      id: '/dev/lasbarhet/$id'
+      path: '/dev/lasbarhet/$id'
+      fullPath: '/dev/lasbarhet/$id'
+      preLoaderRoute: typeof DevLasbarhetIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,6 +106,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiAnalysRoute: ApiAnalysRoute,
   ApiSvarRoute: ApiSvarRoute,
+  DevLasbarhetIdRoute: DevLasbarhetIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -393,7 +393,7 @@ function htmlkontroll(raa: Raadata): Kontroll {
     id: "html",
     status: "fel",
     rubrik: "Texten kommer bara med JavaScript",
-    text: "Servern skickar nästan ingen text. Sidan byggs först i webbläsaren, och många AI-robotar ser då en tom sida.",
+    text: "Servern skickar nästan ingen text. Sidan byggs först i webbläsaren. Många AI-robotar ser då en tom sida.",
     detaljer: [],
   };
 }
