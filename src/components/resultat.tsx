@@ -11,6 +11,7 @@ import { TJANST_ORDNING, TJANSTER, type Tjanst } from "#/lib/modeller";
 import { namnMonster } from "#/lib/svarstext";
 import type { LasbarhetTillstand } from "#/lib/use-lasbarhet";
 import { useSyns } from "#/lib/use-syns";
+import { Dela } from "./dela";
 import { Favicon } from "./favicon";
 import { Lasbarhet, LasbarhetIngress } from "./lasbarhet";
 import type { Korning } from "./scen";
@@ -293,76 +294,33 @@ function Domslut({
   );
 }
 
-export function Resultat({
+type Pastaende = Partial<ResultatData["pastaenden"][number]>;
+type Sak = Partial<ResultatData["attGora"][number]>;
+
+// Allt i sammanfattningen utom laddning och fel. Används både medan analysen
+// strömmar och på delningssidan, där den sparade analysen visas direkt.
+function Innehall({
   korning,
   namns,
   las,
+  resultat,
+  svar,
+  pastaenden,
+  attGora,
+  sparad = false,
 }: {
   korning: Korning;
   namns: number;
   las: LasbarhetTillstand;
+  resultat: ResultatData | null;
+  svar: Partial<Svarsbedomning>[];
+  pastaenden: Pastaende[];
+  attGora: Sak[];
+  sparad?: boolean;
 }) {
-  const [resultat, setResultat] = useState<ResultatData | null>(null);
-  const { sendMessage, partial, error, reload, isLoading, messages } = useChat({
-    connection: fetchServerSentEvents("/api/analys"),
-    threadId: `${korning.id}-analys`,
-    forwardedProps: { korningId: korning.id },
-    outputSchema: AnalysSchema,
-    onCustomEvent: (typ, data) => {
-      if (typ === "resultat") {
-        setResultat(data as ResultatData);
-      }
-    },
-  });
-
-  const skicka = useRef(sendMessage);
-  skicka.current = sendMessage;
-  useEffect(() => {
-    const id = setTimeout(() => skicka.current("Sammanfatta svaren."), 0);
-    return () => clearTimeout(id);
-  }, []);
-
-  const svar = (resultat?.svar ??
-    partial.svar ??
-    []) as Partial<Svarsbedomning>[];
-  const pastaenden = (resultat?.pastaenden ??
-    partial.pastaenden ??
-    []) as Partial<ResultatData["pastaenden"][number]>[];
-  const attGora = (resultat?.attGora ?? partial.attGora ?? []) as Partial<
-    ResultatData["attGora"][number]
-  >[];
   const klarSvar = svar.length >= TJANST_ORDNING.length * 2;
-
   return (
-    <section
-      aria-labelledby="resultat-rubrik"
-      className="mt-16 scroll-mt-44 sm:mt-24"
-      id="sammanfattning"
-    >
-      <h2 className="sr-only" id="resultat-rubrik">
-        Sammanfattning
-      </h2>
-
-      {error ? (
-        <div className="text-fel flex flex-wrap items-center gap-3">
-          <p>Sammanfattningen gick inte att göra den här gången.</p>
-          <button
-            className="text-bakelit hover:border-bakelit rounded-full border border-[var(--linje-stark)] px-4 py-1.5 text-sm transition-colors"
-            onClick={() => reload()}
-            type="button"
-          >
-            Försök igen
-          </button>
-        </div>
-      ) : null}
-
-      {svar.length === 0 && !error ? (
-        <p className="text-dov flex items-center gap-3">
-          <span aria-hidden="true" className="markor" />
-          Läser de åtta svaren och sammanställer vad de säger.
-        </p>
-      ) : null}
-
+    <>
       {svar.length > 0 ? (
         <Domslut klar={klarSvar} korning={korning} svar={svar} />
       ) : null}
@@ -439,6 +397,7 @@ export function Resultat({
                 resultat?.kallor.map((k) => k.doman) ?? []
               )
             }
+            sparad={sparad}
             tillstand={las}
           />
         </div>
@@ -450,6 +409,125 @@ export function Resultat({
           <div className="mt-8">
             <AttGora saker={attGora} />
           </div>
+        </div>
+      ) : null}
+    </>
+  );
+}
+
+// Delningssidan: den sparade analysen utan nytt anrop.
+export function SparatResultat({
+  korning,
+  namns,
+  las,
+  resultat,
+}: {
+  korning: Korning;
+  namns: number;
+  las: LasbarhetTillstand;
+  resultat: ResultatData;
+}) {
+  return (
+    <section aria-labelledby="resultat-rubrik" className="mt-16 sm:mt-24">
+      <h2 className="sr-only" id="resultat-rubrik">
+        Sammanfattning
+      </h2>
+      <Innehall
+        attGora={resultat.attGora}
+        korning={korning}
+        las={las}
+        namns={namns}
+        pastaenden={resultat.pastaenden}
+        resultat={resultat}
+        sparad
+        svar={resultat.svar}
+      />
+    </section>
+  );
+}
+
+export function Resultat({
+  korning,
+  namns,
+  las,
+}: {
+  korning: Korning;
+  namns: number;
+  las: LasbarhetTillstand;
+}) {
+  const [resultat, setResultat] = useState<ResultatData | null>(null);
+  const { sendMessage, partial, error, reload, isLoading, messages } = useChat({
+    connection: fetchServerSentEvents("/api/analys"),
+    threadId: `${korning.id}-analys`,
+    forwardedProps: { korningId: korning.id },
+    outputSchema: AnalysSchema,
+    onCustomEvent: (typ, data) => {
+      if (typ === "resultat") {
+        setResultat(data as ResultatData);
+      }
+    },
+  });
+
+  const skicka = useRef(sendMessage);
+  skicka.current = sendMessage;
+  useEffect(() => {
+    const id = setTimeout(() => skicka.current("Sammanfatta svaren."), 0);
+    return () => clearTimeout(id);
+  }, []);
+
+  const svar = (resultat?.svar ??
+    partial.svar ??
+    []) as Partial<Svarsbedomning>[];
+  const pastaenden = (resultat?.pastaenden ??
+    partial.pastaenden ??
+    []) as Partial<ResultatData["pastaenden"][number]>[];
+  const attGora = (resultat?.attGora ?? partial.attGora ?? []) as Partial<
+    ResultatData["attGora"][number]
+  >[];
+
+  return (
+    <section
+      aria-labelledby="resultat-rubrik"
+      className="mt-16 scroll-mt-44 sm:mt-24"
+      id="sammanfattning"
+    >
+      <h2 className="sr-only" id="resultat-rubrik">
+        Sammanfattning
+      </h2>
+
+      {error ? (
+        <div className="text-fel flex flex-wrap items-center gap-3">
+          <p>Sammanfattningen gick inte att göra den här gången.</p>
+          <button
+            className="text-bakelit hover:border-bakelit rounded-full border border-[var(--linje-stark)] px-4 py-1.5 text-sm transition-colors"
+            onClick={() => reload()}
+            type="button"
+          >
+            Försök igen
+          </button>
+        </div>
+      ) : null}
+
+      {svar.length === 0 && !error ? (
+        <p className="text-dov flex items-center gap-3">
+          <span aria-hidden="true" className="markor" />
+          Läser de åtta svaren och sammanställer vad de säger.
+        </p>
+      ) : null}
+
+      <Innehall
+        attGora={attGora}
+        korning={korning}
+        las={las}
+        namns={namns}
+        pastaenden={pastaenden}
+        resultat={resultat}
+        svar={svar}
+      />
+
+      {resultat ? (
+        <div className="mt-16 border-t border-[var(--linje)] pt-8">
+          <Dela foretag={korning.foretag} id={korning.id} />
         </div>
       ) : null}
 

@@ -3,10 +3,16 @@
   "name": "vad-svarar-ai",
   "compatibility_date": "2026-10-19",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "@tanstack/react-start/server-entry",
+  "main": "./src/server.ts",
   "observability": { "enabled": true },
   "upload_source_maps": true,
-  "secrets": { "required": ["OPENROUTER_API_KEY", "IP_SALT"] },
+  "secrets": {
+    "required": ["OPENROUTER_API_KEY", "IP_SALT", "TURNSTILE_SECRET"]
+  },
+  // Cloudflares testnyckel tills sajten har en egen Turnstile-widget.
+  "vars": { "TURNSTILE_SITE_KEY": "1x00000000000000000000AA" },
+  // Rensar körningar och budgetrader äldre än 30 dagar.
+  "triggers": { "crons": ["17 3 * * *"] },
   "d1_databases": [
     {
       "binding": "DB",

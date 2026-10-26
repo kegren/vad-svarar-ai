@@ -15,6 +15,7 @@ import { fragor, type Kalla } from "#/lib/fragor";
 import { kallFetcher, medKallor } from "#/lib/kallor.server";
 import { hamtaKorning, sparaSvar } from "#/lib/korning.server";
 import { TJANST_ORDNING, TJANSTER } from "#/lib/modeller";
+import { farAnropa, laggTillKostnad } from "#/lib/skydd.server";
 
 const BegaranSchema = z.object({
   korningId: z.string().min(1).max(64),
@@ -38,11 +39,55 @@ async function* medSparning(
     } else if (del.type === EventType.RUN_FINISHED) {
       const kostnad = (del.usage as { cost?: number } | undefined)?.cost;
       await spara({ text, kallor, kostnad: kostnad ?? null, fel: false });
+      await laggTillKostnad(kostnad);
     } else if (del.type === EventType.RUN_ERROR) {
       await spara({ text, kallor, kostnad: null, fel: true });
     }
     yield del;
   }
+}
+
+// Spelar upp ett svar som redan är sparat, utan nytt modellanrop. Det händer när
+// sidan laddas om under en körning.
+// biome-ignore lint/suspicious/useAwait: SSE-svaret kräver en asynkron ström.
+async function* sparat(svar: SparatSvar, threadId: string, runId: string) {
+  const messageId = `${runId}-svar`;
+  const tid = Date.now();
+  yield {
+    type: EventType.RUN_STARTED,
+    threadId,
+    runId,
+    timestamp: tid,
+  } satisfies StreamChunk;
+  yield {
+    type: EventType.TEXT_MESSAGE_START,
+    messageId,
+    role: "assistant",
+    timestamp: tid,
+  } satisfies StreamChunk;
+  yield {
+    type: EventType.TEXT_MESSAGE_CONTENT,
+    messageId,
+    delta: svar.text,
+    timestamp: tid,
+  } satisfies StreamChunk;
+  yield {
+    type: EventType.TEXT_MESSAGE_END,
+    messageId,
+    timestamp: tid,
+  } satisfies StreamChunk;
+  yield {
+    type: EventType.CUSTOM,
+    name: "kallor",
+    value: svar.kallor,
+    timestamp: tid,
+  } satisfies StreamChunk;
+  yield {
+    type: EventType.RUN_FINISHED,
+    threadId,
+    runId,
+    timestamp: tid,
+  } satisfies StreamChunk;
 }
 
 // En av de åtta strömmarna: en tjänst och en fråga i en sparad körning. Frågan
@@ -51,7 +96,7 @@ export const Route = createFileRoute("/api/svar")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const { threadId, forwardedProps } =
+        const { threadId, runId, forwardedProps } =
           await chatParamsFromRequest(request);
         const begaran = BegaranSchema.safeParse(forwardedProps);
         if (!begaran.success) {
@@ -63,6 +108,18 @@ export const Route = createFileRoute("/api/svar")({
           return Response.json(
             { fel: "Körningen finns inte" },
             { status: 404 }
+          );
+        }
+        const tidigare = korning.svar[svarsnyckel(tjanst, fraga)];
+        if (tidigare && !tidigare.fel) {
+          return toServerSentEventsResponse(sparat(tidigare, threadId, runId));
+        }
+        // Taket för anrop per körning och tiden efter start, så att samma körning
+        // inte kan anropas om och om igen.
+        if (!(await farAnropa(korningId))) {
+          return Response.json(
+            { fel: "Körningen tar inte emot fler frågor" },
+            { status: 429 }
           );
         }
         const { modell, sok } = TJANSTER[tjanst];

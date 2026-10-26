@@ -23,6 +23,7 @@ import {
   sparaAnalys,
 } from "#/lib/korning.server";
 import { ANALYSMODELL, TJANST_ORDNING, TJANSTER } from "#/lib/modeller";
+import { farAnropa, laggTillKostnad } from "#/lib/skydd.server";
 
 const BegaranSchema = z.object({ korningId: z.string().min(1).max(64) });
 
@@ -111,6 +112,8 @@ async function* medResultat(
         await sparaAnalys(korningId, resultat);
         yield resultatHandelse(resultat);
       }
+    } else if (del.type === EventType.RUN_FINISHED) {
+      await laggTillKostnad((del.usage as { cost?: number } | undefined)?.cost);
     }
     yield del;
   }
@@ -153,6 +156,12 @@ export const Route = createFileRoute("/api/analys")({
           );
         }
 
+        if (!(await farAnropa(korning.id))) {
+          return Response.json(
+            { fel: "Körningen tar inte emot fler frågor" },
+            { status: 429 }
+          );
+        }
         const abortController = new AbortController();
         const strom = chat({
           adapter: createOpenRouterText(ANALYSMODELL, env.OPENROUTER_API_KEY),

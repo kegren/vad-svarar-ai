@@ -192,10 +192,12 @@ function Formular({
 
 const WWW = /^www\./u;
 
+// Svensk tid, så att servern och webbläsaren skriver samma klockslag på delningssidan.
 function klockslag(iso: string) {
   return new Date(iso).toLocaleTimeString("sv-SE", {
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: "Europe/Stockholm",
   });
 }
 
@@ -227,9 +229,12 @@ function Lista({ kontroller }: { kontroller: Kontroll[] }) {
 export function Lasbarhet({
   tillstand,
   forslag,
+  sparad = false,
 }: {
   tillstand: LasbarhetTillstand;
   forslag: string | null;
+  // På delningssidan visas den sparade kontrollen och kan inte köras om.
+  sparad?: boolean;
 }) {
   const { data, laddar } = tillstand;
   const [andrar, setAndrar] = useState(false);
@@ -271,13 +276,15 @@ export function Lasbarhet({
           {new URL(data.url).hostname.replace(WWW, "")}, kontrollerad{" "}
           {klockslag(data.kontrollerad)}
         </p>
-        <button
-          className="text-svag hover:text-dov text-sm underline decoration-[var(--linje-stark)] underline-offset-4 transition-colors"
-          onClick={() => setAndrar(true)}
-          type="button"
-        >
-          Kontrollera en annan adress
-        </button>
+        {sparad ? null : (
+          <button
+            className="text-svag hover:text-dov text-sm underline decoration-[var(--linje-stark)] underline-offset-4 transition-colors"
+            onClick={() => setAndrar(true)}
+            type="button"
+          >
+            Kontrollera en annan adress
+          </button>
+        )}
       </div>
       <Lista kontroller={data.kontroller} />
       <p className="mt-6 max-w-[64ch] text-[0.95rem] leading-relaxed">

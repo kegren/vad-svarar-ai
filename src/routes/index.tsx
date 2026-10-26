@@ -1,18 +1,23 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useRef, useState } from "react";
 import { Exempel } from "#/components/exempel";
-import { Formular } from "#/components/formular";
+import { Formular, type Fraga } from "#/components/formular";
+import { Fot, Ordmarke } from "#/components/ram";
 import { type Korning, Scen } from "#/components/scen";
-import { startaKorning } from "#/lib/korning.functions";
+import { hamtaLage, SLUT_IDAG, startaKorning } from "#/lib/korning.functions";
 
 const RUBRIK = "Syns ditt företag när kunderna frågar AI?";
 
 export const Route = createFileRoute("/")({
+  loader: () => hamtaLage(),
   component: Startsida,
 });
 
 function Startsida() {
+  const lage = Route.useLoaderData();
+  const navigate = useNavigate();
+  const [slut, setSlut] = useState(lage.slut);
   const [korning, setKorning] = useState<Korning | null>(null);
   const [andrar, setAndrar] = useState(false);
   const [skickar, setSkickar] = useState(false);
@@ -20,12 +25,24 @@ function Startsida() {
   const scenRef = useRef<HTMLDivElement>(null);
   const starta = useServerFn(startaKorning);
 
-  const fraga = async (falt: Omit<Korning, "id" | "startad">) => {
+  const fraga = async ({ turnstile, ...falt }: Fraga) => {
     setSkickar(true);
     setServerfel(undefined);
     try {
-      const { id, skapad } = await starta({ data: falt });
-      setKorning({ ...falt, id, startad: skapad });
+      const svar = await starta({ data: { ...falt, turnstile } });
+      if (svar.typ === "sparad") {
+        await navigate({ to: "/r/$id", params: { id: svar.id } });
+        return;
+      }
+      if (svar.typ === "stopp") {
+        if (svar.meddelande === SLUT_IDAG) {
+          setSlut(true);
+        } else {
+          setServerfel(svar.meddelande);
+        }
+        return;
+      }
+      setKorning({ ...falt, id: svar.id, startad: svar.skapad });
       setAndrar(false);
       requestAnimationFrame(() =>
         scenRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
@@ -44,10 +61,7 @@ function Startsida() {
   return (
     <>
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 pt-5 sm:px-6">
-        <p className="flex items-center gap-2.5 text-[0.95rem] font-semibold tracking-[-0.01em]">
-          <span aria-hidden="true" className="topplampa size-2 rounded-full" />
-          Vad svarar AI?
-        </p>
+        <Ordmarke />
         {korning && !andrar ? (
           <button
             className="hover:border-bakelit rounded-full border border-[var(--linje-stark)] px-4 py-2 text-sm transition-colors"
@@ -79,7 +93,9 @@ function Startsida() {
                   onFraga={fraga}
                   serverfel={serverfel}
                   skickar={skickar}
+                  slut={slut ? SLUT_IDAG : null}
                   start={korning ?? undefined}
+                  webbplatsnyckel={lage.webbplatsnyckel}
                 />
               </div>
             </div>
@@ -105,22 +121,7 @@ function Startsida() {
           </div>
         )}
       </main>
-      <footer className="text-svag mx-auto w-full max-w-6xl border-t border-[var(--linje)] px-4 py-8 text-sm sm:px-6">
-        Byggt av{" "}
-        <a
-          className="text-dov hover:text-bakelit underline"
-          href="https://kegren.com"
-        >
-          Kenny Damgren (kegren.com)
-        </a>{" "}
-        ·{" "}
-        <a
-          className="text-dov hover:text-bakelit underline"
-          href="https://kemero.se"
-        >
-          kemero.se
-        </a>
-      </footer>
+      <Fot />
     </>
   );
 }

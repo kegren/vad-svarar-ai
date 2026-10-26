@@ -12,9 +12,12 @@ export type LasbarhetTillstand = {
 
 // Kör kontrollen och håller utfallet. Scenen startar den direkt när besökaren har
 // fyllt i hemsidan, så att analysen kan bygga på den.
-export function useLasbarhet(korningId: string): LasbarhetTillstand {
+export function useLasbarhet(
+  korningId: string,
+  start: LasbarhetData | null = null
+): LasbarhetTillstand {
   const kontrollera = useServerFn(kontrolleraHemsida);
-  const [data, setData] = useState<LasbarhetData | null>(null);
+  const [data, setData] = useState<LasbarhetData | null>(start);
   const [laddar, setLaddar] = useState(false);
   const [fel, setFel] = useState<string | null>(null);
 

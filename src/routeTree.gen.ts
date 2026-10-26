@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiAnalysRouteImport } from './routes/api/analys'
 import { Route as ApiSvarRouteImport } from './routes/api/svar'
+import { Route as RIdRouteImport } from './routes/r/$id'
+import { Route as ApiBildIdRouteImport } from './routes/api/bild.$id'
 import { Route as DevLasbarhetIdRouteImport } from './routes/dev/lasbarhet.$id'
 import { Route as DevResultatIdRouteImport } from './routes/dev/resultat.$id'
 
@@ -30,6 +32,16 @@ const ApiSvarRoute = ApiSvarRouteImport.update({
   path: '/api/svar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RIdRoute = RIdRouteImport.update({
+  id: '/r/$id',
+  path: '/r/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiBildIdRoute = ApiBildIdRouteImport.update({
+  id: '/api/bild/$id',
+  path: '/api/bild/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DevLasbarhetIdRoute = DevLasbarhetIdRouteImport.update({
   id: '/dev/lasbarhet/$id',
   path: '/dev/lasbarhet/$id',
@@ -45,6 +57,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/analys': typeof ApiAnalysRoute
   '/api/svar': typeof ApiSvarRoute
+  '/r/$id': typeof RIdRoute
+  '/api/bild/$id': typeof ApiBildIdRoute
   '/dev/lasbarhet/$id': typeof DevLasbarhetIdRoute
   '/dev/resultat/$id': typeof DevResultatIdRoute
 }
@@ -52,6 +66,8 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/analys': typeof ApiAnalysRoute
   '/api/svar': typeof ApiSvarRoute
+  '/r/$id': typeof RIdRoute
+  '/api/bild/$id': typeof ApiBildIdRoute
   '/dev/lasbarhet/$id': typeof DevLasbarhetIdRoute
   '/dev/resultat/$id': typeof DevResultatIdRoute
 }
@@ -60,6 +76,8 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/api/analys': typeof ApiAnalysRoute
   '/api/svar': typeof ApiSvarRoute
+  '/r/$id': typeof RIdRoute
+  '/api/bild/$id': typeof ApiBildIdRoute
   '/dev/lasbarhet/$id': typeof DevLasbarhetIdRoute
   '/dev/resultat/$id': typeof DevResultatIdRoute
 }
@@ -69,6 +87,8 @@ export interface FileRouteTypes {
     | '/'
     | '/api/analys'
     | '/api/svar'
+    | '/r/$id'
+    | '/api/bild/$id'
     | '/dev/lasbarhet/$id'
     | '/dev/resultat/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -76,6 +96,8 @@ export interface FileRouteTypes {
     | '/'
     | '/api/analys'
     | '/api/svar'
+    | '/r/$id'
+    | '/api/bild/$id'
     | '/dev/lasbarhet/$id'
     | '/dev/resultat/$id'
   id:
@@ -83,6 +105,8 @@ export interface FileRouteTypes {
     | '/'
     | '/api/analys'
     | '/api/svar'
+    | '/r/$id'
+    | '/api/bild/$id'
     | '/dev/lasbarhet/$id'
     | '/dev/resultat/$id'
   fileRoutesById: FileRoutesById
@@ -91,6 +115,8 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApiAnalysRoute: typeof ApiAnalysRoute
   ApiSvarRoute: typeof ApiSvarRoute
+  RIdRoute: typeof RIdRoute
+  ApiBildIdRoute: typeof ApiBildIdRoute
   DevLasbarhetIdRoute: typeof DevLasbarhetIdRoute
   DevResultatIdRoute: typeof DevResultatIdRoute
 }
@@ -118,6 +144,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSvarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/r/$id': {
+      id: '/r/$id'
+      path: '/r/$id'
+      fullPath: '/r/$id'
+      preLoaderRoute: typeof RIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/bild/$id': {
+      id: '/api/bild/$id'
+      path: '/api/bild/$id'
+      fullPath: '/api/bild/$id'
+      preLoaderRoute: typeof ApiBildIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dev/lasbarhet/$id': {
       id: '/dev/lasbarhet/$id'
       path: '/dev/lasbarhet/$id'
@@ -139,6 +179,8 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApiAnalysRoute: ApiAnalysRoute,
   ApiSvarRoute: ApiSvarRoute,
+  RIdRoute: RIdRoute,
+  ApiBildIdRoute: ApiBildIdRoute,
   DevLasbarhetIdRoute: DevLasbarhetIdRoute,
   DevResultatIdRoute: DevResultatIdRoute,
 }

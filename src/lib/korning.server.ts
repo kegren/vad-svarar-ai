@@ -35,7 +35,7 @@ function iso(skapad: string) {
   return `${skapad.replace(" ", "T")}Z`;
 }
 
-async function hashaIp(ip: string) {
+export async function hashaIp(ip: string) {
   const salt = env.IP_SALT || "lokal-utveckling";
   const data = new TextEncoder().encode(`${salt}:${ip}`);
   const hash = await crypto.subtle.digest("SHA-256", data);

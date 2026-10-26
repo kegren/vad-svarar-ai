@@ -1,8 +1,11 @@
-import { type FormEvent, useId, useState } from "react";
+import { type FormEvent, useId, useRef, useState } from "react";
 import Magnet from "#/components/reactbits/Magnet";
 import { type Foretag, ForetagSchema } from "#/lib/fragor";
+import { Turnstile, type TurnstileHandle } from "./turnstile";
 
 type Falt = Foretag & { hemsida: string };
+
+export type Fraga = Falt & { turnstile: string };
 
 const FALT_FEL: Record<keyof Foretag, string> = {
   foretag: "Skriv företagets namn.",
@@ -67,11 +70,16 @@ export function Formular({
   onFraga,
   skickar = false,
   serverfel,
+  webbplatsnyckel,
+  slut = null,
 }: {
   start?: Partial<Falt>;
-  onFraga: (falt: Falt) => void;
+  onFraga: (fraga: Fraga) => Promise<void>;
   skickar?: boolean;
   serverfel?: string;
+  webbplatsnyckel: string;
+  // Meddelandet när dygnsbudgeten är slut. Då går det inte att fråga.
+  slut?: string | null;
 }) {
   const namnId = useId();
   const [falt, setFalt] = useState<Falt>({
@@ -82,13 +90,16 @@ export function Formular({
   });
   const [fel, setFel] = useState<Partial<Record<keyof Foretag, string>>>({});
   const oppen = falt.foretag.trim().length >= 2;
+  const [token, setToken] = useState("");
+  const [utanToken, setUtanToken] = useState(false);
+  const turnstile = useRef<TurnstileHandle>(null);
 
   const satt = (nyckel: keyof Falt) => (v: string) => {
     setFalt((f) => ({ ...f, [nyckel]: v }));
     setFel((f) => ({ ...f, [nyckel]: undefined }));
   };
 
-  const skicka = (e: FormEvent) => {
+  const skicka = async (e: FormEvent) => {
     e.preventDefault();
     const resultat = ForetagSchema.safeParse(falt);
     if (!resultat.success) {
@@ -100,7 +111,19 @@ export function Formular({
       setFel(nya);
       return;
     }
-    onFraga({ ...resultat.data, hemsida: falt.hemsida.trim() });
+    if (!token) {
+      setUtanToken(true);
+      return;
+    }
+    setUtanToken(false);
+    await onFraga({
+      ...resultat.data,
+      hemsida: falt.hemsida.trim(),
+      turnstile: token,
+    });
+    // En token gäller bara en gång. Formuläret kan redan ha avmonterats.
+    // biome-ignore lint/suspicious/noUnnecessaryConditions: ref.current är null efter avmontering.
+    turnstile.current?.aterstall();
   };
 
   return (
@@ -162,6 +185,18 @@ export function Formular({
               varde={falt.hemsida}
             />
           </div>
+          {oppen ? (
+            <Turnstile
+              onToken={(t) => {
+                setToken(t);
+                if (t) {
+                  setUtanToken(false);
+                }
+              }}
+              ref={turnstile}
+              webbplatsnyckel={webbplatsnyckel}
+            />
+          ) : null}
         </div>
       </div>
 
@@ -169,8 +204,8 @@ export function Formular({
         <Magnet magnetStrength={3} padding={60}>
           <button
             aria-busy={skickar}
-            className="bg-bakelit font-display text-glas h-14 rounded-full px-9 whitespace-nowrap text-[1.15rem] font-semibold tracking-[-0.01em] transition-[background-color,transform,opacity] hover:bg-[#2e2a26] active:scale-[0.98] disabled:cursor-wait disabled:opacity-70"
-            disabled={skickar}
+            className={`bg-bakelit font-display text-glas h-14 rounded-full px-9 text-[1.15rem] font-semibold tracking-[-0.01em] whitespace-nowrap transition-[background-color,transform,opacity] hover:bg-[#2e2a26] active:scale-[0.98] disabled:opacity-70 ${slut ? "disabled:cursor-not-allowed" : "disabled:cursor-wait"}`}
+            disabled={skickar || Boolean(slut)}
             type="submit"
           >
             {skickar ? "Ställer frågorna…" : "Fråga AI"}
@@ -181,9 +216,14 @@ export function Formular({
           tittar.
         </p>
       </div>
-      {serverfel ? (
-        <p className="text-fel mt-4" role="alert">
-          {serverfel}
+      {slut || serverfel || utanToken ? (
+        <p
+          className={`mt-4 ${slut ? "text-bakelit" : "text-fel"}`}
+          role="alert"
+        >
+          {slut ??
+            serverfel ??
+            "Kontrollen att du är en människa är inte klar än. Vänta några sekunder och försök igen."}
         </p>
       ) : null}
     </form>
