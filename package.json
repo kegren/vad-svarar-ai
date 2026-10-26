@@ -1,0 +1,63 @@
+{
+  "name": "vad-svarar-ai",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "scripts": {
+    "build": "vite build",
+    "cf-typegen": "wrangler types",
+    "db:migrate": "wrangler d1 migrations apply vad-svarar-ai --local",
+    "deploy": "bun run build && wrangler deploy",
+    "dev": "vite dev --port 3000",
+    "generate-routes": "tsr generate",
+    "postinstall": "ln -sf ../@tanstack/intent/dist/cli.mjs node_modules/.bin/intent",
+    "preview": "bun run build && vite preview"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "@tanstack/ai": "^1.0.0",
+    "@tanstack/ai-openrouter": "^1.0.0",
+    "@tanstack/ai-react": "^1.0.0",
+    "@tanstack/react-router": "1.170.46",
+    "@tanstack/react-start": "1.169.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.18",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.3",
+    "@cloudflare/vite-plugin": "^1.26.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tanstack/intent": "^0.5.6",
+    "@tanstack/router-cli": "^1.132.0",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^6.0.1",
+    "typescript": "^6.0.2",
+    "ultracite": "^8.1.0",
+    "vite": "^8.0.0",
+    "wrangler": "^4.152.0"
+  },
+  "intent": {
+    "skills": [
+      "@tanstack/ai",
+      "@tanstack/react-router",
+      "@tanstack/react-start",
+      "@tanstack/router-core",
+      "@tanstack/router-plugin",
+      "@tanstack/start-client-core",
+      "@tanstack/start-server-core",
+      "@tanstack/virtual-file-routes"
+    ]
+  },
+  "trustedDependencies": [
+    "esbuild",
+    "lightningcss",
+    "sharp",
+    "workerd"
+  ]
+}
