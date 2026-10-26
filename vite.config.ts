@@ -7,7 +7,9 @@ import { defineConfig } from "vite";
 export default defineConfig({
   resolve: { tsconfigPaths: true },
   // Dev-servern nås från mobilen via `tailscale serve`.
-  server: { allowedHosts: [".ts.net"] },
+  server: { allowedHosts: [".ts.net", "mac-studio"] },
+  // Optimeras tillsammans med React vid start, annars får motion en egen React-kopia.
+  optimizeDeps: { include: ["motion/react", "@tanstack/ai-react"] },
   plugins: [
     cloudflare({ viteEnvironment: { name: "ssr" } }),
     tanstackStart(),

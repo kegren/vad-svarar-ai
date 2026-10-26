@@ -10,11 +10,20 @@
       "!src/routeTree.gen.ts",
       "!worker-configuration.d.ts",
       "!.intent",
-      "!PLAN.md"
+      "!PLAN.md",
+      "!src/components/reactbits"
     ]
   },
   "linter": {
     "rules": {
+      "performance": {
+        // Inline-hanterare är normalt i React utan React Compiler.
+        "noJsxPropsBind": "off"
+      },
+      "suspicious": {
+        // ::selection och scrollbar-color stöds i alla webbläsare vi bryr oss om.
+        "useBaseline": "off"
+      },
       "style": {
         // PLAN.md avsnitt 4: `type` före `interface`.
         "useConsistentTypeDefinitions": {
