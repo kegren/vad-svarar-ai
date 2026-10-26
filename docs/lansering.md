@@ -20,25 +20,28 @@
 - **Repot:** README och MIT-licens finns. Ingen remote och ingen push.
 - **kegren.com:** projektet och två inlägg finns i den lokala kopian (se nedan).
 
-## Kvar, i den här ordningen
+## Lanserat 27 oktober 2026
 
-1. **OpenRouter-nyckeln i workern.** Bestäm om produktionen ska ha en egen nyckel med
-   kreditgränsen 800 kr i månaden. Lägg den sedan med `wrangler secret put OPENROUTER_API_KEY`.
-2. **Umami.** Skapa webbplatsen vad-svarar-ai.kegren.com på umami.kemero.io och klistra in
-   id:t i `src/lib/umami.ts`.
-3. **Driftsättning.** `bun run deploy`. Wrangler kopplar då domänen och ersätter det tomma
-   skalet med appen. Prova en riktig körning efteråt (ungefär 2 kr).
-4. **GitHub.** Skapa `kegren/vad-svarar-ai` som publikt repo, lägg till det som remote och
-   pusha. Inlägget på kegren.com länkar dit.
-5. **kegren.com.** Lägg in projektet och inläggen i produktionens admin. Det går också att
-   köra `emdash content create` mot produktionen med filerna nedan. Slå ihop grenen
-   `vad-svarar-ai` i kegren-repot (den lägger projektet under Selected och Utvalt) och sätt
-   status `live` för `vad-svarar-ai` i `identity.projectStatus` när verktyget är ute.
+1. **OpenRouter-nyckeln** från `.dev.vars` ligger i workern. Produktionen delar nyckel med
+   utvecklingen.
+2. **Umami:** webbplatsen vad-svarar-ai.kegren.com finns på umami.kemero.io och id:t står i
+   `src/lib/umami.ts`.
+3. **Driftsatt** på https://vad-svarar-ai.kegren.com. En riktig körning för kemero gav åtta
+   svar, analysen och läsbarhetskontrollen med nio modellanrop, och budgeten räknade 1,92 kr.
+   Delningssidan och delningsbilden fungerar. Dev-sidorna ger 404 i produktion.
+4. **GitHub:** https://github.com/kegren/vad-svarar-ai är publikt och pushat.
+5. **kegren.com:** projektet och inläggen ligger i produktionens databas och sajten är
+   driftsatt med projektet under Selected och Utvalt, med status "live".
+
+Projektet och inläggen skrevs till produktionen genom en tillfällig dev-server med
+`remoteBindings` i en kopia av kegren-repot. EmDash cachar listorna i KV-namnrymden `CACHE`,
+som den servern inte nådde, så listorna för `projects` och `posts` togs bort ur cachen
+efteråt. Nästa gång går det enklast att lägga in innehåll i produktionens admin, som tömmer
+cachen själv.
 
 ## Texterna på kegren.com
 
-Projektet och inläggen skapades i den lokala EmDash-databasen med CLI:t, alltid med
-`--url http://localhost:4321`, så att inget hamnade i produktionen:
+Projektet och inläggen skapades först i den lokala EmDash-databasen med CLI:t:
 
 ```bash
 bunx emdash content create projects --url http://localhost:4321 --locale en --slug vad-svarar-ai --file projekt_en.json
