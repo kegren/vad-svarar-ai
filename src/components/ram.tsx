@@ -20,6 +20,7 @@ export function Fot() {
       Byggt av{" "}
       <a
         className="text-dov hover:text-bakelit underline"
+        data-umami-event="klick_kegren"
         href="https://kegren.com"
       >
         Kenny Damgren (kegren.com)
@@ -27,6 +28,8 @@ export function Fot() {
       ·{" "}
       <a
         className="text-dov hover:text-bakelit underline"
+        data-umami-event="klick_kemero"
+        data-umami-event-plats="fot"
         href="https://kemero.se"
       >
         kemero.se

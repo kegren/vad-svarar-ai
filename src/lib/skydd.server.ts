@@ -11,17 +11,17 @@ const KRONOR_PER_DOLLAR = 10.5;
 // Senare spelas de sparade svaren upp.
 export const SVARSFONSTER_MINUTER = 15;
 
-// Cloudflares testnycklar släpper alltid igenom. De används bara i utvecklingsläget.
+// Cloudflares testnycklar släpper alltid igenom. De används i utvecklingsläget,
+// eftersom den riktiga widgeten bara godkänner vad-svarar-ai.kegren.com.
 const TESTHEMLIGHET = "1x0000000000000000000000000000000AA";
-export const TESTNYCKEL = "1x00000000000000000000AA";
+const TESTNYCKEL = "1x00000000000000000000AA";
 
 export function webbplatsnyckel() {
-  return env.TURNSTILE_SITE_KEY || TESTNYCKEL;
+  return import.meta.env.DEV ? TESTNYCKEL : env.TURNSTILE_SITE_KEY;
 }
 
 export async function godkandTurnstile(token: string, ip: string) {
-  const hemlighet =
-    env.TURNSTILE_SECRET || (import.meta.env.DEV ? TESTHEMLIGHET : "");
+  const hemlighet = import.meta.env.DEV ? TESTHEMLIGHET : env.TURNSTILE_SECRET;
   if (!(hemlighet && token)) {
     return false;
   }

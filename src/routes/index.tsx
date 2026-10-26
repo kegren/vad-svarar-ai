@@ -6,6 +6,7 @@ import { Formular, type Fraga } from "#/components/formular";
 import { Fot, Ordmarke } from "#/components/ram";
 import { type Korning, Scen } from "#/components/scen";
 import { hamtaLage, SLUT_IDAG, startaKorning } from "#/lib/korning.functions";
+import { mat } from "#/lib/umami";
 
 const RUBRIK = "Syns ditt företag när kunderna frågar AI?";
 
@@ -42,6 +43,7 @@ function Startsida() {
         }
         return;
       }
+      mat("korning_startad");
       setKorning({ ...falt, id: svar.id, startad: svar.skapad });
       setAndrar(false);
       requestAnimationFrame(() =>

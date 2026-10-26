@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { mat } from "#/lib/umami";
 
 // Delar länken till den sparade körningen. I mobilen öppnas telefonens
 // delningsmeny, annars kopieras länken.
@@ -13,6 +14,7 @@ export function Dela({ id, foretag }: { id: string; foretag: string }) {
           title: `Vad svarar AI om ${foretag}?`,
           url,
         });
+        mat("resultat_delat", { satt: "dela" });
         return;
       } catch (e) {
         if (e instanceof DOMException && e.name === "AbortError") {
@@ -21,6 +23,7 @@ export function Dela({ id, foretag }: { id: string; foretag: string }) {
       }
     }
     await navigator.clipboard.writeText(url);
+    mat("resultat_delat", { satt: "kopiera" });
     setKopierad(true);
     setTimeout(() => setKopierad(false), 2400);
   };

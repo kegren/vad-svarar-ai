@@ -5,19 +5,23 @@
   "compatibility_flags": ["nodejs_compat"],
   "main": "./src/server.ts",
   "observability": { "enabled": true },
+  // Bara den egna domänen. Turnstile-widgeten godkänner ingen annan adress.
+  "routes": [{ "pattern": "vad-svarar-ai.kegren.com", "custom_domain": true }],
+  "workers_dev": false,
+  "preview_urls": false,
   "upload_source_maps": true,
   "secrets": {
     "required": ["OPENROUTER_API_KEY", "IP_SALT", "TURNSTILE_SECRET"]
   },
-  // Cloudflares testnyckel tills sajten har en egen Turnstile-widget.
-  "vars": { "TURNSTILE_SITE_KEY": "1x00000000000000000000AA" },
+  // Turnstile-widgeten för vad-svarar-ai.kegren.com. Dev-servern använder testnycklarna.
+  "vars": { "TURNSTILE_SITE_KEY": "0x4AAAAAAFnTL9-NvGZeVy-w" },
   // Rensar körningar och budgetrader äldre än 30 dagar.
   "triggers": { "crons": ["17 3 * * *"] },
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "vad-svarar-ai",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "1c6ee53c-e0a1-4dc4-a6ab-36f6b17eb76b",
       "migrations_dir": "migrations"
     }
   ]

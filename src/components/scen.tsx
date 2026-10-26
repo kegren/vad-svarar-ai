@@ -4,6 +4,7 @@ import CountUp from "#/components/reactbits/CountUp";
 import { type Foretag, fragor, type Kalla } from "#/lib/fragor";
 import { TJANST_ORDNING, TJANSTER, type Tjanst } from "#/lib/modeller";
 import { namnsI } from "#/lib/svarstext";
+import { mat } from "#/lib/umami";
 import { useLasbarhet } from "#/lib/use-lasbarhet";
 import { Mottagare, type Station, type SvarVy } from "./mottagare";
 import { Resultat } from "./resultat";
@@ -95,6 +96,14 @@ export function Scen({ korning }: { korning: Korning }) {
   ).length;
   const total = alla.length;
   const sander = klara < total;
+
+  // Mäts en gång när alla åtta svar har kommit.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: mäts bara när sändningen tar slut.
+  useEffect(() => {
+    if (!sander) {
+      mat("korning_klar", { namns: String(namns) });
+    }
+  }, [sander]);
 
   const las = useLasbarhet(korning.id);
   const korLas = useRef(las.kor);

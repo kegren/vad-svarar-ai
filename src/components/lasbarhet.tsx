@@ -290,6 +290,8 @@ export function Lasbarhet({
       <p className="mt-6 max-w-[64ch] text-[0.95rem] leading-relaxed">
         <a
           className="text-svag hover:text-dov group transition-colors"
+          data-umami-event="klick_kemero"
+          data-umami-event-plats="besiktning"
           href="https://kemero.se/besiktigad-hemsida"
         >
           Vill du pröva hela hemsidan på tjugo punkter? Besiktiga den gratis på
