@@ -1,49 +1,58 @@
 ---
 name: Vad svarar AI?
-description: Fyra AI-tjänster svarar på riktiga kundfrågor medan företagaren tittar.
+description: Fyra AI-tjänster svarar på riktiga kundfrågor i direktsändning medan företagaren lyssnar.
 colors:
-  salong: "#120a0d"
-  rida: "#5c1528"
-  sammet: "#1d1014"
-  sammet-2: "#26151a"
-  ljus: "#ffe2b8"
-  text: "#f6eee8"
-  dov: "#c2b0a9"
-  svag: "#94817b"
-  ramp: "#ffb547"
-  fel: "#ff8f7a"
+  emalj: "#eee8dc"
+  glas: "#f7f2e7"
+  glas-2: "#e6decf"
+  bakelit: "#1a1714"
+  dov: "#544a42"
+  svag: "#6e645a"
+  vav: "#3a332d"
+  vav-2: "#2e2823"
+  vavtext: "#f3ece1"
+  vavdov: "#c7bcae"
+  sandning: "#c4301a"
+  sandning-ljus: "#ff8a6e"
+  fel: "#9e2a1a"
 typography:
   display:
     fontFamily: "Inter Variable, Inter Fallback, -apple-system, system-ui, sans-serif"
-    fontSize: "clamp(2.75rem, 11vw, 6rem)"
+    fontSize: "clamp(2.75rem, 10vw, 4.5rem)"
     fontWeight: 600
     lineHeight: 1.02
     letterSpacing: "-0.035em"
   headline:
     fontFamily: "Inter Variable, Inter Fallback, -apple-system, system-ui, sans-serif"
-    fontSize: "clamp(1.6rem, 6.5vw, 2.6rem)"
+    fontSize: "clamp(1.35rem, 5.5vw, 1.9rem)"
     fontWeight: 600
-    lineHeight: 1.05
+    lineHeight: 1.08
     letterSpacing: "-0.03em"
   title:
     fontFamily: "Inter Variable, Inter Fallback, -apple-system, system-ui, sans-serif"
-    fontSize: "1.75rem"
+    fontSize: "1.15rem"
     fontWeight: 600
-    lineHeight: 1
-    letterSpacing: "-0.03em"
+    lineHeight: 1.2
+    letterSpacing: "-0.01em"
   body:
-    fontFamily: "Inter Variable, Inter, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "1rem"
+    fontFamily: "Inter Variable, Inter Fallback, -apple-system, system-ui, sans-serif"
+    fontSize: "1.05rem"
     fontWeight: 400
     lineHeight: 1.65
   label:
-    fontFamily: "Inter Variable, Inter, ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.85rem"
+    fontFamily: "Inter Variable, Inter Fallback, -apple-system, system-ui, sans-serif"
+    fontSize: "0.8rem"
     fontWeight: 400
     lineHeight: 1.3
+  micro:
+    fontFamily: "Inter Variable, Inter Fallback, -apple-system, system-ui, sans-serif"
+    fontSize: "0.75rem"
+    fontWeight: 500
+    lineHeight: 1.2
 rounded:
-  kort: "16px"
-  chip: "12px"
+  front: "20px"
+  skala: "12px"
+  lampa: "3px"
   piller: "9999px"
 spacing:
   tat: "8px"
@@ -51,35 +60,37 @@ spacing:
   sektion: "24px"
 components:
   knapp-primar:
-    backgroundColor: "{colors.ljus}"
-    textColor: "{colors.salong}"
+    backgroundColor: "{colors.bakelit}"
+    textColor: "{colors.glas}"
     rounded: "{rounded.piller}"
     padding: "0 36px"
     height: "56px"
   knapp-sekundar:
-    textColor: "{colors.text}"
+    textColor: "{colors.bakelit}"
     rounded: "{rounded.piller}"
     padding: "8px 16px"
   falt-namn:
-    backgroundColor: "{colors.sammet}"
-    textColor: "{colors.text}"
+    backgroundColor: "{colors.glas}"
+    textColor: "{colors.bakelit}"
     rounded: "{rounded.piller}"
     padding: "0 28px"
     height: "64px"
-  falt-chip:
-    backgroundColor: "{colors.sammet}"
-    textColor: "{colors.text}"
-    rounded: "{rounded.piller}"
-    padding: "0 20px"
-    height: "48px"
-  kort:
-    backgroundColor: "{colors.sammet}"
-    rounded: "{rounded.kort}"
+  mottagare:
+    backgroundColor: "{colors.glas}"
+    rounded: "{rounded.front}"
+    padding: "20px"
+  skala:
+    backgroundColor: "{colors.glas}"
+    rounded: "{rounded.skala}"
+    height: "84px"
+  vav:
+    backgroundColor: "{colors.vav}"
+    textColor: "{colors.vavtext}"
     padding: "20px"
   kalla:
-    backgroundColor: "{colors.sammet-2}"
-    textColor: "{colors.dov}"
-    rounded: "{rounded.chip}"
+    backgroundColor: "{colors.vav-2}"
+    textColor: "{colors.vavdov}"
+    rounded: "{rounded.skala}"
     padding: "8px 14px 8px 10px"
 ---
 
@@ -87,132 +98,129 @@ components:
 
 ## Overview
 
-**Creative North Star: "Svarsteatern"**
+**Creative North Star: "Direktsändningen"**
 
-Besökaren sitter i en mörk salong. Ridån är oxblod och hänger i lodräta veck. Fyra AI-tjänster står på scenen och svarar på riktiga kundfrågor medan besökaren tittar. Spänningen ligger i om företagets namn sägs. När namnet sägs tänds det i rampljus. Allt annat på sidan är lågmält, så att det enda starka ljuset är det som betyder något.
+Sidan är lokalradions inringningsprogram. Kunderna ringer in sin fråga och fyra AI-tjänster svarar i direktsändning. Besökaren ställer in mottagaren på en station i taget och läser svaret som textas fram i högtalarväven. När företagets namn sägs tänds sändningslampan.
 
-Sidan är mörk för att den är en scen, inte för att verktyget är teknik. Ljuset är varmt som glödlampor, aldrig neon. Tätheten är låg i första vyn (en rubrik, ett fält, en knapp) och hög när svaren kommer, där texten får gott radavstånd för att gå att läsa på mobil.
+Fronten är ljus, varm och emaljerad. Det mörka finns bara i väven där svaren står, så att ögat hamnar där texten kommer. Sändningsrött är den enda kulören och betyder alltid att namnet sägs eller att sändningen pågår.
+
+Startsidan är aldrig tom. Ett riktigt exempel (kemero, webbyrå i Västerås) spelas upp i mottagaren innan besökaren frågar själv. Uppspelningen läser en sparad körning och gör inga anrop.
 
 **Key Characteristics:**
-- Ridån är riktig WebGL (Silk), laddas efter första målningen och står still vid reducerad rörelse.
-- Rampljuset (bärnsten) är reserverat för företagets namn och räknarens tal när det är större än noll.
-- Strålkastarljuset (glödlampsvitt) visar vilken tjänst som talar.
-- Samma typsnitt som kemero.se: Inter med optisk storlek, stora och täta rubriker i vikt 600 och lugn brödtext.
+- En mottagare i stället för åtta kort, så att sidan inte blir lång på mobil. Väven har fast höjd och rullar inuti.
+- Frekvensskalan med fyra stationer och en röd nål visar vilken tjänst man lyssnar på. Nålen svänger själv till första stationen som säger namnet, tills besökaren väljer själv.
+- Samma typsnitt som kemero.se: Inter med optisk storlek, täta rubriker i vikt 600 och lugn brödtext.
+- Inga kort, ingen gradienttext, inga ikonplattor och inga skuggor.
 
 ## Colors
 
-En mörk, varm palett där två ljus gör allt arbete: glödlampsvitt för scenen och bärnsten för namnet.
+En ljus och varm palett av emalj, glas och bakelit med en mörk väv och en enda röd.
 
 ### Primary
-- **Rampljus** (ramp): företagets namn när det sägs i ett svar, pricken på fliken där namnet finns, gnistan och talet i räknaren när det är större än noll. Inget annat.
-
-### Secondary
-- **Glödlampsljus** (ljus): huvudknappen "Fråga AI", fokusringen, strålkastarljuset på kort som svarar och markören som pulserar i väntan.
+- **Sändningsrött** (sandning): företagets namn i svaren och i sammanfattningen, nålen, stationens prick när namnet finns och den egna stapeln. 4,55:1 mot emalj.
+- **Ljust sändningsrött** (sandning-ljus): samma roll inne i väven och i sändningslampan. 5,4:1 mot väv.
 
 ### Neutral
-- **Salong** (salong): marken bakom allt.
-- **Ridå** (rida): tonen i Silk-tyget. Vecken ljusnar mot rosa i högdagrarna.
-- **Sammet** (sammet): kort och fält.
-- **Djup sammet** (sammet-2): vald flik och källchips.
-- **Ljus text** (text): rubriker och starka ord. 16,1:1 mot sammet.
-- **Dov text** (dov): brödtext i svaren och förklarande rader. 8,9:1 mot sammet.
-- **Svag text** (svag): frågan i kursiv, metadata och etiketter. 4,7:1 mot djup sammet, lägsta tillåtna.
+- **Emalj** (emalj): marken bakom allt.
+- **Glas** (glas): mottagarens front, skalan och fälten.
+- **Mörkt glas** (glas-2): staplarnas spår och vald knapp i frågeväljaren.
+- **Bakelit** (bakelit): text, huvudknappen, mottagarens kant och fokusringen. 14,6:1 mot emalj.
+- **Dov text** (dov): förklarande text. 7,1:1 mot emalj.
+- **Svag text** (svag): metadata, tidsrader och etiketter. 4,7:1 mot emalj, lägsta tillåtna.
+- **Väv** (vav) och **djup väv** (vav-2): ytan där svaren textas och källchipen i den.
+- **Vävtext** (vavtext) och **dov vävtext** (vavdov): svarets text och dess metadata. 10,6:1 och 6,6:1 mot väv.
 - **Fel** (fel): felmeddelanden och fältkanter vid fel.
 
 ### Named Rules
-**Rampljusregeln.** Bärnsten betyder "namnet sägs här". Den används aldrig som dekor, på knappar eller på tal som är noll.
+**Sändningsregeln.** Rött betyder "namnet sägs här" eller "sändningen pågår". Det används aldrig som dekor, på knappar eller på tal. Räknaren står i bakelit.
 
-**Ett ljus i taget.** Glödlampsljus och rampljus får aldrig tävla på samma element.
+**Mörkt bara där svaren står.** Väven är den enda mörka ytan. Sammanfattningen och läsbarhetskontrollen ligger på emaljen.
 
 ## Typography
 
 **Display Font:** Inter (Variable med optisk storlek, självhostad via @fontsource, samma som kemero.se)
 **Body Font:** Inter (Variable, självhostad via @fontsource)
 
-**Character:** Ett typsnitt för allt, som på kemero.se. Den optiska storleken gör rubrikerna täta och skarpa i stor grad och texten öppen och lättläst i långa svar. Reservtypsnittet Inter Fallback är Arial med Inters mått, så att texten inte hoppar när Inter laddas.
+**Character:** Ett typsnitt för allt. Den optiska storleken gör rubrikerna täta i stor grad och texten öppen i långa svar. Reservtypsnittet Inter Fallback är Arial med Inters mått, så att texten inte hoppar när Inter laddas.
 
 ### Hierarchy
-- **Display** (600, clamp(2.75rem, 11vw, 6rem), 1.02): startsidans rubrik, max 13 tecken breda rader, ord för ord in.
-- **Headline** (600, clamp(1.6rem, 6.5vw, 2.6rem), 1.05): räknaren "kemero nämns i 4 av 8 svar".
-- **Title** (600, 1.75rem, 1): tjänsternas namn i korten.
-- **Body** (400, 1rem, 1.65): svaren. Rubriker i svaren sätts i 1.05rem och vikt 600.
-- **Label** (400, 0.85rem): flikar, chips och metadata. Tal sätts med tabular-nums.
+- **Display** (600, clamp(2.75rem, 10vw, 4.5rem), 1.02): startsidans rubrik, max 13 tecken breda rader, ord för ord in.
+- **Headline** (600, clamp(1.35rem, 5.5vw, 1.9rem), 1.08): räknaren "kemero nämns i 4 av 8 svar". Sammanfattningens rubriker står i 1.6rem och 2rem från 640px.
+- **Title** (600, 1.15rem): knappen "Fråga AI", kontrollernas rubriker och de tre sakerna att göra.
+- **Body** (400, 1.05rem, 1.65): svaren i väven. Text på emaljen står i 0.95 till 1rem.
+- **Label** (400, 0.8rem): stationernas namn, källchip och exemplets undertext.
+- **Micro** (500, 0.75rem): flaggan Kontrollera och små detaljer. Tal sätts med tabular-nums.
 
 ### Named Rules
-**Tät rubrik, luftig text.** Rubriker har -0.03 till -0.035em spärrning och radavstånd under 1.05. Brödtext har aldrig mindre än 1.6 i radavstånd.
+**Tät rubrik, luftig text.** Rubriker har -0.03 till -0.035em spärrning och radavstånd under 1.1. Brödtext har aldrig mindre än 1.6 i radavstånd.
 
 ## Layout
 
-Mobil först. Innehållet ligger i en kolumn med max 72rem bredd och 16px kant (24px från 640px). Första vyn är minst 100svh hög med rubriken och formuläret centrerade lodrätt. Under en körning ligger räknaren klistrad överst som en rundad remsa, 8px från kanten (12px från 640px). Korten ligger i en kolumn på mobil och två kolumner från 1024px, med 16px mellanrum.
+Mobil först. Innehållet ligger i en kolumn med 16px kant (24px från 640px). På mobil kommer rubriken, fältet och knappen först och mottagaren med exemplet direkt under. På skrivbord står rubrik och formulär till vänster och mottagaren till höger på samma horisont, med högst 34rem för mottagaren.
 
-Formulärets extrafält kommer fram först när namnet har minst två tecken. Bransch tar en hel rad på mobil, ort och hemsida delar nästa.
+Under en körning byts exemplet mot besökarens egen mottagare i en kolumn på max 56rem. Sammanfattningen kommer under när alla åtta svar är klara. Väven är 24rem hög på mobil och 26rem från 640px, så sidan blir aldrig längre för att ett svar är långt.
 
 ## Elevation & Depth
 
-Djup kommer från ljus, inte från skuggor. Kort och fält är platta ytor med en 1px kant i glödlampsljus på 11 till 24 procents styrka. Den enda skuggan är glöden under huvudknappen. Kort som svarar får ett fast strålkastarljus uppifrån som tonas bort när svaret är klart. På skrivbordet följer dessutom ett ljus pekaren över korten.
+Djup kommer från material, inte från skuggor. Mottagaren har en 1.5px kant i bakelit. Skalan och fälten har tunna linjer i bakelit på 14 eller 32 procent. Väven har ett fint prickmönster som ger tyg utan att störa texten. Den enda glöden är sändningslampan.
 
 ### Shadow Vocabulary
-- **Knappglöd** (`box-shadow: 0 10px 40px -12px rgb(255 226 184 / 0.6)`): bara på "Fråga AI".
-- **Rampglöd** (`text-shadow: 0 0 18px rgb(255 181 71 / 0.55)`): på tänt namn och prick.
+- **Lampglöd** (`box-shadow: 0 0 0 3px rgb(232 64 42 / 0.18), 0 0 14px rgb(232 64 42 / 0.6)`): bara på sändningslampan bredvid "Vad svarar AI?" i toppen. Den lyser och pulserar långsamt när någon mottagare på sidan sänder (`html:has([data-sander="true"])`), annars är den bakelit på 20 procent.
 
 ### Named Rules
-**Ljus i stället för skugga.** Ett element lyfts genom att belysas, aldrig genom en mörk skugga.
+**Linje i stället för skugga.** Ett element avgränsas med en linje eller ett material, aldrig med en mörk skugga.
 
 ## Shapes
 
-Mjukt men inte runt. Kort har 16px hörn. Källchips har 12px. Fält, knappar, flikar och räknarremsan är piller, eftersom de är små kontroller man trycker på.
+Mottagaren har 20px hörn som en radiofront. Skalan och källchipen har 12px. Fält, knappar och frågeväljaren är piller. Lampan och nålen är runda.
 
 ## Components
 
 ### Buttons
-- **Shape:** piller (9999px), 56px hög.
-- **Primary:** glödlampsljus med salongsfärgad text i vikt 600. Magnetisk på skrivbordet (React Bits Magnet), stilla vid reducerad rörelse.
-- **Hover / Focus:** ljusnar till #fff0d9. Fokus är en 2px ring i glödlampsljus med 3px avstånd.
-- **Secondary:** genomskinlig med 1px kant i glödlampsljus på 24 procent, för "Fråga om ett annat företag" och "Fråga igen".
-
-### Chips
-- **Källor i svarskortet:** djup sammet, 12px hörn, favicon 20px på en ljus platta (ljus text, 5px hörn), sidans titel i ljus text och domänen under i svag text. Tonar in en i taget med 70ms mellanrum.
-- **Källor i sammanfattningen:** samma chip med domänen i ljus text och, i svag text, tjänsten som läste den eller antalet tjänster. Tonar in med 50ms mellanrum.
-- **Kontrollera:** liten pillerflagga före ett påstående, 1px kant och text i glödlampsljus. Bara när tjänsterna säger emot varandra eller uppgiften kommer från en katalog.
-
-### Cards / Containers
-- **Corner Style:** 16px.
-- **Background:** sammet.
-- **Shadow Strategy:** ingen skugga, se Elevation & Depth.
-- **Border:** 1px glödlampsljus på 11 procent.
-- **Internal Padding:** 20px på mobil, 28px från 640px.
+- **Primary:** bakelit med glastext i vikt 600, piller, 56px hög. Ljusnar till #2e2a26 vid hover och trycks ihop till 98 procent.
+- **Secondary:** genomskinlig med en linje i bakelit på 32 procent, för "Fråga om ett annat företag". I väven används vävtext och vävlinje, för "Fråga igen".
+- **Focus:** 2px ring i bakelit med 3px avstånd. I väven är ringen vävtext.
 
 ### Inputs / Fields
-- **Style:** sammet på 80 till 85 procent med lätt oskärpa bakom, piller, 1px kant på 24 procent. Namnfältet är 64 till 72px högt med text i 1.35 till 1.5rem.
-- **Focus:** kanten blir glödlampsljus och pillerformen står kvar. Fält har ingen extra fokusring. Markören är bärnsten.
-- **Error:** kanten blir fel-färgen, även när fältet har fokus. Meddelandet står under fältet.
+- **Style:** glas, piller, linje i bakelit på 32 procent. Namnfältet är 64 till 72px högt med text i 1.35 till 1.5rem.
+- **Focus:** kanten blir bakelit och pillerformen står kvar. Markören är sändningsröd.
+- **Error:** kanten blir fel-färgen. Meddelandet står under fältet.
 
-### Svarskortet (signatur)
-Ett kort per tjänst med tjänstens namn och modellnamn, två flikar ("Vem rekommenderas?" och "Om {företag}") och svaret som strömmar in. Fliken visar en pulserande prick medan svaret kommer och en bärnstensprick när namnet finns. Frågan står i kursiv ovanför svaret. Första gången namnet syns i en öppen flik tänds det med understreck i rampljus och en kort gnista (React Bits Click Spark, bara via kod). Under svaret står "{Tjänst} läste N källor" med källchipen.
+### Mottagaren (signatur)
+Används både för exemplet och för besökarens egen körning.
+- **Huvudet:** räknaren till vänster och status till höger ("I sändning · 3 av 8", "Klart", "Spelas upp" eller "Spela igen"). Status bryts under räknaren när raden inte räcker. Lampan sitter i sidans topp, inte här.
+- **Frekvensskalan:** glas med streck var 12:e pixel, fyra stationer (14, 38, 62 och 86 procent) och en röd nål som glider dit (0.7s). Skalan är en tablist som styrs med piltangenterna. Under varje station sitter en prick: röd när namnet finns, pulserande medan svaret kommer, svag när den väntar.
+- **Frågeväljaren:** två piller, "Vem rekommenderas?" och "Om {företag}", med en röd prick när namnet finns i det svaret.
+- **Väven:** en tabpanel med frågan i kursiv och svaret som textas fram. Den följer texten medan den strömmar. När ett svar blir klart visar den första stället där namnet sägs en tredjedel ner, annars början. Samma sak gäller när besökaren byter till ett klart svar. Överkanten tonas ut med en mask. Första gången namnet syns i ett öppet svar tänds det i ljust sändningsrött med understreck och en kort gnista (React Bits Click Spark, bara via kod). Under svaret står "{Tjänst} läste N källor" med källchip i en kolumn på mobil och två från 640px.
+
+### Exemplet
+En sparad körning spelas upp 18 tecken åt gången var 70:e ms. Tjänsterna börjar lite efter varandra som i en riktig körning. Vid reducerad rörelse står hela texten direkt. Raden under säger att det är en riktig körning och från vilket datum.
 
 ### Sammanfattningen (signatur)
-Kommer under svaren när alla åtta är klara och fylls i medan analysen strömmar.
-- **Huvudmeningarna:** två meningar i Display och Headline (max 20 och 30 tecken breda) om vilka tjänster som känner till företaget och om någon rekommenderar det. Företagets namn tänds med rampljus som i svaren. Inga mätartavlor.
-- **Rad per tjänst:** tjänstens namn, "Rekommenderar, plats N" i rampljus eller "Rekommenderar inte", och ett ordagrant citat ur svaret i kursiv. Citatet visas bara om koden hittar det i svaret, annars modellens omdöme.
-- **Staplar:** en per företag som nämns, 8px hög på djup sammet. Företagets egen stapel är rampljus, konkurrenternas glödlampsljus på 70 procent. Staplarna växer från vänster när listan syns (1.1s, 90ms mellan raderna) och står i full längd vid reducerad rörelse.
-- **Tre saker att göra:** numrerade 1 till 3 i vikt 600 och glödlampsljus, eftersom ordningen är den viktigaste först. Uppmaningen i Title-storlek (max 34 tecken bred) och skälet under i dov text.
+Kommer under mottagaren när alla åtta svar är klara och fylls i medan analysen strömmar.
+- **Domslutet:** på glas med 1.5px kant i bakelit, som mottagarens front. Två meningar om vilka tjänster som känner till företaget och om någon rekommenderar det. Namnet tänds i sändningsrött som i svaren.
+- **Rad per tjänst:** i domslutet. Raden har samma prick som på skalan (röd när tjänsten rekommenderar företaget), tjänstens namn, "Rekommenderar, plats N" eller "Rekommenderar inte" och ett ordagrant citat i kursiv. Citatet visas bara om koden hittar det i svaret.
+- **Staplar:** en per företag som nämns, 8px hög på mörkt glas. Den egna stapeln är sändningsröd och konkurrenternas bakelit på 70 procent. De växer fram från vänster när listan syns.
+- **Källorna de läste:** chip med favicon på glasplatta, domän och vilka tjänster som läste sidan.
+- **Vad de säger:** varje påstående har en tunn hänvisningslinje till en hängande källkolumn med domänen och tjänsterna. På mobil står källan under påståendet.
+- **Kontrollera:** liten pillerflagga i bakelit före ett påstående när tjänsterna säger emot varandra eller uppgiften kommer från en katalog.
+- **Tre saker att göra:** numrerade 1 till 3 i stor siffra, uppmaningen i vikt 600 och skälet under i dov text.
 
 ### Läsbarhetskontrollen (signatur)
-Sektionen "Kan AI läsa din hemsida?" i sammanfattningen.
-- **Rad per kontroll:** en ring på 28px med ett tecken som ritas när listan syns (0.6s, 160ms mellan raderna): bock i glödlampsljus för klarar, kryss i fel-färgen för klarar inte, streck i dov text för varning och bara ringen i svag text för okänt. Rubriken står i 1.1rem och vikt 600 och förklaringen i dov text. Detaljerna (tjänster eller fält) visas som små tecken på 16px. Rampljus används inte här.
-- **Utan hemsida:** ett fält i pillerform med förslag från källorna och knappen "Kontrollera" i glödlampsljus.
-- **Länken till besiktningen:** under listan, i svag text med en tunn pil som följer texten. Ingen knapp, ingen ram och ingen färg som sticker ut (PLAN.md avsnitt 0).
+Sektionen "Kan AI läsa din hemsida?".
+- **Rad per kontroll:** en ring på 28px med ett tecken som ritas när listan syns: bock i bakelit för klarar, kryss i fel-färgen för klarar inte, streck för varning och bara ringen för okänt. Sändningsrött används inte här.
+- **Länken till besiktningen:** under listan, i svag text med en tunn pil. Ingen knapp, ingen ram och ingen färg som sticker ut (PLAN.md avsnitt 0).
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** låt bärnsten betyda en sak: att namnet sägs.
+- **Do** låt rött betyda en sak: att namnet sägs eller att det sänds.
 - **Do** visa tjänsternas och modellernas namn i klartext, aldrig logotyper eller modell-ID:n.
-- **Do** ladda WebGL och tunga komponenter efter första målningen och låt allt stå still vid reducerad rörelse.
-- **Do** låt varje rörelse säga något: väntan, träff, källa eller resultat.
+- **Do** låt exemplet spelas upp ur sparad data, aldrig med nya anrop.
+- **Do** låt allt stå still och visas helt vid reducerad rörelse.
 
 ### Don't:
-- **Don't** använd gradienttext, ikonplattor eller etiketter ovanför rubriker.
-- **Don't** lägg skuggor under kort eller fält.
-- **Don't** använd neonfärger eller kall blåsvart bakgrund. Salongen är varm.
-- **Don't** låt något annat än företagets namn glöda.
+- **Don't** använd kort i rader, gradienttext, ikonplattor eller etiketter ovanför rubriker.
+- **Don't** lägg skuggor under ytor. Lampan är den enda glöden.
+- **Don't** gör fler ytor mörka än väven.
+- **Don't** låt sidan växa med svarens längd. Väven rullar inuti.

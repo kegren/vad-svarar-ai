@@ -1,147 +1,189 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-26T18:30:00+01:00",
+  "generatedAt": "2026-10-26T22:40:00+01:00",
   "title": "Design System: Vad svarar AI?",
   "extensions": {
     "colorMeta": {
-      "salong": {
+      "emalj": {
         "role": "neutral",
-        "displayName": "Salong",
+        "displayName": "Emalj",
         "tonalRamp": [
-          "#0a0507",
-          "#120a0d",
-          "#1d1014",
-          "#2b181e",
-          "#3f252c",
-          "#5a3a42",
-          "#80606a",
-          "#b9a3a9"
+          "#1b170d",
+          "#372e1b",
+          "#594a2b",
+          "#826c3f",
+          "#af935a",
+          "#c6b28a",
+          "#ded2ba",
+          "#f2ede4"
         ]
       },
-      "rida": {
+      "glas": {
         "role": "neutral",
-        "displayName": "Ridå",
+        "displayName": "Glas",
         "tonalRamp": [
-          "#1f060d",
-          "#3d0f1a",
-          "#5c1528",
-          "#7a1d33",
-          "#9a3048",
-          "#b95367",
-          "#d6848f",
-          "#efc3c7"
+          "#1f180a",
+          "#3d3014",
+          "#634f21",
+          "#917330",
+          "#c29c47",
+          "#d4b97d",
+          "#e6d6b2",
+          "#f5eee0"
         ]
       },
-      "sammet": {
+      "glas-2": {
         "role": "neutral",
-        "displayName": "Sammet",
+        "displayName": "Mörkt glas",
         "tonalRamp": [
-          "#120a0d",
-          "#1d1014",
-          "#26151a",
-          "#331c22",
-          "#47282f",
-          "#64404a",
-          "#8f6e76",
-          "#c7b3b8"
+          "#1b160e",
+          "#362d1c",
+          "#57492d",
+          "#7f6a42",
+          "#ab905e",
+          "#c4b18d",
+          "#dcd1bc",
+          "#f1ede4"
         ]
       },
-      "sammet-2": {
+      "bakelit": {
         "role": "neutral",
-        "displayName": "Djup sammet",
+        "displayName": "Bakelit",
         "tonalRamp": [
-          "#1d1014",
-          "#26151a",
-          "#331c22",
-          "#47282f",
-          "#64404a",
-          "#8f6e76",
-          "#c7b3b8",
-          "#ece2e4"
-        ]
-      },
-      "ljus": {
-        "role": "secondary",
-        "displayName": "Glödlampsljus",
-        "tonalRamp": [
-          "#5c4224",
-          "#8a6738",
-          "#b98f55",
-          "#e0b77c",
-          "#f5cf97",
-          "#ffe2b8",
-          "#fff0d9",
-          "#fffaf2"
-        ]
-      },
-      "text": {
-        "role": "neutral",
-        "displayName": "Ljus text",
-        "tonalRamp": [
-          "#5a524e",
-          "#7d7470",
-          "#a39994",
-          "#c7bdb7",
-          "#e0d6d0",
-          "#f6eee8",
-          "#faf6f3",
-          "#fffdfb"
+          "#171412",
+          "#2e2923",
+          "#4b423a",
+          "#6e6154",
+          "#958575",
+          "#b4a89d",
+          "#d3ccc5",
+          "#edebe8"
         ]
       },
       "dov": {
         "role": "neutral",
         "displayName": "Dov text",
         "tonalRamp": [
-          "#3d3330",
-          "#5a4d49",
-          "#7a6a65",
-          "#9c8b85",
-          "#c2b0a9",
-          "#d6c8c2",
-          "#e8dfdb",
-          "#f6f1ef"
+          "#171412",
+          "#2e2824",
+          "#4a413a",
+          "#6d6055",
+          "#938376",
+          "#b3a79e",
+          "#d2cbc6",
+          "#edeae8"
         ]
       },
       "svag": {
         "role": "neutral",
         "displayName": "Svag text",
         "tonalRamp": [
-          "#2e2624",
-          "#463a37",
-          "#615250",
-          "#7a6966",
-          "#94817b",
-          "#ad9c97",
-          "#c9bcb8",
-          "#e6dedb"
+          "#161412",
+          "#2d2925",
+          "#49423c",
+          "#6b6157",
+          "#918578",
+          "#b1a8a0",
+          "#d1ccc7",
+          "#edebe9"
         ]
       },
-      "ramp": {
-        "role": "primary",
-        "displayName": "Rampljus",
+      "vav": {
+        "role": "neutral",
+        "displayName": "Väv",
         "tonalRamp": [
-          "#4d2f05",
-          "#7a4b0a",
-          "#b8730f",
-          "#e0911c",
-          "#ffb547",
-          "#ffc875",
-          "#ffdca6",
-          "#fff0d6"
+          "#171412",
+          "#2e2824",
+          "#4b423a",
+          "#6d6055",
+          "#948375",
+          "#b3a79d",
+          "#d2ccc6",
+          "#edeae8"
+        ]
+      },
+      "vav-2": {
+        "role": "neutral",
+        "displayName": "Djup väv",
+        "tonalRamp": [
+          "#171412",
+          "#2e2823",
+          "#4b4139",
+          "#6e6054",
+          "#958374",
+          "#b4a79d",
+          "#d3cbc5",
+          "#edeae8"
+        ]
+      },
+      "vavtext": {
+        "role": "neutral",
+        "displayName": "Vävtext",
+        "tonalRamp": [
+          "#1d160c",
+          "#3a2d17",
+          "#5f4926",
+          "#8a6a37",
+          "#b99050",
+          "#cdb183",
+          "#e2d1b6",
+          "#f3ede2"
+        ]
+      },
+      "vavdov": {
+        "role": "neutral",
+        "displayName": "Dov vävtext",
+        "tonalRamp": [
+          "#181511",
+          "#302a21",
+          "#4e4436",
+          "#73634f",
+          "#9b876e",
+          "#b8aa98",
+          "#d5cdc3",
+          "#eeebe7"
+        ]
+      },
+      "sandning": {
+        "role": "primary",
+        "displayName": "Sändningsrött",
+        "tonalRamp": [
+          "#240905",
+          "#48120a",
+          "#751d10",
+          "#ab2a17",
+          "#e23f27",
+          "#eb7766",
+          "#f3afa5",
+          "#fadfdb"
+        ]
+      },
+      "sandning-ljus": {
+        "role": "primary",
+        "displayName": "Ljust sändningsrött",
+        "tonalRamp": [
+          "#290800",
+          "#521000",
+          "#851a00",
+          "#c22500",
+          "#ff390a",
+          "#ff7352",
+          "#ffad99",
+          "#ffded6"
         ]
       },
       "fel": {
-        "role": "neutral",
+        "role": "error",
         "displayName": "Fel",
         "tonalRamp": [
-          "#4d1e15",
-          "#7a3022",
-          "#a84532",
-          "#d6634d",
-          "#ff8f7a",
-          "#ffaa99",
-          "#ffc8bd",
-          "#ffe7e2"
+          "#230906",
+          "#46130c",
+          "#721e13",
+          "#a62c1b",
+          "#dc422d",
+          "#e6796a",
+          "#f1b0a7",
+          "#f9e0dc"
         ]
       }
     },
@@ -152,31 +194,30 @@
       },
       "headline": {
         "displayName": "Headline",
-        "purpose": "Räknaren under en körning."
+        "purpose": "Räknaren i mottagaren."
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Tjänsternas namn i korten."
+        "purpose": "Huvudknappen, kontrollernas rubriker och de tre sakerna att göra."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Svaren och förklarande text."
+        "purpose": "Svaren i väven."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Flikar, chips och metadata."
+        "purpose": "Stationer, källchip och undertext."
+      },
+      "micro": {
+        "displayName": "Micro",
+        "purpose": "Flaggan Kontrollera och små detaljer."
       }
     },
     "shadows": [
       {
-        "name": "knappglod",
-        "value": "0 10px 40px -12px rgb(255 226 184 / 0.6)",
-        "purpose": "Glöden under Fråga AI, den enda skuggan."
-      },
-      {
-        "name": "rampglod",
-        "value": "text-shadow: 0 0 18px rgb(255 181 71 / 0.55)",
-        "purpose": "Tänt namn i ett svar."
+        "name": "lampglod",
+        "value": "0 0 0 3px rgb(232 64 42 / 0.18), 0 0 14px rgb(232 64 42 / 0.6)",
+        "purpose": "Sändningslampan i toppen när en mottagare sänder, den enda glöden."
       }
     ],
     "motion": [
@@ -187,8 +228,18 @@
       },
       {
         "name": "tands",
-        "value": "1.4s ease-ut",
-        "purpose": "Namnet tänds: understreck och glöd."
+        "value": "1.6s ease-ut",
+        "purpose": "Namnet tänds: understreck och en kort blixt i bakgrunden."
+      },
+      {
+        "name": "nal",
+        "value": "left 0.7s ease-ut",
+        "purpose": "Nålen glider till vald station."
+      },
+      {
+        "name": "lampa",
+        "value": "2.4s ease-in-out, oändlig",
+        "purpose": "Sändningslampan pulserar medan det sänds."
       },
       {
         "name": "ord-in",
@@ -196,14 +247,19 @@
         "purpose": "Rubriken kommer fram ord för ord."
       },
       {
-        "name": "kalla-in",
-        "value": "0.6s ease-ut, 70ms mellan chipen",
-        "purpose": "Källorna tonar in."
+        "name": "textning",
+        "value": "18 tecken per 70ms",
+        "purpose": "Exemplet textas fram i väven."
       },
       {
-        "name": "slackning",
-        "value": "1600ms ease-ut",
-        "purpose": "Salongen släcks när körningen startar."
+        "name": "stapel",
+        "value": "scaleX 1.1s ease-ut, 90ms mellan raderna",
+        "purpose": "Staplarna växer fram när de syns."
+      },
+      {
+        "name": "kalla-in",
+        "value": "0.6s ease-ut",
+        "purpose": "Källorna tonar in."
       }
     ],
     "breakpoints": [
@@ -222,101 +278,113 @@
       "name": "Fråga AI",
       "kind": "button",
       "refersTo": "knapp-primar",
-      "description": "Huvudknappen. Magnetisk på skrivbordet.",
+      "description": "Huvudknappen i bakelit.",
       "html": "<button class=\"ds-knapp\">Fråga AI</button>",
-      "css": ".ds-knapp { height: 56px; padding: 0 36px; border: none; border-radius: 9999px; background: #ffe2b8; color: #120a0d; font: 600 1.15rem/1 'Inter Variable', 'Inter Fallback', sans-serif; letter-spacing: -0.01em; box-shadow: 0 10px 40px -12px rgb(255 226 184 / 0.6); cursor: pointer; transition: background-color 0.2s, transform 0.2s; } .ds-knapp:hover { background: #fff0d9; } .ds-knapp:active { transform: scale(0.98); } .ds-knapp:focus-visible { outline: 2px solid #ffe2b8; outline-offset: 3px; }"
+      "css": ".ds-knapp { height: 56px; padding: 0 36px; border: none; border-radius: 9999px; background: #1a1714; color: #f7f2e7; font: 600 1.15rem/1 'Inter Variable', 'Inter Fallback', sans-serif; letter-spacing: -0.01em; cursor: pointer; transition: background-color 0.2s, transform 0.2s; } .ds-knapp:hover { background: #2e2a26; } .ds-knapp:active { transform: scale(0.98); } .ds-knapp:focus-visible { outline: 2px solid #1a1714; outline-offset: 3px; }"
     },
     {
       "name": "Sekundär knapp",
       "kind": "button",
       "refersTo": "knapp-sekundar",
-      "description": "Fråga om ett annat företag, Fråga igen.",
+      "description": "Fråga om ett annat företag.",
       "html": "<button class=\"ds-knapp-2\">Fråga om ett annat företag</button>",
-      "css": ".ds-knapp-2 { padding: 8px 16px; border: 1px solid rgb(255 226 184 / 0.24); border-radius: 9999px; background: transparent; color: #f6eee8; font: 400 0.875rem/1.3 'Inter Variable', sans-serif; cursor: pointer; transition: border-color 0.2s; } .ds-knapp-2:hover { border-color: #ffe2b8; } .ds-knapp-2:focus-visible { outline: 2px solid #ffe2b8; outline-offset: 3px; }"
+      "css": ".ds-knapp-2 { padding: 8px 16px; border: 1px solid rgb(26 23 20 / 0.32); border-radius: 9999px; background: transparent; color: #1a1714; font: 400 0.875rem/1.3 'Inter Variable', 'Inter Fallback', sans-serif; cursor: pointer; transition: border-color 0.2s; } .ds-knapp-2:hover { border-color: #1a1714; }"
     },
     {
       "name": "Namnfältet",
       "kind": "input",
       "refersTo": "falt-namn",
-      "description": "Det stora fältet i pillerform för företagsnamnet.",
-      "html": "<input class=\"ds-namn\" placeholder=\"Företagets namn\" />",
-      "css": ".ds-namn { width: 100%; height: 64px; padding: 0 28px; border: 1px solid rgb(255 226 184 / 0.24); border-radius: 9999px; background: rgb(29 16 20 / 0.85); color: #f6eee8; caret-color: #ffb547; font: 400 1.35rem/1 'Inter Variable', 'Inter Fallback', sans-serif; letter-spacing: -0.01em; } .ds-namn::placeholder { color: #94817b; } .ds-namn:focus { outline: none; border-color: #ffe2b8; }"
+      "description": "Det stora fältet i pillerform.",
+      "html": "<input class=\"ds-falt\" placeholder=\"Företagets namn\">",
+      "css": ".ds-falt { height: 64px; padding: 0 28px; border: 1px solid rgb(26 23 20 / 0.32); border-radius: 9999px; background: #f7f2e7; color: #1a1714; font: 400 1.35rem/1 'Inter Variable', 'Inter Fallback', sans-serif; caret-color: #c4301a; outline: none; } .ds-falt:focus { border-color: #1a1714; } .ds-falt::placeholder { color: #6e645a; }"
+    },
+    {
+      "name": "Frekvensskalan",
+      "kind": "navigation",
+      "refersTo": "skala",
+      "description": "Fyra stationer och en röd nål.",
+      "html": "<div class=\"ds-skala\"><span class=\"ds-nal\"></span><span>ChatGPT</span><span>Gemini</span><span>Claude</span><b>Perplexity</b></div>",
+      "css": ".ds-skala { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); align-items: end; height: 84px; padding-bottom: 12px; border: 1px solid rgb(26 23 20 / 0.32); border-radius: 12px; background: #f7f2e7 repeating-linear-gradient(90deg, #1a1714 0 1px, transparent 1px 14px) 0 12px / 100% 14px no-repeat; font: 400 0.8rem/1 'Inter Variable', 'Inter Fallback', sans-serif; color: #544a42; text-align: center; } .ds-skala b { color: #1a1714; font-weight: 600; } .ds-nal { position: absolute; top: 6px; left: 87.5%; width: 3px; height: 26px; border-radius: 9999px; background: #c4301a; transform: translateX(-50%); }"
+    },
+    {
+      "name": "Väven",
+      "kind": "surface",
+      "refersTo": "vav",
+      "description": "Den mörka ytan där svaren textas.",
+      "html": "<div class=\"ds-vav\"><p><em>Vem rekommenderas?</em></p><p>Det finns flera webbyråer, bland annat <mark>kemero</mark>.</p></div>",
+      "css": ".ds-vav { padding: 20px; background: #3a332d radial-gradient(rgb(255 255 255 / 0.05) 1px, transparent 1.5px) 0 0 / 6px 6px; color: #f3ece1; font: 400 1.05rem/1.65 'Inter Variable', 'Inter Fallback', sans-serif; } .ds-vav em { color: #c7bcae; } .ds-vav mark { background: none; color: #ff8a6e; font-weight: 600; text-decoration: underline 2px; text-underline-offset: 0.22em; }"
     },
     {
       "name": "Källchip",
       "kind": "chip",
       "refersTo": "kalla",
       "description": "En källa som tjänsten läste.",
-      "html": "<a class=\"ds-kalla\" href=\"#\"><span class=\"ds-kalla-titel\">Webbyrå i Västerås | Depo Studio</span><span class=\"ds-kalla-doman\">depostudio.se</span></a>",
-      "css": ".ds-kalla { display: inline-flex; flex-direction: column; max-width: 17rem; padding: 8px 14px 8px 10px; border-radius: 12px; background: #26151a; text-decoration: none; font: 400 0.8rem/1.25 'Inter Variable', sans-serif; transition: background-color 0.2s; } .ds-kalla:hover { background: #331c22; } .ds-kalla-titel { color: #f6eee8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } .ds-kalla-doman { color: #94817b; font-size: 0.72rem; }"
+      "html": "<a class=\"ds-kalla\">kemero.se</a>",
+      "css": ".ds-kalla { display: inline-flex; padding: 8px 14px 8px 10px; border-radius: 12px; background: #2e2823; color: #c7bcae; font: 400 0.8rem/1.3 'Inter Variable', 'Inter Fallback', sans-serif; }"
     },
     {
-      "name": "Svarskort",
-      "kind": "card",
-      "refersTo": "kort",
-      "description": "Ett kort per tjänst, med strålkastarljus medan tjänsten svarar.",
-      "html": "<article class=\"ds-kort ds-kort-talar\"><h3 class=\"ds-kort-namn\">ChatGPT</h3><p class=\"ds-kort-text\">Kemero är en webbyrå i Västerås som drivs av <mark class=\"ds-namn-tant\">Kenny Damgren</mark>.</p></article>",
-      "css": ".ds-kort { position: relative; overflow: hidden; padding: 20px; border: 1px solid rgb(255 226 184 / 0.11); border-radius: 16px; background: #1d1014; } .ds-kort-talar::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 14rem; background: radial-gradient(55% 100% at 50% 0%, rgb(255 226 184 / 0.16), transparent); pointer-events: none; } .ds-kort-namn { position: relative; margin: 0; color: #f6eee8; font: 600 1.75rem/1 'Inter Variable', 'Inter Fallback', sans-serif; letter-spacing: -0.03em; } .ds-kort-text { position: relative; color: #c2b0a9; font: 400 1rem/1.65 'Inter Variable', sans-serif; } .ds-namn-tant { background: none; color: #ffb547; font-weight: 600; text-decoration: underline 2px #ffb547; text-underline-offset: 0.22em; text-shadow: 0 0 18px rgb(255 181 71 / 0.55); }"
+      "name": "Sändningslampan",
+      "kind": "indicator",
+      "refersTo": "lampa",
+      "description": "Lyser medan det sänds.",
+      "html": "<span class=\"ds-lampa\"></span>",
+      "css": ".ds-lampa { display: inline-block; width: 10px; height: 10px; border-radius: 9999px; background: #ff8a6e; box-shadow: 0 0 0 3px rgb(232 64 42 / 0.18), 0 0 14px rgb(232 64 42 / 0.6); }"
     },
     {
       "name": "Stapel",
-      "kind": "custom",
+      "kind": "meter",
       "refersTo": "stapel",
-      "description": "Hur många av de åtta svaren som nämner ett företag. Företagets egen stapel är rampljus.",
-      "html": "<div class=\"ds-stapel\"><div class=\"ds-stapel-rad\"><span class=\"ds-stapel-namn ds-eget\">kemero</span><span class=\"ds-stapel-antal\">i 5 av 8 svar</span></div><div class=\"ds-stapel-spar\"><div class=\"ds-stapel-fyll ds-eget-fyll\" style=\"width:62%\"></div></div></div>",
-      "css": ".ds-stapel { font: 400 0.95rem/1.3 'Inter Variable', sans-serif; } .ds-stapel-rad { display: flex; justify-content: space-between; } .ds-stapel-namn { color: #f6eee8; } .ds-eget { color: #ffb547; font-weight: 600; } .ds-stapel-antal { color: #94817b; font-size: 0.875rem; } .ds-stapel-spar { margin-top: 6px; height: 8px; border-radius: 9999px; background: #26151a; overflow: hidden; } .ds-stapel-fyll { height: 100%; border-radius: 9999px; background: rgb(255 226 184 / 0.7); } .ds-eget-fyll { background: #ffb547; }"
+      "description": "Hur många svar ett företag nämns i. Den egna stapeln är röd.",
+      "html": "<div class=\"ds-spar\"><div class=\"ds-stapel\"></div></div>",
+      "css": ".ds-spar { height: 8px; border-radius: 9999px; background: #e6decf; overflow: hidden; } .ds-stapel { width: 50%; height: 100%; border-radius: 9999px; background: #c4301a; }"
     },
     {
       "name": "Kontrollera",
-      "kind": "chip",
+      "kind": "badge",
       "refersTo": "kontrollera",
-      "description": "Flagga före ett påstående som tjänsterna säger emot varandra om.",
-      "html": "<span class=\"ds-kontrollera\">Kontrollera</span>",
-      "css": ".ds-kontrollera { display: inline-block; padding: 2px 8px; border: 1px solid rgb(255 226 184 / 0.6); border-radius: 9999px; color: #ffe2b8; font: 500 0.7rem/1.4 'Inter Variable', sans-serif; }"
+      "description": "Flagga före ett påstående som bör kontrolleras.",
+      "html": "<span class=\"ds-flagga\">Kontrollera</span>",
+      "css": ".ds-flagga { display: inline-block; padding: 2px 8px; border: 1px solid rgb(26 23 20 / 0.5); border-radius: 9999px; color: #1a1714; font: 500 0.75rem/1.2 'Inter Variable', 'Inter Fallback', sans-serif; }"
     }
   ],
   "narrative": {
-    "northStar": "Svarsteatern",
-    "overview": "Besökaren sitter i en mörk salong. Ridån är oxblod och hänger i lodräta veck. Fyra AI-tjänster står på scenen och svarar på riktiga kundfrågor medan besökaren tittar, och spänningen ligger i om företagets namn sägs. När namnet sägs tänds det i rampljus. Allt annat på sidan är lågmält, så att det enda starka ljuset är det som betyder något.",
+    "northStar": "Direktsändningen",
+    "overview": "Sidan är lokalradions inringningsprogram. Kunderna ringer in sin fråga och fyra AI-tjänster svarar i direktsändning. Besökaren ställer in mottagaren på en station i taget och läser svaret som textas fram i högtalarväven. När företagets namn sägs tänds sändningslampan.",
     "keyCharacteristics": [
-      "Ridån är riktig WebGL (Silk), laddas efter första målningen och står still vid reducerad rörelse.",
-      "Rampljuset (bärnsten) är reserverat för företagets namn och räknarens tal när det är större än noll.",
-      "Strålkastarljuset (glödlampsvitt) visar vilken tjänst som talar.",
-      "Samma typsnitt som kemero.se: Inter med optisk storlek, stora och täta rubriker i vikt 600 och lugn brödtext."
+      "En mottagare i stället för åtta kort, så att sidan inte blir lång på mobil.",
+      "Frekvensskalan med fyra stationer och en röd nål visar vilken tjänst man lyssnar på.",
+      "Ett riktigt exempel spelas upp ur sparad data innan besökaren frågar själv.",
+      "Samma typsnitt som kemero.se: Inter med optisk storlek."
     ],
     "rules": [
       {
-        "name": "Rampljusregeln",
-        "body": "Bärnsten betyder \"namnet sägs här\". Den används aldrig som dekor, på knappar eller på tal som är noll.",
-        "section": "colors"
+        "name": "Sändningsregeln",
+        "body": "Rött betyder att namnet sägs eller att det sänds. Det används aldrig som dekor, på knappar eller på tal."
       },
       {
-        "name": "Ett ljus i taget",
-        "body": "Glödlampsljus och rampljus får aldrig tävla på samma element.",
-        "section": "colors"
+        "name": "Mörkt bara där svaren står",
+        "body": "Väven är den enda mörka ytan."
+      },
+      {
+        "name": "Linje i stället för skugga",
+        "body": "Ytor avgränsas med linjer och material, aldrig med mörka skuggor."
       },
       {
         "name": "Tät rubrik, luftig text",
-        "body": "Rubriker har -0.03 till -0.035em spärrning och radavstånd under 1.05. Brödtext har aldrig mindre än 1.6 i radavstånd.",
-        "section": "typography"
-      },
-      {
-        "name": "Ljus i stället för skugga",
-        "body": "Ett element lyfts genom att belysas, aldrig genom en mörk skugga.",
-        "section": "elevation"
+        "body": "Rubriker under 1.1 i radavstånd, brödtext aldrig under 1.6."
       }
     ],
     "dos": [
-      "Do låt bärnsten betyda en sak: att namnet sägs.",
-      "Do visa tjänsternas och modellernas namn i klartext, aldrig logotyper eller modell-ID:n.",
-      "Do ladda WebGL och tunga komponenter efter första målningen och låt allt stå still vid reducerad rörelse.",
-      "Do låt varje rörelse säga något: väntan, träff, källa eller resultat."
+      "Låt rött betyda en sak.",
+      "Visa tjänsternas och modellernas namn i klartext.",
+      "Spela upp exemplet ur sparad data.",
+      "Låt allt stå still vid reducerad rörelse."
     ],
     "donts": [
-      "Don't använd gradienttext, ikonplattor eller etiketter ovanför rubriker.",
-      "Don't lägg skuggor under kort eller fält.",
-      "Don't använd neonfärger eller kall blåsvart bakgrund. Salongen är varm.",
-      "Don't låt något annat än företagets namn glöda."
+      "Kort i rader, gradienttext eller ikonplattor.",
+      "Skuggor under ytor.",
+      "Fler mörka ytor än väven.",
+      "En sida som växer med svarens längd."
     ]
   }
 }
