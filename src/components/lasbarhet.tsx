@@ -5,7 +5,7 @@ import type { LasbarhetTillstand } from "#/lib/use-lasbarhet";
 import { useSyns } from "#/lib/use-syns";
 
 const FARG: Record<Status, string> = {
-  ok: "text-ljus",
+  ok: "text-bakelit",
   varning: "text-dov",
   fel: "text-fel",
   okand: "text-svag",
@@ -84,7 +84,7 @@ function Rad({
     <li className="grid grid-cols-[28px_1fr] gap-x-4 py-5">
       <Tecken fordrojning={index * 160} status={kontroll.status} syns={syns} />
       <div>
-        <p className="text-text text-[1.1rem] leading-snug font-semibold">
+        <p className="text-bakelit text-[1.15rem] leading-snug font-semibold">
           <span className="sr-only">{ETIKETT[kontroll.status]}: </span>
           {hallIhop(kontroll.rubrik, "rubrik")}
         </p>
@@ -152,10 +152,10 @@ function Formular({
           aria-describedby={tillstand.fel ? `${id}-fel` : undefined}
           aria-invalid={Boolean(tillstand.fel)}
           autoComplete="url"
-          className={`bg-sammet/80 text-text h-12 min-w-0 flex-1 basis-[14rem] rounded-full border px-5 transition-colors focus:outline-none ${
+          className={`bg-glas text-bakelit h-12 min-w-0 flex-1 basis-[14rem] rounded-full border px-5 transition-colors focus:outline-none ${
             tillstand.fel
               ? "border-fel focus:border-fel"
-              : "focus:border-ljus border-[var(--linje-stark)]"
+              : "focus:border-bakelit border-[var(--linje-stark)]"
           }`}
           id={id}
           inputMode="url"
@@ -165,7 +165,7 @@ function Formular({
           value={varde}
         />
         <button
-          className="bg-ljus text-salong h-12 rounded-full px-6 font-semibold transition-colors hover:bg-[#fff0d9] disabled:cursor-wait disabled:opacity-70"
+          className="bg-bakelit text-glas h-12 rounded-full px-6 font-semibold transition-colors hover:bg-[#2e2a26] disabled:cursor-wait disabled:opacity-70"
           disabled={tillstand.laddar}
           type="submit"
         >
@@ -173,7 +173,7 @@ function Formular({
         </button>
         {onAvbryt ? (
           <button
-            className="text-dov hover:text-text h-12 rounded-full px-4 transition-colors"
+            className="text-dov hover:text-bakelit h-12 rounded-full px-4 transition-colors"
             onClick={onAvbryt}
             type="button"
           >

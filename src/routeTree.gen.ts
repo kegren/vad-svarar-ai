@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiAnalysRouteImport } from './routes/api/analys'
 import { Route as ApiSvarRouteImport } from './routes/api/svar'
 import { Route as DevLasbarhetIdRouteImport } from './routes/dev/lasbarhet.$id'
+import { Route as DevResultatIdRouteImport } from './routes/dev/resultat.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const DevLasbarhetIdRoute = DevLasbarhetIdRouteImport.update({
   path: '/dev/lasbarhet/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DevResultatIdRoute = DevResultatIdRouteImport.update({
+  id: '/dev/resultat/$id',
+  path: '/dev/resultat/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/api/analys': typeof ApiAnalysRoute
   '/api/svar': typeof ApiSvarRoute
   '/dev/lasbarhet/$id': typeof DevLasbarhetIdRoute
+  '/dev/resultat/$id': typeof DevResultatIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api/analys': typeof ApiAnalysRoute
   '/api/svar': typeof ApiSvarRoute
   '/dev/lasbarhet/$id': typeof DevLasbarhetIdRoute
+  '/dev/resultat/$id': typeof DevResultatIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,30 @@ export interface FileRoutesById {
   '/api/analys': typeof ApiAnalysRoute
   '/api/svar': typeof ApiSvarRoute
   '/dev/lasbarhet/$id': typeof DevLasbarhetIdRoute
+  '/dev/resultat/$id': typeof DevResultatIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/analys' | '/api/svar' | '/dev/lasbarhet/$id'
+  fullPaths:
+    | '/'
+    | '/api/analys'
+    | '/api/svar'
+    | '/dev/lasbarhet/$id'
+    | '/dev/resultat/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/analys' | '/api/svar' | '/dev/lasbarhet/$id'
-  id: '__root__' | '/' | '/api/analys' | '/api/svar' | '/dev/lasbarhet/$id'
+  to:
+    | '/'
+    | '/api/analys'
+    | '/api/svar'
+    | '/dev/lasbarhet/$id'
+    | '/dev/resultat/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/api/analys'
+    | '/api/svar'
+    | '/dev/lasbarhet/$id'
+    | '/dev/resultat/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +92,7 @@ export interface RootRouteChildren {
   ApiAnalysRoute: typeof ApiAnalysRoute
   ApiSvarRoute: typeof ApiSvarRoute
   DevLasbarhetIdRoute: typeof DevLasbarhetIdRoute
+  DevResultatIdRoute: typeof DevResultatIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DevLasbarhetIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dev/resultat/$id': {
+      id: '/dev/resultat/$id'
+      path: '/dev/resultat/$id'
+      fullPath: '/dev/resultat/$id'
+      preLoaderRoute: typeof DevResultatIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAnalysRoute: ApiAnalysRoute,
   ApiSvarRoute: ApiSvarRoute,
   DevLasbarhetIdRoute: DevLasbarhetIdRoute,
+  DevResultatIdRoute: DevResultatIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -57,7 +57,7 @@ function slutsats(korning: Korning, svar: Partial<Svarsbedomning>[]) {
   return { forsta: kannerText + kannerInteText, andra: rekText };
 }
 
-// Den stora meningen: företagets namn tänds i rampljus som i svaren.
+// Den stora meningen: företagets namn tänds i sändningsrött som i svaren.
 function stortText(text: string, namn: string) {
   return text.split(namnMonster(namn)).flatMap((del, i): ReactNode[] =>
     i % 2 === 1
@@ -73,7 +73,7 @@ function stortText(text: string, namn: string) {
 
 function Rubrik({ children }: { children: string }) {
   return (
-    <h3 className="font-display text-text text-[1.6rem] leading-[1.05] font-semibold tracking-[-0.03em] sm:text-[2rem]">
+    <h3 className="font-display text-bakelit text-[1.6rem] leading-[1.05] font-semibold tracking-[-0.03em] sm:text-[2rem]">
       {children}
     </h3>
   );
@@ -89,7 +89,7 @@ function Rekommendation({
   }
   if (typeof bedomning.plats === "number") {
     return (
-      <span className="text-ramp font-semibold whitespace-nowrap">
+      <span className="text-sandning font-semibold whitespace-nowrap">
         Rekommenderar, plats {bedomning.plats}
       </span>
     );
@@ -101,27 +101,30 @@ function PerTjanst({ svar }: { svar: Partial<Svarsbedomning>[] }) {
   const om = (tjanst: Tjanst, fraga: 0 | 1) =>
     svar.find((s) => s.nyckel === svarsnyckel(tjanst, fraga));
   return (
-    <ul className="divide-y divide-[var(--linje)] border-y border-[var(--linje)]">
+    <ul className="divide-y divide-[var(--linje)] border-t border-[var(--linje)]">
       {TJANST_ORDNING.map((tjanst) => {
         const rek = om(tjanst, 0);
         const kan = om(tjanst, 1);
         return (
           <li
-            className="grid gap-x-6 gap-y-2 py-4 sm:grid-cols-[9rem_13rem_1fr] sm:items-baseline"
+            className="grid gap-x-6 gap-y-2 py-4 last:pb-0 sm:grid-cols-[9rem_13rem_1fr] sm:items-baseline"
             key={tjanst}
           >
-            <p className="font-display text-text text-[1.15rem] font-semibold">
+            <p className="font-display text-bakelit flex items-center gap-2.5 text-[1.15rem] font-semibold">
+              <span
+                className={`size-2 shrink-0 rounded-full ${typeof rek?.plats === "number" ? "bg-sandning" : "bg-bakelit/25"}`}
+              />
               {TJANSTER[tjanst].namn}
             </p>
-            <p className="text-dov text-[0.9rem] tabular-nums">
+            <p className="text-dov text-[0.95rem] tabular-nums">
               <Rekommendation bedomning={rek} />
             </p>
             {kan?.citat ? (
-              <blockquote className="text-dov text-[0.95rem] leading-relaxed italic">
+              <blockquote className="text-dov text-[1rem] leading-relaxed italic">
                 ”{kan.citat}”
               </blockquote>
             ) : (
-              <p className="text-dov text-[0.95rem] leading-relaxed">
+              <p className="text-dov text-[1rem] leading-relaxed">
                 {kan?.omdome ?? <span className="text-svag">…</span>}
               </p>
             )}
@@ -155,7 +158,9 @@ function Staplar({
         <li key={rad.namn}>
           <div className="flex items-baseline justify-between gap-4 text-[0.95rem]">
             <span
-              className={rad.eget ? "text-ramp font-semibold" : "text-text"}
+              className={
+                rad.eget ? "text-sandning font-semibold" : "text-bakelit"
+              }
             >
               {rad.namn}
             </span>
@@ -163,9 +168,9 @@ function Staplar({
               i {rad.antal} av {total} svar
             </span>
           </div>
-          <div className="bg-sammet-2 mt-1.5 h-2 overflow-hidden rounded-full">
+          <div className="bg-glas-2 mt-1.5 h-2 overflow-hidden rounded-full">
             <div
-              className={`stapel h-full rounded-full ${syns ? "syns" : ""} ${rad.eget ? "bg-ramp" : "bg-ljus/70"}`}
+              className={`stapel h-full rounded-full ${syns ? "syns" : ""} ${rad.eget ? "bg-sandning" : "bg-bakelit/70"}`}
               style={{
                 width: `${Math.max(2, (rad.antal / total) * 100)}%`,
                 transitionDelay: `${i * 90}ms`,
@@ -184,28 +189,41 @@ function Pastaenden({
   pastaenden: Partial<ResultatData["pastaenden"][number]>[];
 }) {
   return (
-    <ul className="space-y-5">
+    <ul className="space-y-5 sm:space-y-6">
       {pastaenden.map((p, i) =>
         p.text ? (
-          // biome-ignore lint/suspicious/noArrayIndexKey: påståendena strömmar in i ordning och byter aldrig plats.
-          <li className="kalla-in max-w-[65ch]" key={i}>
-            <p className="text-text text-[1.02rem] leading-relaxed">
+          <li
+            className="kalla-in grid gap-y-1 sm:grid-cols-[minmax(0,52ch)_minmax(1.5rem,1fr)_13rem] sm:gap-x-3"
+            // biome-ignore lint/suspicious/noArrayIndexKey: påståendena strömmar in i ordning och byter aldrig plats.
+            key={i}
+          >
+            <p className="text-bakelit text-[1.02rem] leading-relaxed">
               {p.kontrollera ? (
-                <span className="border-ljus/60 text-ljus mr-2 inline-block translate-y-[-1px] rounded-full border px-2 py-0.5 align-middle text-[0.7rem] font-medium">
+                <span className="border-bakelit/50 text-bakelit mr-2 inline-block translate-y-[-1px] rounded-full border px-2 py-0.5 align-middle text-[0.75rem] font-medium">
                   Kontrollera
                 </span>
               ) : null}
               {p.text}
             </p>
-            <p className="text-svag mt-1 text-sm">
-              {uppraknat(
-                (p.svar ?? [])
-                  .map((n) => n?.split("-")[0])
-                  .filter((t): t is Tjanst => Boolean(t && t in TJANSTER))
-                  .filter((t, j, alla) => alla.indexOf(t) === j)
-                  .map((t) => TJANSTER[t].namn)
-              )}
-              {p.kalla ? ` · ${p.kalla}` : ""}
+            {/* Hänvisningslinjen från påståendet till källan. */}
+            <span
+              aria-hidden="true"
+              className="mt-[0.85em] hidden h-px self-start bg-[var(--linje-stark)] sm:block"
+            />
+            <p className="text-svag text-[0.95rem] leading-snug sm:pt-[0.2em]">
+              {p.kalla ? (
+                <span className="text-bakelit sm:block">{p.kalla}</span>
+              ) : null}
+              {p.kalla ? <span className="sm:hidden"> · </span> : null}
+              <span className="sm:block sm:text-[0.8rem]">
+                {uppraknat(
+                  (p.svar ?? [])
+                    .map((n) => n?.split("-")[0])
+                    .filter((t): t is Tjanst => Boolean(t && t in TJANSTER))
+                    .filter((t, j, alla) => alla.indexOf(t) === j)
+                    .map((t) => TJANSTER[t].namn)
+                )}
+              </span>
             </p>
           </li>
         ) : null
@@ -225,11 +243,11 @@ function AttGora({
         sak.gor ? (
           // biome-ignore lint/suspicious/noArrayIndexKey: sakerna strömmar in i ordning och byter aldrig plats.
           <li className="kalla-in grid grid-cols-[2.5rem_1fr] gap-x-3" key={i}>
-            <span className="font-display text-ljus text-[2.4rem] leading-none font-semibold tabular-nums">
+            <span className="font-display text-bakelit text-[2.4rem] leading-none font-semibold tabular-nums">
               {i + 1}
             </span>
             <div>
-              <p className="font-display text-text max-w-[34ch] text-[1.35rem] leading-[1.15] font-semibold tracking-[-0.02em] sm:text-[1.6rem]">
+              <p className="font-display text-bakelit max-w-[34ch] text-[1.35rem] leading-[1.15] font-semibold tracking-[-0.02em] sm:text-[1.6rem]">
                 {sak.gor}
               </p>
               {sak.darfor ? (
@@ -242,6 +260,36 @@ function AttGora({
         ) : null
       )}
     </ol>
+  );
+}
+
+// Domslutet på glas, som mottagarens front: huvudmeningarna och en rad per
+// station med samma prick som på skalan.
+function Domslut({
+  korning,
+  klar,
+  svar,
+}: {
+  korning: Korning;
+  klar: boolean;
+  svar: Partial<Svarsbedomning>[];
+}) {
+  const { forsta, andra } = slutsats(korning, svar);
+  const { foretag } = korning;
+  return (
+    <div className="bg-glas border-bakelit rounded-[20px] border-[1.5px] px-5 py-6 sm:px-8 sm:py-8">
+      {klar ? (
+        <div className="kalla-in mb-8">
+          <p className="font-display text-bakelit max-w-[20ch] text-[clamp(1.9rem,7vw,3.4rem)] leading-[1.04] font-semibold tracking-[-0.035em] text-balance">
+            {stortText(forsta, foretag)}
+          </p>
+          <p className="font-display text-dov mt-4 max-w-[30ch] text-[clamp(1.3rem,4.5vw,2rem)] leading-[1.1] font-semibold tracking-[-0.025em] text-balance">
+            {stortText(andra, foretag)}
+          </p>
+        </div>
+      ) : null}
+      <PerTjanst svar={svar} />
+    </div>
   );
 }
 
@@ -284,7 +332,6 @@ export function Resultat({
     ResultatData["attGora"][number]
   >[];
   const klarSvar = svar.length >= TJANST_ORDNING.length * 2;
-  const { forsta, andra } = slutsats(korning, svar);
 
   return (
     <section
@@ -300,7 +347,7 @@ export function Resultat({
         <div className="text-fel flex flex-wrap items-center gap-3">
           <p>Sammanfattningen gick inte att göra den här gången.</p>
           <button
-            className="text-text hover:border-ljus rounded-full border border-[var(--linje-stark)] px-4 py-1.5 text-sm transition-colors"
+            className="text-bakelit hover:border-bakelit rounded-full border border-[var(--linje-stark)] px-4 py-1.5 text-sm transition-colors"
             onClick={() => reload()}
             type="button"
           >
@@ -316,21 +363,8 @@ export function Resultat({
         </p>
       ) : null}
 
-      {klarSvar ? (
-        <div className="kalla-in">
-          <p className="font-display text-text max-w-[20ch] text-[clamp(1.9rem,7vw,3.4rem)] leading-[1.04] font-semibold tracking-[-0.035em] text-balance">
-            {stortText(forsta, korning.foretag)}
-          </p>
-          <p className="font-display text-dov mt-4 max-w-[30ch] text-[clamp(1.3rem,4.5vw,2rem)] leading-[1.1] font-semibold tracking-[-0.025em] text-balance">
-            {stortText(andra, korning.foretag)}
-          </p>
-        </div>
-      ) : null}
-
       {svar.length > 0 ? (
-        <div className="mt-12">
-          <PerTjanst svar={svar} />
-        </div>
+        <Domslut klar={klarSvar} korning={korning} svar={svar} />
       ) : null}
 
       {resultat ? (
@@ -361,14 +395,14 @@ export function Resultat({
                   style={{ animationDelay: `${i * 50}ms` }}
                 >
                   <a
-                    className="bg-sammet-2 hover:text-text text-dov flex items-center gap-2 rounded-xl py-2 pr-3.5 pl-2.5 text-[0.85rem] transition-colors hover:bg-[#331c22]"
+                    className="bg-glas-2 hover:text-bakelit text-dov flex items-center gap-2 rounded-xl py-2 pr-3.5 pl-2.5 text-[0.85rem] transition-colors hover:bg-[#ddd4c3]"
                     href={k.url}
                     rel="noopener noreferrer nofollow"
                     target="_blank"
                     title={k.titel}
                   >
                     <Favicon doman={k.doman} />
-                    <span className="text-text">{k.doman}</span>
+                    <span className="text-bakelit">{k.doman}</span>
                     <span className="text-svag tabular-nums">
                       {k.tjanster.length === 1
                         ? TJANSTER[k.tjanster[0] as Tjanst].namn
@@ -424,7 +458,7 @@ export function Resultat({
         <div className="text-fel mt-10 flex flex-wrap items-center gap-3">
           <p>Sammanfattningen blev inte klar den här gången.</p>
           <button
-            className="text-text hover:border-ljus rounded-full border border-[var(--linje-stark)] px-4 py-1.5 text-sm transition-colors"
+            className="text-bakelit hover:border-bakelit rounded-full border border-[var(--linje-stark)] px-4 py-1.5 text-sm transition-colors"
             onClick={() => reload()}
             type="button"
           >

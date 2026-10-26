@@ -1,8 +1,10 @@
 @import "@fontsource-variable/inter/opsz.css";
 @import "tailwindcss";
 
-/* Svarsteatern: salongen är mörk, ridån är oxblod och strålkastarna glödlampsvarma.
-   Rampljuset (bärnsten) används bara när företagets namn sägs. */
+/* Direktsändningen: en ljus radiofront. Emaljen är marken, glaset bär skalan och
+   fälten, bakeliten är text och knappar. Högtalarväven är den mörka ytan där svaren
+   textas. Sändningsrött tänds bara för företagets namn och sändningslampan. */
+
 /* Samma typsnitt som kemero.se: Inter Variable med optisk storlek både för rubriker
    och text. Reservtypsnittet har Inters mått, så att texten inte hoppar när Inter laddas. */
 @font-face {
@@ -21,54 +23,61 @@
     "Inter Variable", "Inter Fallback", -apple-system, system-ui, "Segoe UI",
     Roboto, sans-serif;
 
-  --color-salong: #120a0d;
-  --color-rida: #3d0f1a;
-  --color-sammet: #1d1014;
-  --color-sammet-2: #26151a;
-  --color-ljus: #ffe2b8;
-  --color-text: #f6eee8;
-  --color-dov: #c2b0a9;
-  --color-svag: #94817b;
-  --color-ramp: #ffb547;
-  --color-ramp-djup: #b8730f;
-  --color-fel: #ff8f7a;
+  --color-emalj: #eee8dc;
+  --color-glas: #f7f2e7;
+  --color-glas-2: #e6decf;
+  --color-bakelit: #1a1714;
+  --color-dov: #544a42;
+  --color-svag: #6e645a;
+  --color-vav: #3a332d;
+  --color-vav-2: #2e2823;
+  --color-vavtext: #f3ece1;
+  --color-vavdov: #c7bcae;
+  --color-sandning: #c4301a;
+  --color-sandning-ljus: #ff8a6e;
+  --color-fel: #9e2a1a;
 
   --ease-ut: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {
-  --linje: rgb(255 226 184 / 0.12);
-  --linje-stark: rgb(255 226 184 / 0.24);
-  color-scheme: dark;
+  --linje: rgb(26 23 20 / 0.14);
+  --linje-stark: rgb(26 23 20 / 0.32);
+  --linje-vav: rgb(243 236 225 / 0.14);
+  color-scheme: light;
 }
 
 html {
   scroll-behavior: smooth;
-  background: var(--color-salong);
-  scrollbar-color: var(--color-sammet-2) var(--color-salong);
+  background: var(--color-emalj);
+  scrollbar-color: rgb(26 23 20 / 0.3) transparent;
   -webkit-tap-highlight-color: transparent;
 }
 
 body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
-  color: var(--color-text);
+  color: var(--color-bakelit);
   text-rendering: optimizeLegibility;
 }
 
 ::selection {
-  color: var(--color-text);
-  background: rgb(255 181 71 / 0.35);
+  color: var(--color-bakelit);
+  background: rgb(196 48 26 / 0.2);
 }
 
 /* Fält visar fokus med sin egen kant och behåller pillerformen. */
 :focus-visible:not(input) {
-  outline: 2px solid var(--color-ljus);
+  outline: 2px solid var(--color-bakelit);
   outline-offset: 3px;
 }
 
+.vav :focus-visible:not(input) {
+  outline-color: var(--color-vavtext);
+}
+
 input {
-  caret-color: var(--color-ramp);
+  caret-color: var(--color-sandning);
 }
 
 input::placeholder {
@@ -81,27 +90,52 @@ a {
   text-underline-offset: 0.2em;
 }
 
-/* Namnet tänds: understreck i rampljus som glöder upp en gång. */
+/* Namnet tänds: sändningsrött med understreck och en kort blixt i bakgrunden,
+   som sändningslampan. I väven används den ljusare röda. */
 mark.namn {
   font-weight: 600;
-  color: var(--color-ramp);
+  color: var(--color-sandning);
   text-decoration: underline;
   text-decoration-thickness: 2px;
-  text-decoration-color: var(--color-ramp);
+  text-decoration-color: currentColor;
   text-underline-offset: 0.22em;
-  text-shadow: 0 0 18px rgb(255 181 71 / 0.55);
   background: none;
-  animation: tands 1.4s var(--ease-ut) both;
+  border-radius: 3px;
+  animation: tands 1.6s var(--ease-ut) both;
+}
+
+.vav mark.namn {
+  color: var(--color-sandning-ljus);
 }
 
 @keyframes tands {
   from {
-    color: var(--color-text);
     text-decoration-color: transparent;
-    text-shadow: 0 0 0 rgb(255 181 71 / 0);
+    background: rgb(232 64 42 / 0);
   }
-  35% {
-    text-shadow: 0 0 28px rgb(255 181 71 / 0.9);
+  20% {
+    background: rgb(232 64 42 / 0.28);
+  }
+}
+
+/* Lampan i toppen lyser när mottagaren sänder, både i exemplet och i en körning. */
+.topplampa {
+  background: rgb(26 23 20 / 0.2);
+}
+
+html:has([data-sander="true"]) .topplampa {
+  background: var(--color-sandning-ljus);
+  box-shadow:
+    0 0 0 3px rgb(232 64 42 / 0.18),
+    0 0 14px rgb(232 64 42 / 0.6);
+  animation: lampa 2.4s ease-in-out infinite;
+}
+
+@keyframes lampa {
+  50% {
+    box-shadow:
+      0 0 0 3px rgb(232 64 42 / 0.1),
+      0 0 6px rgb(232 64 42 / 0.4);
   }
 }
 
@@ -111,7 +145,7 @@ mark.namn {
   width: 0.55em;
   height: 1.1em;
   vertical-align: -0.18em;
-  background: var(--color-ljus);
+  background: currentColor;
   border-radius: 2px;
   animation: puls 1.1s ease-in-out infinite;
 }
@@ -129,26 +163,26 @@ mark.namn {
 
 @keyframes ord-in {
   from {
-    opacity: 0;
-    filter: blur(12px);
+    filter: blur(8px);
     transform: translateY(0.12em);
   }
 }
 
-/* Talet i räknaren glöder till när det går upp. */
+/* Talet i räknaren tänds kort när det går upp. */
 .tal-tands {
   display: inline-block;
   animation: tal-tands 1.2s var(--ease-ut) both;
 }
 
 @keyframes tal-tands {
-  from {
-    text-shadow: 0 0 0 rgb(255 181 71 / 0);
-  }
   25% {
-    text-shadow: 0 0 26px rgb(255 181 71 / 0.95);
-    transform: scale(1.08);
+    transform: scale(1.1);
   }
+}
+
+/* Nålen glider mellan stationerna på skalan. */
+.nal {
+  transition: left 0.7s var(--ease-ut);
 }
 
 /* Staplarna växer fram från vänster när de syns. Vid reducerad rörelse står de
@@ -181,12 +215,6 @@ mark.namn {
 
   .rita {
     stroke-dashoffset: 0;
-  }
-}
-
-@keyframes ridan {
-  from {
-    opacity: 0;
   }
 }
 

@@ -41,10 +41,10 @@ function Chip({
         aria-describedby={fel ? `${id}-fel` : undefined}
         aria-invalid={Boolean(fel)}
         autoComplete={autoComplete}
-        className={`bg-sammet/80 text-text h-12 w-full rounded-full border px-5 text-[1rem] backdrop-blur-sm transition-colors focus:outline-none ${
+        className={`bg-glas text-bakelit h-12 w-full rounded-full border px-5 text-[1rem] transition-colors focus:outline-none ${
           fel
             ? "border-fel focus:border-fel"
-            : "focus:border-ljus border-[var(--linje-stark)]"
+            : "focus:border-bakelit border-[var(--linje-stark)]"
         }`}
         id={id}
         inputMode={typ === "url" ? "url" : "text"}
@@ -112,10 +112,10 @@ export function Formular({
         aria-describedby={fel.foretag ? `${namnId}-fel` : undefined}
         aria-invalid={Boolean(fel.foretag)}
         autoComplete="organization"
-        className={`bg-sammet/85 font-display text-text h-16 w-full rounded-full border px-7 text-[1.35rem] tracking-[-0.01em] backdrop-blur-sm transition-colors focus:outline-none sm:h-[4.5rem] sm:text-[1.5rem] ${
+        className={`bg-glas font-display text-bakelit h-14 w-full rounded-full border px-6 text-[1.25rem] tracking-[-0.01em] transition-colors focus:outline-none sm:h-[4.5rem] sm:px-7 sm:text-[1.5rem] ${
           fel.foretag
             ? "border-fel focus:border-fel"
-            : "focus:border-ljus border-[var(--linje-stark)]"
+            : "focus:border-bakelit border-[var(--linje-stark)]"
         }`}
         id={namnId}
         onChange={(e) => satt("foretag")(e.target.value)}
@@ -165,18 +165,18 @@ export function Formular({
         </div>
       </div>
 
-      <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
+      <div className="mt-5 flex items-center gap-x-4 sm:mt-6 sm:gap-x-5">
         <Magnet magnetStrength={3} padding={60}>
           <button
             aria-busy={skickar}
-            className="bg-ljus font-display text-salong h-14 rounded-full px-9 text-[1.15rem] font-semibold tracking-[-0.01em] shadow-[0_10px_40px_-12px_rgb(255_226_184/0.6)] transition-[background-color,transform,opacity] hover:bg-[#fff0d9] active:scale-[0.98] disabled:cursor-wait disabled:opacity-70"
+            className="bg-bakelit font-display text-glas h-14 rounded-full px-9 whitespace-nowrap text-[1.15rem] font-semibold tracking-[-0.01em] transition-[background-color,transform,opacity] hover:bg-[#2e2a26] active:scale-[0.98] disabled:cursor-wait disabled:opacity-70"
             disabled={skickar}
             type="submit"
           >
             {skickar ? "Ställer frågorna…" : "Fråga AI"}
           </button>
         </Magnet>
-        <p className="text-dov max-w-[30ch] text-[0.9rem] leading-snug">
+        <p className="text-dov max-w-[30ch] min-w-0 text-[0.8rem] leading-snug sm:text-[0.95rem]">
           Fyra AI-tjänster får två kundfrågor var. Svaren kommer medan du
           tittar.
         </p>

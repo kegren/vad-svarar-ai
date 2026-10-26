@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// Favicon för en källa, på en ljus platta så att mörka ikoner syns mot sammet.
+// Favicon för en källa, på en ljus platta så att mörka ikoner syns i väven.
 // Plattan visas först när ikonen har laddat, och chipet blir utan ikon om den
 // inte går att hämta, så att det aldrig blir en tom ruta.
 export function Favicon({ doman }: { doman: string }) {
@@ -13,7 +13,7 @@ export function Favicon({ doman }: { doman: string }) {
     <img
       alt=""
       className={`size-5 shrink-0 rounded-[5px] p-0.5 transition-opacity duration-300 ${
-        lage === "klar" ? "bg-text opacity-100" : "opacity-0"
+        lage === "klar" ? "bg-glas opacity-100" : "opacity-0"
       }`}
       height={20}
       loading="lazy"

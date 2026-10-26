@@ -2,7 +2,8 @@ import type { ReactNode } from "react";
 
 // Svaren kommer som markdown. Den här renderaren klarar det tjänsterna faktiskt
 // skickar (rubriker, listor, fetstil, länkar, [n]-hänvisningar och enkla tabeller)
-// och tänder företagets namn i den löpande texten.
+// och tänder företagets namn i den löpande texten. Svaren visas alltid i
+// högtalarväven, så färgerna är vävens.
 
 const INLINE =
   /\[(?<lanktext>[^\]]+)\]\((?<lank>https?:\/\/[^)\s]+)\)|\*\*(?<fet>[^*]+?)\*\*|\[(?<nummer>\d{1,3})\]|(?<adress>https?:\/\/[^\s)\]]+)/gu;
@@ -56,7 +57,7 @@ function inline(text: string, monster: RegExp, nyckel: string): ReactNode[] {
     if (g.lank) {
       delar.push(
         <a
-          className="text-dov hover:text-ljus underline decoration-[var(--linje-stark)]"
+          className="text-vavdov hover:text-vavtext underline decoration-[var(--linje-vav)]"
           href={g.lank}
           key={k}
           rel="noopener noreferrer nofollow"
@@ -67,20 +68,20 @@ function inline(text: string, monster: RegExp, nyckel: string): ReactNode[] {
       );
     } else if (g.fet) {
       delar.push(
-        <strong className="text-text font-semibold" key={k}>
+        <strong className="text-vavtext font-semibold" key={k}>
           {inline(g.fet, monster, k)}
         </strong>
       );
     } else if (g.nummer) {
       delar.push(
-        <sup className="text-svag px-0.5 text-[0.7em] tabular-nums" key={k}>
+        <sup className="text-vavdov px-0.5 text-[0.7em] tabular-nums" key={k}>
           {g.nummer}
         </sup>
       );
     } else if (g.adress) {
       delar.push(
         <a
-          className="text-dov hover:text-ljus underline decoration-[var(--linje-stark)]"
+          className="text-vavdov hover:text-vavtext underline decoration-[var(--linje-vav)]"
           href={g.adress}
           key={k}
           rel="noopener noreferrer nofollow"
@@ -162,7 +163,7 @@ export function Svarstext({ text, namn }: { text: string; namn: string }) {
     if (b.typ === "rubrik") {
       return (
         <h4
-          className="font-display text-text mt-5 mb-1.5 text-[1.05rem] font-semibold tracking-[-0.01em]"
+          className="font-display text-vavtext mt-5 mb-1.5 text-[1.05rem] font-semibold tracking-[-0.01em]"
           key={k}
         >
           {inline(b.text, monster, k)}
@@ -173,7 +174,7 @@ export function Svarstext({ text, namn }: { text: string; namn: string }) {
       const Lista = b.numrerad ? "ol" : "ul";
       return (
         <Lista
-          className={`my-3 space-y-2 pl-5 ${b.numrerad ? "list-decimal" : "list-disc"} marker:text-svag`}
+          className={`my-3 space-y-2 pl-5 ${b.numrerad ? "list-decimal" : "list-disc"} marker:text-vavdov`}
           key={k}
         >
           {b.punkter.map((p, j) => (
@@ -190,7 +191,7 @@ export function Svarstext({ text, namn }: { text: string; namn: string }) {
         <div className="my-3 space-y-1.5 text-[0.95em]" key={k}>
           {b.rader.map((rad, j) => (
             // biome-ignore lint/suspicious/noArrayIndexKey: raderna har ingen egen nyckel och byter aldrig plats.
-            <p className={j === 0 ? "text-svag" : ""} key={j}>
+            <p className={j === 0 ? "text-vavdov" : ""} key={j}>
               {inline(rad.filter(Boolean).join(" · "), monster, `${k}-${j}`)}
             </p>
           ))}
