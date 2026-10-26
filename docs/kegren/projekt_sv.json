@@ -1,0 +1,6 @@
+{
+ "title": "Vad svarar AI?",
+ "summary": "Fyra AI-tjänster får två kundfrågor var om ditt företag och svarar medan du tittar.",
+ "url": "https://vad-svarar-ai.kegren.com",
+ "content": "Vad svarar AI? är ett verktyg jag har byggt för företagare. Du skriver företagets namn, bransch och ort. Sedan får ChatGPT, Gemini, Claude och Perplexity två frågor var med webbsökning påslagen: vilka de rekommenderar när någon behöver en firma som din och vad de vet om just ditt företag. Svaren kommer medan du tittar, tillsammans med sidorna som tjänsterna läste.\n\nUnder svaren kommer en sammanfattning. Där står vilka tjänster som känner till företaget, om någon av dem rekommenderar det, vilka konkurrenter som nämns och tre saker att rätta. Verktyget kontrollerar också om tjänsternas robotar kan läsa hemsidan.\n\nDet första företaget jag provade var kemero. Alla fyra tjänsterna kände till byrån, men ingen rekommenderade den när jag frågade efter en webbyrå i Västerås. En katalog hade dessutom en annan adress än hemsidan.\n\nDet kostar inget att använda. Jag betalar för frågorna, ungefär två kronor per körning, så det finns ett tak per dag. Resultatet sparas i 30 dagar och går att dela med en länk. Jag har också [skrivit om verktyget](/sv/writing/vad-svarar-ai-om-ditt-foretag) för dig som driver företag.\n"
+}

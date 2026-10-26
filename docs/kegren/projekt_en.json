@@ -1,0 +1,6 @@
+{
+ "title": "Vad svarar AI?",
+ "summary": "Four AI services each get two customer questions about your business and answer while you watch.",
+ "url": "https://vad-svarar-ai.kegren.com",
+ "content": "Vad svarar AI? (\"What does AI answer?\") is a tool I built for Swedish business owners. You type the name of your business, your trade and your town. ChatGPT, Gemini, Claude and Perplexity then get two questions each with web search on: who they recommend when someone needs a business like yours, and what they know about yours. The answers stream in while you watch, along with the pages each service read.\n\nBelow the answers comes a summary. It says which services know the business, whether any of them recommends it, which competitors come up and three things to fix. The tool also checks whether the services' crawlers can read the website.\n\nThe first business I tried was kemero. All four services knew the agency, but none recommended it when I asked for a web agency in Västerås. One directory also listed a different address than the website.\n\nIt is free to use. I pay for the questions, about two kronor a run, so there is a daily cap. Results are saved for 30 days and can be shared with a link. I wrote about [how I built it](/writing/how-i-built-vad-svarar-ai) with TanStack Start and TanStack AI.\n"
+}

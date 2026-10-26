@@ -11,7 +11,7 @@ Det här byggdes i fas 6 och provades lokalt den 26 oktober 2026 utan några mod
   workers-og (Satori och resvg). Inter läses som woff, eftersom Satori inte klarar woff2.
 - **"Dela resultatet"** finns under sammanfattningen och på delningssidan. I mobilen
   öppnas delningsmenyn och på datorn kopieras länken.
-- En adress som inte är ett id ger 404, och det gör även ett id som saknas.
+- En adress som inte är ett id ger 404. Det gör även ett id som saknas.
 
 ## Skydden
 
@@ -35,7 +35,7 @@ Två spärrar till, som inte fanns i planen:
   när någon laddar om sidan.
 
 **Rensningen.** En cron-trigger (`17 3 * * *`) tar bort körningar och budgetrader som är
-äldre än 30 dagar. Den ligger i `src/server.ts`, och därför pekar `main` i
+äldre än 30 dagar. Den ligger i `src/server.ts`. Därför pekar `main` i
 `wrangler.jsonc` dit.
 
 ## Provat lokalt
@@ -53,12 +53,8 @@ Två spärrar till, som inte fanns i planen:
 | Delningsbilden | PNG på 40 kB |
 | `wrangler deploy --dry-run` | 5,9 MB, 1,5 MB med gzip, under gränsen på 3 MB |
 
-## Kenny gör före lanseringen
+## Klart inför lanseringen (26 oktober 2026)
 
-- Skapa en Turnstile-widget för domänen i Cloudflare. Byt `TURNSTILE_SITE_KEY` i
-  `wrangler.jsonc` och lägg hemligheten med `wrangler secret put TURNSTILE_SECRET`.
-  Utan den hemligheten släpper servern inte igenom någon i produktion.
-- Lägg `IP_SALT` med `wrangler secret put IP_SALT`.
-- Kör migreringarna mot den riktiga databasen:
-  `wrangler d1 migrations apply vad-svarar-ai --remote`. Den nya är `0002_anrop.sql`.
-- Sätt kreditlimitet på OpenRouter-nyckeln till 800 kr i månaden (i dag 10 dollar).
+Turnstile-widgeten för vad-svarar-ai.kegren.com, hemligheterna `TURNSTILE_SECRET` och
+`IP_SALT` och D1-databasen med båda migreringarna är på plats. Det som återstår står i
+[lansering.md](lansering.md).
