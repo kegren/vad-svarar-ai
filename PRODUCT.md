@@ -10,15 +10,15 @@ web
 
 Svenska företagare i alla branscher och på alla orter. De flesta kommer från ett
 inlägg i sociala medier och öppnar sidan i mobilen. De vill veta vad ChatGPT, Gemini,
-Claude och Perplexity svarar när en kund frågar efter ett företag som deras, och om
-deras eget företag kommer med. De har sällan sett AI-svar om sitt företag förut och
+Claude och Perplexity svarar när en kund frågar efter ett företag som deras. De vill
+också veta om deras eget företag kommer med. De har sällan sett AI-svar om sitt företag förut och
 har inget sätt att se dem i någon statistik.
 
 Utvecklare kommer också, för tekniken och den öppna koden, men företagarna går först.
 
 ## Product Purpose
 
-Företagaren skriver företagsnamn, bransch och ort, och om de vill sin hemsida. Fyra
+Företagaren skriver företagsnamn, bransch och ort. Hemsidan är valfri. Fyra
 AI-tjänster får samma två kundfrågor med webbsökning. Svaren strömmar in medan
 företagaren tittar. Sedan visar verktyget var företaget nämns, vilka konkurrenter som
 nämns, vilka källor tjänsterna läste, vad som sägs om företaget och om AI kan läsa
@@ -38,7 +38,7 @@ svaren som de kommer, med källorna. Det är en körning som går att se, inte e
 - Gratis, kräver ingen mejladress och säljer inget.
 - Byggt av Kenny Damgren. Kenny betalar för anropen, med ett tak på 100 kr per dygn.
 - Resultatet får en egen länk och en delningsbild, så att det går att dela vidare.
-- Svaren tar ungefär 15 sekunder parallellt, och analysen ungefär 15 sekunder till.
+- Svaren tar ungefär 15 sekunder parallellt. Analysen tar ungefär 15 sekunder till.
 
 ## Capabilities and Constraints
 
@@ -71,7 +71,7 @@ svaren som de kommer, med källorna. Det är en körning som går att se, inte e
 
 ## Product Principles
 
-- Visa det tjänsterna faktiskt svarade, med källorna, och låt företagaren dra
+- Visa det tjänsterna faktiskt svarade med källorna. Låt företagaren dra
   slutsatsen.
 - Varje påstående i resultatet går att peka på: ett svar, en källa eller en kontroll.
 - Väntan är en del av upplevelsen. Det ska synas vad som händer medan svaren kommer.

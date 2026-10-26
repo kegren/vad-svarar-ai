@@ -89,7 +89,7 @@ components:
 
 **Creative North Star: "Svarsteatern"**
 
-Besökaren sitter i en mörk salong. Ridån är oxblod och hänger i lodräta veck. Fyra AI-tjänster står på scenen och svarar på riktiga kundfrågor medan besökaren tittar, och spänningen ligger i om företagets namn sägs. När namnet sägs tänds det i rampljus. Allt annat på sidan är lågmält, så att det enda starka ljuset är det som betyder något.
+Besökaren sitter i en mörk salong. Ridån är oxblod och hänger i lodräta veck. Fyra AI-tjänster står på scenen och svarar på riktiga kundfrågor medan besökaren tittar. Spänningen ligger i om företagets namn sägs. När namnet sägs tänds det i rampljus. Allt annat på sidan är lågmält, så att det enda starka ljuset är det som betyder något.
 
 Sidan är mörk för att den är en scen, inte för att verktyget är teknik. Ljuset är varmt som glödlampor, aldrig neon. Tätheten är låg i första vyn (en rubrik, ett fält, en knapp) och hög när svaren kommer, där texten får gott radavstånd för att gå att läsa på mobil.
 
@@ -171,7 +171,9 @@ Mjukt men inte runt. Kort har 16px hörn. Källchips har 12px. Fält, knappar, f
 - **Secondary:** genomskinlig med 1px kant i glödlampsljus på 24 procent, för "Fråga om ett annat företag" och "Fråga igen".
 
 ### Chips
-- **Källor:** djup sammet, favicon 16px, sidans titel i ljus text och domänen under i svag text. Tonar in en i taget med 70ms mellanrum.
+- **Källor i svarskortet:** djup sammet, 12px hörn, favicon 20px på en ljus platta (ljus text, 5px hörn), sidans titel i ljus text och domänen under i svag text. Tonar in en i taget med 70ms mellanrum.
+- **Källor i sammanfattningen:** samma chip med domänen i ljus text och, i svag text, tjänsten som läste den eller antalet tjänster. Tonar in med 50ms mellanrum.
+- **Kontrollera:** liten pillerflagga före ett påstående, 1px kant och text i glödlampsljus. Bara när tjänsterna säger emot varandra eller uppgiften kommer från en katalog.
 
 ### Cards / Containers
 - **Corner Style:** 16px.
@@ -186,7 +188,14 @@ Mjukt men inte runt. Kort har 16px hörn. Källchips har 12px. Fält, knappar, f
 - **Error:** kanten blir fel-färgen och meddelandet står under fältet.
 
 ### Svarskortet (signatur)
-Ett kort per tjänst med tjänstens namn och modellnamn, två flikar ("Vem rekommenderas?" och "Om {företag}") och svaret som strömmar in. Fliken visar en pulserande prick medan svaret kommer och en bärnstensprick när namnet finns. Frågan står i kursiv ovanför svaret. När namnet sägs i den öppna fliken, eller när fliken öppnas, tänds namnet med understreck i rampljus och en kort gnista (React Bits Click Spark, bara via kod). Under svaret står "{Tjänst} läste N källor" med källchipen.
+Ett kort per tjänst med tjänstens namn och modellnamn, två flikar ("Vem rekommenderas?" och "Om {företag}") och svaret som strömmar in. Fliken visar en pulserande prick medan svaret kommer och en bärnstensprick när namnet finns. Frågan står i kursiv ovanför svaret. Första gången namnet syns i en öppen flik tänds det med understreck i rampljus och en kort gnista (React Bits Click Spark, bara via kod). Under svaret står "{Tjänst} läste N källor" med källchipen.
+
+### Sammanfattningen (signatur)
+Kommer under svaren när alla åtta är klara och fylls i medan analysen strömmar.
+- **Huvudmeningarna:** två meningar i Display och Headline (max 20 och 30 tecken breda) om vilka tjänster som känner till företaget och om någon rekommenderar det. Företagets namn tänds med rampljus som i svaren. Inga mätartavlor.
+- **Rad per tjänst:** tjänstens namn, "Rekommenderar, plats N" i rampljus eller "Rekommenderar inte", och ett ordagrant citat ur svaret i kursiv. Citatet visas bara om koden hittar det i svaret, annars modellens omdöme.
+- **Staplar:** en per företag som nämns, 8px hög på djup sammet. Företagets egen stapel är rampljus, konkurrenternas glödlampsljus på 70 procent. Staplarna växer från vänster när listan syns (1.1s, 90ms mellan raderna) och står i full längd vid reducerad rörelse.
+- **Tre saker att göra:** numrerade 1 till 3 i Familjen Grotesk 700 och glödlampsljus, eftersom ordningen är den viktigaste först. Uppmaningen i Title-storlek (max 34 tecken bred) och skälet under i dov text.
 
 ## Do's and Don'ts
 

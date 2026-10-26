@@ -1,41 +1,220 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-26T16:10:00+01:00",
+  "generatedAt": "2026-10-26T17:10:00+01:00",
   "title": "Design System: Vad svarar AI?",
   "extensions": {
     "colorMeta": {
-      "salong": { "role": "neutral", "displayName": "Salong", "tonalRamp": ["#0a0507", "#120a0d", "#1d1014", "#2b181e", "#3f252c", "#5a3a42", "#80606a", "#b9a3a9"] },
-      "rida": { "role": "neutral", "displayName": "Ridå", "tonalRamp": ["#1f060d", "#3d0f1a", "#5c1528", "#7a1d33", "#9a3048", "#b95367", "#d6848f", "#efc3c7"] },
-      "sammet": { "role": "neutral", "displayName": "Sammet", "tonalRamp": ["#120a0d", "#1d1014", "#26151a", "#331c22", "#47282f", "#64404a", "#8f6e76", "#c7b3b8"] },
-      "sammet-2": { "role": "neutral", "displayName": "Djup sammet", "tonalRamp": ["#1d1014", "#26151a", "#331c22", "#47282f", "#64404a", "#8f6e76", "#c7b3b8", "#ece2e4"] },
-      "ljus": { "role": "secondary", "displayName": "Glödlampsljus", "tonalRamp": ["#5c4224", "#8a6738", "#b98f55", "#e0b77c", "#f5cf97", "#ffe2b8", "#fff0d9", "#fffaf2"] },
-      "text": { "role": "neutral", "displayName": "Ljus text", "tonalRamp": ["#5a524e", "#7d7470", "#a39994", "#c7bdb7", "#e0d6d0", "#f6eee8", "#faf6f3", "#fffdfb"] },
-      "dov": { "role": "neutral", "displayName": "Dov text", "tonalRamp": ["#3d3330", "#5a4d49", "#7a6a65", "#9c8b85", "#c2b0a9", "#d6c8c2", "#e8dfdb", "#f6f1ef"] },
-      "svag": { "role": "neutral", "displayName": "Svag text", "tonalRamp": ["#2e2624", "#463a37", "#615250", "#7a6966", "#94817b", "#ad9c97", "#c9bcb8", "#e6dedb"] },
-      "ramp": { "role": "primary", "displayName": "Rampljus", "tonalRamp": ["#4d2f05", "#7a4b0a", "#b8730f", "#e0911c", "#ffb547", "#ffc875", "#ffdca6", "#fff0d6"] },
-      "fel": { "role": "neutral", "displayName": "Fel", "tonalRamp": ["#4d1e15", "#7a3022", "#a84532", "#d6634d", "#ff8f7a", "#ffaa99", "#ffc8bd", "#ffe7e2"] }
+      "salong": {
+        "role": "neutral",
+        "displayName": "Salong",
+        "tonalRamp": [
+          "#0a0507",
+          "#120a0d",
+          "#1d1014",
+          "#2b181e",
+          "#3f252c",
+          "#5a3a42",
+          "#80606a",
+          "#b9a3a9"
+        ]
+      },
+      "rida": {
+        "role": "neutral",
+        "displayName": "Ridå",
+        "tonalRamp": [
+          "#1f060d",
+          "#3d0f1a",
+          "#5c1528",
+          "#7a1d33",
+          "#9a3048",
+          "#b95367",
+          "#d6848f",
+          "#efc3c7"
+        ]
+      },
+      "sammet": {
+        "role": "neutral",
+        "displayName": "Sammet",
+        "tonalRamp": [
+          "#120a0d",
+          "#1d1014",
+          "#26151a",
+          "#331c22",
+          "#47282f",
+          "#64404a",
+          "#8f6e76",
+          "#c7b3b8"
+        ]
+      },
+      "sammet-2": {
+        "role": "neutral",
+        "displayName": "Djup sammet",
+        "tonalRamp": [
+          "#1d1014",
+          "#26151a",
+          "#331c22",
+          "#47282f",
+          "#64404a",
+          "#8f6e76",
+          "#c7b3b8",
+          "#ece2e4"
+        ]
+      },
+      "ljus": {
+        "role": "secondary",
+        "displayName": "Glödlampsljus",
+        "tonalRamp": [
+          "#5c4224",
+          "#8a6738",
+          "#b98f55",
+          "#e0b77c",
+          "#f5cf97",
+          "#ffe2b8",
+          "#fff0d9",
+          "#fffaf2"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Ljus text",
+        "tonalRamp": [
+          "#5a524e",
+          "#7d7470",
+          "#a39994",
+          "#c7bdb7",
+          "#e0d6d0",
+          "#f6eee8",
+          "#faf6f3",
+          "#fffdfb"
+        ]
+      },
+      "dov": {
+        "role": "neutral",
+        "displayName": "Dov text",
+        "tonalRamp": [
+          "#3d3330",
+          "#5a4d49",
+          "#7a6a65",
+          "#9c8b85",
+          "#c2b0a9",
+          "#d6c8c2",
+          "#e8dfdb",
+          "#f6f1ef"
+        ]
+      },
+      "svag": {
+        "role": "neutral",
+        "displayName": "Svag text",
+        "tonalRamp": [
+          "#2e2624",
+          "#463a37",
+          "#615250",
+          "#7a6966",
+          "#94817b",
+          "#ad9c97",
+          "#c9bcb8",
+          "#e6dedb"
+        ]
+      },
+      "ramp": {
+        "role": "primary",
+        "displayName": "Rampljus",
+        "tonalRamp": [
+          "#4d2f05",
+          "#7a4b0a",
+          "#b8730f",
+          "#e0911c",
+          "#ffb547",
+          "#ffc875",
+          "#ffdca6",
+          "#fff0d6"
+        ]
+      },
+      "fel": {
+        "role": "neutral",
+        "displayName": "Fel",
+        "tonalRamp": [
+          "#4d1e15",
+          "#7a3022",
+          "#a84532",
+          "#d6634d",
+          "#ff8f7a",
+          "#ffaa99",
+          "#ffc8bd",
+          "#ffe7e2"
+        ]
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Startsidans rubrik, ord för ord in." },
-      "headline": { "displayName": "Headline", "purpose": "Räknaren under en körning." },
-      "title": { "displayName": "Title", "purpose": "Tjänsternas namn i korten." },
-      "body": { "displayName": "Body", "purpose": "Svaren och förklarande text." },
-      "label": { "displayName": "Label", "purpose": "Flikar, chips och metadata." }
+      "display": {
+        "displayName": "Display",
+        "purpose": "Startsidans rubrik, ord för ord in."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Räknaren under en körning."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Tjänsternas namn i korten."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Svaren och förklarande text."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Flikar, chips och metadata."
+      }
     },
     "shadows": [
-      { "name": "knappglod", "value": "0 10px 40px -12px rgb(255 226 184 / 0.6)", "purpose": "Glöden under Fråga AI, den enda skuggan." },
-      { "name": "rampglod", "value": "text-shadow: 0 0 18px rgb(255 181 71 / 0.55)", "purpose": "Tänt namn i ett svar." }
+      {
+        "name": "knappglod",
+        "value": "0 10px 40px -12px rgb(255 226 184 / 0.6)",
+        "purpose": "Glöden under Fråga AI, den enda skuggan."
+      },
+      {
+        "name": "rampglod",
+        "value": "text-shadow: 0 0 18px rgb(255 181 71 / 0.55)",
+        "purpose": "Tänt namn i ett svar."
+      }
     ],
     "motion": [
-      { "name": "ease-ut", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "All in- och uttoning." },
-      { "name": "tands", "value": "1.4s ease-ut", "purpose": "Namnet tänds: understreck och glöd." },
-      { "name": "ord-in", "value": "0.9s ease-ut, 70ms mellan orden", "purpose": "Rubriken kommer fram ord för ord." },
-      { "name": "kalla-in", "value": "0.6s ease-ut, 70ms mellan chipen", "purpose": "Källorna tonar in." },
-      { "name": "slackning", "value": "1600ms ease-ut", "purpose": "Salongen släcks när körningen startar." }
+      {
+        "name": "ease-ut",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "All in- och uttoning."
+      },
+      {
+        "name": "tands",
+        "value": "1.4s ease-ut",
+        "purpose": "Namnet tänds: understreck och glöd."
+      },
+      {
+        "name": "ord-in",
+        "value": "0.9s ease-ut, 70ms mellan orden",
+        "purpose": "Rubriken kommer fram ord för ord."
+      },
+      {
+        "name": "kalla-in",
+        "value": "0.6s ease-ut, 70ms mellan chipen",
+        "purpose": "Källorna tonar in."
+      },
+      {
+        "name": "slackning",
+        "value": "1600ms ease-ut",
+        "purpose": "Salongen släcks när körningen startar."
+      }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "lg", "value": "1024px" }
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
     ]
   },
   "components": [
@@ -78,6 +257,22 @@
       "description": "Ett kort per tjänst, med strålkastarljus medan tjänsten svarar.",
       "html": "<article class=\"ds-kort ds-kort-talar\"><h3 class=\"ds-kort-namn\">ChatGPT</h3><p class=\"ds-kort-text\">Kemero är en webbyrå i Västerås som drivs av <mark class=\"ds-namn-tant\">Kenny Damgren</mark>.</p></article>",
       "css": ".ds-kort { position: relative; overflow: hidden; padding: 20px; border: 1px solid rgb(255 226 184 / 0.11); border-radius: 16px; background: #1d1014; } .ds-kort-talar::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 14rem; background: radial-gradient(55% 100% at 50% 0%, rgb(255 226 184 / 0.16), transparent); pointer-events: none; } .ds-kort-namn { position: relative; margin: 0; color: #f6eee8; font: 600 1.75rem/1 'Familjen Grotesk Variable', sans-serif; letter-spacing: -0.03em; } .ds-kort-text { position: relative; color: #c2b0a9; font: 400 1rem/1.65 'Inter Variable', sans-serif; } .ds-namn-tant { background: none; color: #ffb547; font-weight: 600; text-decoration: underline 2px #ffb547; text-underline-offset: 0.22em; text-shadow: 0 0 18px rgb(255 181 71 / 0.55); }"
+    },
+    {
+      "name": "Stapel",
+      "kind": "custom",
+      "refersTo": "stapel",
+      "description": "Hur många av de åtta svaren som nämner ett företag. Företagets egen stapel är rampljus.",
+      "html": "<div class=\"ds-stapel\"><div class=\"ds-stapel-rad\"><span class=\"ds-stapel-namn ds-eget\">kemero</span><span class=\"ds-stapel-antal\">i 5 av 8 svar</span></div><div class=\"ds-stapel-spar\"><div class=\"ds-stapel-fyll ds-eget-fyll\" style=\"width:62%\"></div></div></div>",
+      "css": ".ds-stapel { font: 400 0.95rem/1.3 'Inter Variable', sans-serif; } .ds-stapel-rad { display: flex; justify-content: space-between; } .ds-stapel-namn { color: #f6eee8; } .ds-eget { color: #ffb547; font-weight: 600; } .ds-stapel-antal { color: #94817b; font-size: 0.875rem; } .ds-stapel-spar { margin-top: 6px; height: 8px; border-radius: 9999px; background: #26151a; overflow: hidden; } .ds-stapel-fyll { height: 100%; border-radius: 9999px; background: rgb(255 226 184 / 0.7); } .ds-eget-fyll { background: #ffb547; }"
+    },
+    {
+      "name": "Kontrollera",
+      "kind": "chip",
+      "refersTo": "kontrollera",
+      "description": "Flagga före ett påstående som tjänsterna säger emot varandra om.",
+      "html": "<span class=\"ds-kontrollera\">Kontrollera</span>",
+      "css": ".ds-kontrollera { display: inline-block; padding: 2px 8px; border: 1px solid rgb(255 226 184 / 0.6); border-radius: 9999px; color: #ffe2b8; font: 500 0.7rem/1.4 'Inter Variable', sans-serif; }"
     }
   ],
   "narrative": {
@@ -90,10 +285,26 @@
       "Stora, täta rubriker i Familjen Grotesk mot lugn brödtext i Inter."
     ],
     "rules": [
-      { "name": "Rampljusregeln", "body": "Bärnsten betyder \"namnet sägs här\". Den används aldrig som dekor, på knappar eller på tal som är noll.", "section": "colors" },
-      { "name": "Ett ljus i taget", "body": "Glödlampsljus och rampljus får aldrig tävla på samma element.", "section": "colors" },
-      { "name": "Tät rubrik, luftig text", "body": "Rubriker har -0.03 till -0.035em spärrning och radavstånd under 1.05. Brödtext har aldrig mindre än 1.6 i radavstånd.", "section": "typography" },
-      { "name": "Ljus i stället för skugga", "body": "Ett element lyfts genom att belysas, aldrig genom en mörk skugga.", "section": "elevation" }
+      {
+        "name": "Rampljusregeln",
+        "body": "Bärnsten betyder \"namnet sägs här\". Den används aldrig som dekor, på knappar eller på tal som är noll.",
+        "section": "colors"
+      },
+      {
+        "name": "Ett ljus i taget",
+        "body": "Glödlampsljus och rampljus får aldrig tävla på samma element.",
+        "section": "colors"
+      },
+      {
+        "name": "Tät rubrik, luftig text",
+        "body": "Rubriker har -0.03 till -0.035em spärrning och radavstånd under 1.05. Brödtext har aldrig mindre än 1.6 i radavstånd.",
+        "section": "typography"
+      },
+      {
+        "name": "Ljus i stället för skugga",
+        "body": "Ett element lyfts genom att belysas, aldrig genom en mörk skugga.",
+        "section": "elevation"
+      }
     ],
     "dos": [
       "Do låt bärnsten betyda en sak: att namnet sägs.",
