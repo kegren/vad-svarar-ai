@@ -1,6 +1,6 @@
 // Umami på umami.kemero.io (PLAN.md avsnitt 13), utan kakor. Id:t kommer från
-// webbplatsen för vad-svarar-ai.kegren.com i Umami. Tomt id betyder ingen mätning.
-export const UMAMI_WEBBPLATS = "";
+// webbplatsen för vad-svarar-ai.kegren.com i Umami. Skriptet laddas bara i produktion.
+export const UMAMI_WEBBPLATS = "cb369380-1ab5-48a6-a93f-d3c6f6a9c537";
 export const UMAMI_SKRIPT = "https://umami.kemero.io/script.js";
 
 type Handelse =
