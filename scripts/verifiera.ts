@@ -143,14 +143,51 @@ const AnalysSchema = z.object({
   attGora: z
     .array(
       z.object({
-        text: z.string(),
+        text: z.string().meta({
+          description:
+            "Något företagaren själv kan göra, inte ett råd till kunden",
+        }),
         grund: z.string().meta({
           description: "Svaret, källan eller kontrollen som saken bygger på",
         }),
       })
     )
-    .length(3),
+    .meta({ description: "Exakt tre saker, de viktigaste först" }),
 });
+
+const sparat: Record<string, unknown> = { foretag, bransch, ort };
+const stamp = new Date().toISOString().replace(/[:.]/gu, "-");
+
+function spara() {
+  writeFileSync(`${UT}/${stamp}-svar.json`, JSON.stringify(sparat, null, 2));
+  writeFileSync(
+    `${UT}/${stamp}-ravara.json`,
+    JSON.stringify(Object.fromEntries(ravaror), null, 2)
+  );
+}
+
+// OpenRouters generation-post säger vilken leverantör som svarade, hur många
+// sökningar som gjordes och vad anropet kostade.
+async function hamtaGenerationer() {
+  const ids = [...ravaror.values()].flatMap((post) => {
+    const id = post.sse.match(/"id":"(gen-[^"]+)"/u)?.[1];
+    return id ? [id] : [];
+  });
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+  return Promise.all(
+    ids.map(async (id) => {
+      const svar = await originalFetch(
+        `https://openrouter.ai/api/v1/generation?id=${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+          },
+        }
+      );
+      return { id, post: (await svar.json()) as unknown };
+    })
+  );
+}
 
 async function main() {
   mkdirSync(UT, { recursive: true });
@@ -161,45 +198,39 @@ async function main() {
       fragor.map((text, index) => fraga(tjanst, text, index))
     )
   );
-  const svarSekunder = (Date.now() - start) / 1000;
+  sparat.svarSekunder = (Date.now() - start) / 1000;
+  sparat.svar = svar;
+  await Promise.all(lasningar);
+  spara();
 
   const analysStart = Date.now();
-  const analys = await chat({
-    adapter: openRouterText(ANALYS),
-    threadId: "verifiera-analys",
-    systemPrompts: [
-      `Du analyserar vad AI-tjänster svarade om företaget ${foretag} (${bransch}, ${ort}). Svara på svenska.`,
-    ],
-    messages: [
-      {
-        role: "user",
-        content: svar
-          .map(
-            (s, i) =>
-              `## Svar ${i + 1}: ${s.tjanst}\nFråga: ${s.fraga}\n\n${s.text}`
-          )
-          .join("\n\n"),
-      },
-    ],
-    outputSchema: AnalysSchema,
-  });
-  const analysSekunder = (Date.now() - analysStart) / 1000;
-
+  try {
+    sparat.analys = await chat({
+      adapter: openRouterText(ANALYS),
+      threadId: "verifiera-analys",
+      systemPrompts: [
+        `Du hjälper företagaren bakom ${foretag} (${bransch}, ${ort}) att förstå vad AI-tjänster svarar när kunder frågar. Svara på svenska. Sakerna att göra riktar sig till företagaren och ska peka på ett svar, en källa eller en kontroll, aldrig allmänna råd.`,
+      ],
+      messages: [
+        {
+          role: "user",
+          content: svar
+            .map(
+              (s, i) =>
+                `## Svar ${i + 1}: ${s.tjanst}\nFråga: ${s.fraga}\n\n${s.text}`
+            )
+            .join("\n\n"),
+        },
+      ],
+      outputSchema: AnalysSchema,
+    });
+  } catch (fel) {
+    sparat.analysFel = String(fel);
+  }
+  sparat.analysSekunder = (Date.now() - analysStart) / 1000;
   await Promise.all(lasningar);
-
-  const stamp = new Date().toISOString().replace(/[:.]/gu, "-");
-  writeFileSync(
-    `${UT}/${stamp}-svar.json`,
-    JSON.stringify(
-      { foretag, bransch, ort, svarSekunder, analysSekunder, svar, analys },
-      null,
-      2
-    )
-  );
-  writeFileSync(
-    `${UT}/${stamp}-ravara.json`,
-    JSON.stringify(Object.fromEntries(ravaror), null, 2)
-  );
+  sparat.generationer = await hamtaGenerationer();
+  spara();
   console.log(`${UT}/${stamp}`);
 }
 
