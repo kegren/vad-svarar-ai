@@ -12,5 +12,16 @@
       "!.intent",
       "!PLAN.md"
     ]
+  },
+  "linter": {
+    "rules": {
+      "style": {
+        // PLAN.md avsnitt 4: `type` före `interface`.
+        "useConsistentTypeDefinitions": {
+          "level": "error",
+          "options": { "style": "type" }
+        }
+      }
+    }
   }
 }

@@ -13,6 +13,7 @@ export function getRouter() {
 }
 
 declare module "@tanstack/react-router" {
+  // biome-ignore lint/style/useConsistentTypeDefinitions: Register måste vara ett interface för att slås ihop med routerns typ.
   interface Register {
     router: ReturnType<typeof getRouter>;
   }
