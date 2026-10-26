@@ -14,19 +14,19 @@ colors:
   fel: "#ff8f7a"
 typography:
   display:
-    fontFamily: "Familjen Grotesk Variable, Familjen Grotesk, sans-serif"
+    fontFamily: "Inter Variable, Inter Fallback, -apple-system, system-ui, sans-serif"
     fontSize: "clamp(2.75rem, 11vw, 6rem)"
-    fontWeight: 700
-    lineHeight: 0.95
+    fontWeight: 600
+    lineHeight: 1.02
     letterSpacing: "-0.035em"
   headline:
-    fontFamily: "Familjen Grotesk Variable, Familjen Grotesk, sans-serif"
+    fontFamily: "Inter Variable, Inter Fallback, -apple-system, system-ui, sans-serif"
     fontSize: "clamp(1.6rem, 6.5vw, 2.6rem)"
     fontWeight: 600
     lineHeight: 1.05
     letterSpacing: "-0.03em"
   title:
-    fontFamily: "Familjen Grotesk Variable, Familjen Grotesk, sans-serif"
+    fontFamily: "Inter Variable, Inter Fallback, -apple-system, system-ui, sans-serif"
     fontSize: "1.75rem"
     fontWeight: 600
     lineHeight: 1
@@ -97,7 +97,7 @@ Sidan är mörk för att den är en scen, inte för att verktyget är teknik. Lj
 - Ridån är riktig WebGL (Silk), laddas efter första målningen och står still vid reducerad rörelse.
 - Rampljuset (bärnsten) är reserverat för företagets namn och räknarens tal när det är större än noll.
 - Strålkastarljuset (glödlampsvitt) visar vilken tjänst som talar.
-- Stora, täta rubriker i Familjen Grotesk mot lugn brödtext i Inter.
+- Samma typsnitt som kemero.se: Inter med optisk storlek, stora och täta rubriker i vikt 600 och lugn brödtext.
 
 ## Colors
 
@@ -126,16 +126,16 @@ En mörk, varm palett där två ljus gör allt arbete: glödlampsvitt för scene
 
 ## Typography
 
-**Display Font:** Familjen Grotesk (Variable, självhostad via @fontsource)
+**Display Font:** Inter (Variable med optisk storlek, självhostad via @fontsource, samma som kemero.se)
 **Body Font:** Inter (Variable, självhostad via @fontsource)
 
-**Character:** Familjen Grotesk kommer från Stockholm och har en egen, lite kantig värme som bär stora rubriker. Inter är neutral och lättläst i långa svar.
+**Character:** Ett typsnitt för allt, som på kemero.se. Den optiska storleken gör rubrikerna täta och skarpa i stor grad och texten öppen och lättläst i långa svar. Reservtypsnittet Inter Fallback är Arial med Inters mått, så att texten inte hoppar när Inter laddas.
 
 ### Hierarchy
-- **Display** (700, clamp(2.75rem, 11vw, 6rem), 0.95): startsidans rubrik, max 13 tecken breda rader, ord för ord in.
+- **Display** (600, clamp(2.75rem, 11vw, 6rem), 1.02): startsidans rubrik, max 13 tecken breda rader, ord för ord in.
 - **Headline** (600, clamp(1.6rem, 6.5vw, 2.6rem), 1.05): räknaren "kemero nämns i 4 av 8 svar".
 - **Title** (600, 1.75rem, 1): tjänsternas namn i korten.
-- **Body** (400, 1rem, 1.65): svaren. Rubriker i svaren sätts i Familjen Grotesk 1.05rem.
+- **Body** (400, 1rem, 1.65): svaren. Rubriker i svaren sätts i 1.05rem och vikt 600.
 - **Label** (400, 0.85rem): flikar, chips och metadata. Tal sätts med tabular-nums.
 
 ### Named Rules
@@ -166,7 +166,7 @@ Mjukt men inte runt. Kort har 16px hörn. Källchips har 12px. Fält, knappar, f
 
 ### Buttons
 - **Shape:** piller (9999px), 56px hög.
-- **Primary:** glödlampsljus med salongsfärgad text i Familjen Grotesk 600. Magnetisk på skrivbordet (React Bits Magnet), stilla vid reducerad rörelse.
+- **Primary:** glödlampsljus med salongsfärgad text i vikt 600. Magnetisk på skrivbordet (React Bits Magnet), stilla vid reducerad rörelse.
 - **Hover / Focus:** ljusnar till #fff0d9. Fokus är en 2px ring i glödlampsljus med 3px avstånd.
 - **Secondary:** genomskinlig med 1px kant i glödlampsljus på 24 procent, för "Fråga om ett annat företag" och "Fråga igen".
 
@@ -183,7 +183,7 @@ Mjukt men inte runt. Kort har 16px hörn. Källchips har 12px. Fält, knappar, f
 - **Internal Padding:** 20px på mobil, 28px från 640px.
 
 ### Inputs / Fields
-- **Style:** sammet på 80 till 85 procent med lätt oskärpa bakom, piller, 1px kant på 24 procent. Namnfältet är 64 till 72px högt med text i Familjen Grotesk.
+- **Style:** sammet på 80 till 85 procent med lätt oskärpa bakom, piller, 1px kant på 24 procent. Namnfältet är 64 till 72px högt med text i 1.35 till 1.5rem.
 - **Focus:** kanten blir glödlampsljus. Markören är bärnsten.
 - **Error:** kanten blir fel-färgen och meddelandet står under fältet.
 
@@ -195,7 +195,7 @@ Kommer under svaren när alla åtta är klara och fylls i medan analysen strömm
 - **Huvudmeningarna:** två meningar i Display och Headline (max 20 och 30 tecken breda) om vilka tjänster som känner till företaget och om någon rekommenderar det. Företagets namn tänds med rampljus som i svaren. Inga mätartavlor.
 - **Rad per tjänst:** tjänstens namn, "Rekommenderar, plats N" i rampljus eller "Rekommenderar inte", och ett ordagrant citat ur svaret i kursiv. Citatet visas bara om koden hittar det i svaret, annars modellens omdöme.
 - **Staplar:** en per företag som nämns, 8px hög på djup sammet. Företagets egen stapel är rampljus, konkurrenternas glödlampsljus på 70 procent. Staplarna växer från vänster när listan syns (1.1s, 90ms mellan raderna) och står i full längd vid reducerad rörelse.
-- **Tre saker att göra:** numrerade 1 till 3 i Familjen Grotesk 700 och glödlampsljus, eftersom ordningen är den viktigaste först. Uppmaningen i Title-storlek (max 34 tecken bred) och skälet under i dov text.
+- **Tre saker att göra:** numrerade 1 till 3 i vikt 600 och glödlampsljus, eftersom ordningen är den viktigaste först. Uppmaningen i Title-storlek (max 34 tecken bred) och skälet under i dov text.
 
 ## Do's and Don'ts
 

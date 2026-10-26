@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-26T17:10:00+01:00",
+  "generatedAt": "2026-10-26T18:30:00+01:00",
   "title": "Design System: Vad svarar AI?",
   "extensions": {
     "colorMeta": {
@@ -224,7 +224,7 @@
       "refersTo": "knapp-primar",
       "description": "Huvudknappen. Magnetisk på skrivbordet.",
       "html": "<button class=\"ds-knapp\">Fråga AI</button>",
-      "css": ".ds-knapp { height: 56px; padding: 0 36px; border: none; border-radius: 9999px; background: #ffe2b8; color: #120a0d; font: 600 1.15rem/1 'Familjen Grotesk Variable', sans-serif; letter-spacing: -0.01em; box-shadow: 0 10px 40px -12px rgb(255 226 184 / 0.6); cursor: pointer; transition: background-color 0.2s, transform 0.2s; } .ds-knapp:hover { background: #fff0d9; } .ds-knapp:active { transform: scale(0.98); } .ds-knapp:focus-visible { outline: 2px solid #ffe2b8; outline-offset: 3px; }"
+      "css": ".ds-knapp { height: 56px; padding: 0 36px; border: none; border-radius: 9999px; background: #ffe2b8; color: #120a0d; font: 600 1.15rem/1 'Inter Variable', 'Inter Fallback', sans-serif; letter-spacing: -0.01em; box-shadow: 0 10px 40px -12px rgb(255 226 184 / 0.6); cursor: pointer; transition: background-color 0.2s, transform 0.2s; } .ds-knapp:hover { background: #fff0d9; } .ds-knapp:active { transform: scale(0.98); } .ds-knapp:focus-visible { outline: 2px solid #ffe2b8; outline-offset: 3px; }"
     },
     {
       "name": "Sekundär knapp",
@@ -240,7 +240,7 @@
       "refersTo": "falt-namn",
       "description": "Det stora fältet i pillerform för företagsnamnet.",
       "html": "<input class=\"ds-namn\" placeholder=\"Företagets namn\" />",
-      "css": ".ds-namn { width: 100%; height: 64px; padding: 0 28px; border: 1px solid rgb(255 226 184 / 0.24); border-radius: 9999px; background: rgb(29 16 20 / 0.85); color: #f6eee8; caret-color: #ffb547; font: 400 1.35rem/1 'Familjen Grotesk Variable', sans-serif; letter-spacing: -0.01em; } .ds-namn::placeholder { color: #94817b; } .ds-namn:focus { outline: none; border-color: #ffe2b8; }"
+      "css": ".ds-namn { width: 100%; height: 64px; padding: 0 28px; border: 1px solid rgb(255 226 184 / 0.24); border-radius: 9999px; background: rgb(29 16 20 / 0.85); color: #f6eee8; caret-color: #ffb547; font: 400 1.35rem/1 'Inter Variable', 'Inter Fallback', sans-serif; letter-spacing: -0.01em; } .ds-namn::placeholder { color: #94817b; } .ds-namn:focus { outline: none; border-color: #ffe2b8; }"
     },
     {
       "name": "Källchip",
@@ -256,7 +256,7 @@
       "refersTo": "kort",
       "description": "Ett kort per tjänst, med strålkastarljus medan tjänsten svarar.",
       "html": "<article class=\"ds-kort ds-kort-talar\"><h3 class=\"ds-kort-namn\">ChatGPT</h3><p class=\"ds-kort-text\">Kemero är en webbyrå i Västerås som drivs av <mark class=\"ds-namn-tant\">Kenny Damgren</mark>.</p></article>",
-      "css": ".ds-kort { position: relative; overflow: hidden; padding: 20px; border: 1px solid rgb(255 226 184 / 0.11); border-radius: 16px; background: #1d1014; } .ds-kort-talar::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 14rem; background: radial-gradient(55% 100% at 50% 0%, rgb(255 226 184 / 0.16), transparent); pointer-events: none; } .ds-kort-namn { position: relative; margin: 0; color: #f6eee8; font: 600 1.75rem/1 'Familjen Grotesk Variable', sans-serif; letter-spacing: -0.03em; } .ds-kort-text { position: relative; color: #c2b0a9; font: 400 1rem/1.65 'Inter Variable', sans-serif; } .ds-namn-tant { background: none; color: #ffb547; font-weight: 600; text-decoration: underline 2px #ffb547; text-underline-offset: 0.22em; text-shadow: 0 0 18px rgb(255 181 71 / 0.55); }"
+      "css": ".ds-kort { position: relative; overflow: hidden; padding: 20px; border: 1px solid rgb(255 226 184 / 0.11); border-radius: 16px; background: #1d1014; } .ds-kort-talar::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 14rem; background: radial-gradient(55% 100% at 50% 0%, rgb(255 226 184 / 0.16), transparent); pointer-events: none; } .ds-kort-namn { position: relative; margin: 0; color: #f6eee8; font: 600 1.75rem/1 'Inter Variable', 'Inter Fallback', sans-serif; letter-spacing: -0.03em; } .ds-kort-text { position: relative; color: #c2b0a9; font: 400 1rem/1.65 'Inter Variable', sans-serif; } .ds-namn-tant { background: none; color: #ffb547; font-weight: 600; text-decoration: underline 2px #ffb547; text-underline-offset: 0.22em; text-shadow: 0 0 18px rgb(255 181 71 / 0.55); }"
     },
     {
       "name": "Stapel",
@@ -282,7 +282,7 @@
       "Ridån är riktig WebGL (Silk), laddas efter första målningen och står still vid reducerad rörelse.",
       "Rampljuset (bärnsten) är reserverat för företagets namn och räknarens tal när det är större än noll.",
       "Strålkastarljuset (glödlampsvitt) visar vilken tjänst som talar.",
-      "Stora, täta rubriker i Familjen Grotesk mot lugn brödtext i Inter."
+      "Samma typsnitt som kemero.se: Inter med optisk storlek, stora och täta rubriker i vikt 600 och lugn brödtext."
     ],
     "rules": [
       {

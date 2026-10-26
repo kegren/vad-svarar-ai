@@ -68,7 +68,7 @@ function inline(text: string, monster: RegExp, nyckel: string): ReactNode[] {
     } else if (g.fet) {
       delar.push(
         <strong className="text-text font-semibold" key={k}>
-          {tand(g.fet, monster, k)}
+          {inline(g.fet, monster, k)}
         </strong>
       );
     } else if (g.nummer) {

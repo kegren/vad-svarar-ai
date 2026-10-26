@@ -47,7 +47,7 @@ function Startsida() {
       <main className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         {visaFormular ? (
           <section className="flex min-h-[100svh] flex-col justify-center py-16 sm:py-24">
-            <h1 className="font-display text-text max-w-[13ch] text-[clamp(2.75rem,11vw,6rem)] leading-[0.95] font-bold tracking-[-0.035em] text-balance">
+            <h1 className="font-display text-text max-w-[13ch] text-[clamp(2.75rem,11vw,6rem)] leading-[1.02] font-semibold tracking-[-0.035em] text-balance">
               {RUBRIK.split(" ").map((ord, i) => (
                 <span
                   className="ord-in inline-block"

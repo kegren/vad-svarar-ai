@@ -1,12 +1,25 @@
-@import "@fontsource-variable/familjen-grotesk";
-@import "@fontsource-variable/inter";
+@import "@fontsource-variable/inter/opsz.css";
 @import "tailwindcss";
 
 /* Svarsteatern: salongen är mörk, ridån är oxblod och strålkastarna glödlampsvarma.
    Rampljuset (bärnsten) används bara när företagets namn sägs. */
+/* Samma typsnitt som kemero.se: Inter Variable med optisk storlek både för rubriker
+   och text. Reservtypsnittet har Inters mått, så att texten inte hoppar när Inter laddas. */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  ascent-override: 92.44%;
+  descent-override: 23.02%;
+  line-gap-override: 0%;
+  size-adjust: 104.8%;
+}
+
 @theme {
-  --font-display: "Familjen Grotesk Variable", "Familjen Grotesk", sans-serif;
-  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "Inter Variable", "Inter Fallback", -apple-system, system-ui, sans-serif;
+  --font-sans:
+    "Inter Variable", "Inter Fallback", -apple-system, system-ui, "Segoe UI",
+    Roboto, sans-serif;
 
   --color-salong: #120a0d;
   --color-rida: #3d0f1a;
@@ -38,7 +51,6 @@ html {
 
 body {
   font-family: var(--font-sans);
-  font-feature-settings: "cv11", "ss01";
   -webkit-font-smoothing: antialiased;
   color: var(--color-text);
   text-rendering: optimizeLegibility;

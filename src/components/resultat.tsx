@@ -254,7 +254,7 @@ function AttGora({
         sak.gor ? (
           // biome-ignore lint/suspicious/noArrayIndexKey: sakerna strömmar in i ordning och byter aldrig plats.
           <li className="kalla-in grid grid-cols-[2.5rem_1fr] gap-x-3" key={i}>
-            <span className="font-display text-ljus text-[2.4rem] leading-none font-bold tabular-nums">
+            <span className="font-display text-ljus text-[2.4rem] leading-none font-semibold tabular-nums">
               {i + 1}
             </span>
             <div>
@@ -345,7 +345,7 @@ export function Resultat({
 
       {klarSvar ? (
         <div className="kalla-in">
-          <p className="font-display text-text max-w-[20ch] text-[clamp(1.9rem,7vw,3.4rem)] leading-[1.02] font-bold tracking-[-0.035em] text-balance">
+          <p className="font-display text-text max-w-[20ch] text-[clamp(1.9rem,7vw,3.4rem)] leading-[1.04] font-semibold tracking-[-0.035em] text-balance">
             {stortText(forsta, korning.foretag)}
           </p>
           <p className="font-display text-dov mt-4 max-w-[30ch] text-[clamp(1.3rem,4.5vw,2rem)] leading-[1.1] font-semibold tracking-[-0.025em] text-balance">
