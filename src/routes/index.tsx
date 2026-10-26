@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { Formular } from "#/components/formular";
 import { Rida } from "#/components/rida";
 import { type Korning, Scen } from "#/components/scen";
+import { nyttId } from "#/lib/id";
 
 const RUBRIK = "Syns ditt företag när kunderna frågar AI?";
 
@@ -18,7 +19,7 @@ function Startsida() {
   const fraga = (falt: Omit<Korning, "id" | "startad">) => {
     setKorning({
       ...falt,
-      id: crypto.randomUUID(),
+      id: nyttId(),
       startad: new Date().toISOString(),
     });
     setAndrar(false);
