@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { useRef, useState } from "react";
 import { Formular } from "#/components/formular";
 import { Rida } from "#/components/rida";
 import { type Korning, Scen } from "#/components/scen";
-import { nyttId } from "#/lib/id";
+import { startaKorning } from "#/lib/korning.functions";
 
 const RUBRIK = "Syns ditt företag när kunderna frågar AI?";
 
@@ -14,18 +15,28 @@ export const Route = createFileRoute("/")({
 function Startsida() {
   const [korning, setKorning] = useState<Korning | null>(null);
   const [andrar, setAndrar] = useState(false);
+  const [skickar, setSkickar] = useState(false);
+  const [serverfel, setServerfel] = useState<string>();
   const scenRef = useRef<HTMLDivElement>(null);
+  const starta = useServerFn(startaKorning);
 
-  const fraga = (falt: Omit<Korning, "id" | "startad">) => {
-    setKorning({
-      ...falt,
-      id: nyttId(),
-      startad: new Date().toISOString(),
-    });
-    setAndrar(false);
-    requestAnimationFrame(() =>
-      scenRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
-    );
+  const fraga = async (falt: Omit<Korning, "id" | "startad">) => {
+    setSkickar(true);
+    setServerfel(undefined);
+    try {
+      const { id, skapad } = await starta({ data: falt });
+      setKorning({ ...falt, id, startad: skapad });
+      setAndrar(false);
+      requestAnimationFrame(() =>
+        scenRef.current?.scrollIntoView({ behavior: "smooth", block: "start" })
+      );
+    } catch {
+      setServerfel(
+        "Det gick inte att ställa frågorna just nu. Försök igen om en stund."
+      );
+    } finally {
+      setSkickar(false);
+    }
   };
 
   const visaFormular = !korning || andrar;
@@ -49,7 +60,12 @@ function Startsida() {
               ))}
             </h1>
             <div className="mt-10 max-w-2xl sm:mt-14">
-              <Formular onFraga={fraga} start={korning ?? undefined} />
+              <Formular
+                onFraga={fraga}
+                serverfel={serverfel}
+                skickar={skickar}
+                start={korning ?? undefined}
+              />
             </div>
           </section>
         ) : (

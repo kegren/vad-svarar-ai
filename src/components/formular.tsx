@@ -63,9 +63,13 @@ function Chip({
 export function Formular({
   start,
   onFraga,
+  skickar = false,
+  serverfel,
 }: {
   start?: Partial<Falt>;
   onFraga: (falt: Falt) => void;
+  skickar?: boolean;
+  serverfel?: string;
 }) {
   const namnId = useId();
   const [falt, setFalt] = useState<Falt>({
@@ -160,10 +164,12 @@ export function Formular({
       <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3">
         <Magnet magnetStrength={3} padding={60}>
           <button
-            className="bg-ljus font-display text-salong h-14 rounded-full px-9 text-[1.15rem] font-semibold tracking-[-0.01em] shadow-[0_10px_40px_-12px_rgb(255_226_184/0.6)] transition-[background-color,transform] hover:bg-[#fff0d9] active:scale-[0.98]"
+            aria-busy={skickar}
+            className="bg-ljus font-display text-salong h-14 rounded-full px-9 text-[1.15rem] font-semibold tracking-[-0.01em] shadow-[0_10px_40px_-12px_rgb(255_226_184/0.6)] transition-[background-color,transform,opacity] hover:bg-[#fff0d9] active:scale-[0.98] disabled:cursor-wait disabled:opacity-70"
+            disabled={skickar}
             type="submit"
           >
-            Fråga AI
+            {skickar ? "Ställer frågorna…" : "Fråga AI"}
           </button>
         </Magnet>
         <p className="text-dov max-w-[30ch] text-[0.9rem] leading-snug">
@@ -171,6 +177,11 @@ export function Formular({
           tittar.
         </p>
       </div>
+      {serverfel ? (
+        <p className="text-fel mt-4" role="alert">
+          {serverfel}
+        </p>
+      ) : null}
     </form>
   );
 }

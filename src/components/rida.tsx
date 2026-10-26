@@ -3,7 +3,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 const Silk = lazy(() => import("#/components/reactbits/Silk"));
 
 // Ridån bakom scenen. Den statiska gradienten är första målningen. Silk laddas
-// först när sidan är ledig, och står still vid reducerad rörelse.
+// först när sidan är ledig. Vid reducerad rörelse står den still.
 // När körningen startar släcks salongen: ridån tonas ner så att korten tar scenen.
 export function Rida({ slackt = false }: { slackt?: boolean }) {
   const [visa, setVisa] = useState(false);

@@ -27,6 +27,9 @@ export const TJANSTER = {
   },
 } as const;
 
+// Analysen av de åtta svaren (PLAN.md avsnitt 2).
+export const ANALYSMODELL = "anthropic/claude-haiku-5.5";
+
 export type Tjanst = keyof typeof TJANSTER;
 
 export const TJANST_ORDNING = Object.keys(TJANSTER) as Tjanst[];

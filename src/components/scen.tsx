@@ -17,6 +17,8 @@ import SpotlightCard from "#/components/reactbits/SpotlightCard";
 import { type Foretag, fragor, type Kalla } from "#/lib/fragor";
 import { TJANST_ORDNING, TJANSTER, type Tjanst } from "#/lib/modeller";
 import { namnsI, Svarstext } from "#/lib/svarstext";
+import { Favicon } from "./favicon";
+import { Resultat } from "./resultat";
 
 export type Korning = Foretag & { id: string; startad: string };
 
@@ -53,13 +55,7 @@ function Svar({
   const { messages, sendMessage, status, error, reload } = useChat({
     connection: fetchServerSentEvents("/api/svar"),
     threadId: `${korning.id}-${tjanst}-${fraga}`,
-    forwardedProps: {
-      tjanst,
-      fraga,
-      foretag: korning.foretag,
-      bransch: korning.bransch,
-      ort: korning.ort,
-    },
+    forwardedProps: { korningId: korning.id, tjanst, fraga },
     onCustomEvent: (typ, data) => {
       if (typ === "kallor") {
         setKallor(data as Kalla[]);
@@ -158,14 +154,7 @@ function Svar({
                   target="_blank"
                   title={kalla.titel}
                 >
-                  <img
-                    alt=""
-                    className="size-4 shrink-0 rounded-sm"
-                    height={16}
-                    loading="lazy"
-                    src={`https://icons.duckduckgo.com/ip3/${kalla.doman}.ico`}
-                    width={16}
-                  />
+                  <Favicon doman={kalla.doman} />
                   <span className="flex min-w-0 flex-col leading-tight">
                     <span className="text-text truncate">{kalla.titel}</span>
                     {kalla.titel === kalla.doman ? null : (
@@ -399,11 +388,21 @@ export function Scen({ korning }: { korning: Korning }) {
             av {total} svar
           </span>
         </h2>
-        <p className="text-svag mt-1.5 text-sm tabular-nums">
-          {klara < total
-            ? `${klara} av ${total} svar klara · frågorna ställdes ${klockslag(korning.startad)}`
-            : `Alla svar klara · frågorna ställdes ${klockslag(korning.startad)}`}
-        </p>
+        <div className="mt-1.5 flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+          <p className="text-svag text-sm tabular-nums">
+            {klara < total
+              ? `${klara} av ${total} svar klara · frågorna ställdes ${klockslag(korning.startad)}`
+              : `Alla svar klara · frågorna ställdes ${klockslag(korning.startad)}`}
+          </p>
+          {klara === total ? (
+            <a
+              className="text-text hover:border-ljus rounded-full border border-[var(--linje-stark)] px-3.5 py-1.5 text-sm transition-colors"
+              href="#sammanfattning"
+            >
+              Till sammanfattningen
+            </a>
+          ) : null}
+        </div>
       </div>
       <p aria-live="polite" className="sr-only">
         {meddelande}
@@ -442,8 +441,10 @@ export function Scen({ korning }: { korning: Korning }) {
         </GnistaContext.Provider>
       </div>
 
+      {klara === total ? <Resultat korning={korning} namns={namns} /> : null}
+
       {klara === total && (
-        <p className="text-svag mt-8 max-w-[62ch] text-sm leading-relaxed">
+        <p className="text-svag mt-16 max-w-[62ch] text-sm leading-relaxed">
           Svaren kom {klockslag(korning.startad)} från{" "}
           {uppraknat(TJANST_ORDNING.map((t) => TJANSTER[t].modellnamn))}. Varje
           tjänst fick två frågor med webbsökning. Samma tjänst kan svara

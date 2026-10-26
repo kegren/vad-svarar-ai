@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiAnalysRouteImport } from './routes/api/analys'
 import { Route as ApiSvarRouteImport } from './routes/api/svar'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAnalysRoute = ApiAnalysRouteImport.update({
+  id: '/api/analys',
+  path: '/api/analys',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiSvarRoute = ApiSvarRouteImport.update({
@@ -25,27 +31,31 @@ const ApiSvarRoute = ApiSvarRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/analys': typeof ApiAnalysRoute
   '/api/svar': typeof ApiSvarRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/analys': typeof ApiAnalysRoute
   '/api/svar': typeof ApiSvarRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/analys': typeof ApiAnalysRoute
   '/api/svar': typeof ApiSvarRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/svar'
+  fullPaths: '/' | '/api/analys' | '/api/svar'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/svar'
-  id: '__root__' | '/' | '/api/svar'
+  to: '/' | '/api/analys' | '/api/svar'
+  id: '__root__' | '/' | '/api/analys' | '/api/svar'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiAnalysRoute: typeof ApiAnalysRoute
   ApiSvarRoute: typeof ApiSvarRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/analys': {
+      id: '/api/analys'
+      path: '/api/analys'
+      fullPath: '/api/analys'
+      preLoaderRoute: typeof ApiAnalysRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/svar': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiAnalysRoute: ApiAnalysRoute,
   ApiSvarRoute: ApiSvarRoute,
 }
 export const routeTree = rootRouteImport

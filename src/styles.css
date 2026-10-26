@@ -30,6 +30,7 @@
 }
 
 html {
+  scroll-behavior: smooth;
   background: var(--color-salong);
   scrollbar-color: var(--color-sammet-2) var(--color-salong);
   -webkit-tap-highlight-color: transparent;
@@ -138,6 +139,24 @@ mark.namn {
   }
 }
 
+/* Staplarna växer fram från vänster när de syns. Vid reducerad rörelse står de
+   direkt i full längd. */
+.stapel {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.1s var(--ease-ut);
+}
+
+.stapel.syns {
+  transform: scaleX(1);
+}
+
+@media print {
+  .stapel {
+    transform: none;
+  }
+}
+
 @keyframes ridan {
   from {
     opacity: 0;
@@ -161,6 +180,8 @@ mark.namn {
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;

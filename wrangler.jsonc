@@ -6,7 +6,7 @@
   "main": "@tanstack/react-start/server-entry",
   "observability": { "enabled": true },
   "upload_source_maps": true,
-  "secrets": { "required": ["OPENROUTER_API_KEY"] },
+  "secrets": { "required": ["OPENROUTER_API_KEY", "IP_SALT"] },
   "d1_databases": [
     {
       "binding": "DB",
